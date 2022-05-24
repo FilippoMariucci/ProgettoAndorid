@@ -6,4 +6,11 @@
     tools:context=".HomeActivity">
 
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="380dp"
+        android:layout_height="253dp"
+        android:text="CAZZO"
+        android:textSize="100dp"
+        android:textStyle="bold" />
 </FrameLayout>

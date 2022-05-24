@@ -8,6 +8,7 @@ class User {
     var birth: String? = null
     var state: String? = null
     var description: String? = null
+
     constructor(  name:String,  surname:String,
          password:String,  birth:String,  state:String, description:String){
         this.name = name

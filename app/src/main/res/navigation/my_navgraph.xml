@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_navgraph"
-    app:startDestination="@id/homeActivity">
-    <activity
-        android:id="@+id/homeActivity"
-        android:name="com.example.progettoprogrammazionemobile.HomeActivity"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.progettoprogrammazionemobile.homeFragment"
+        android:label="homeFragment" />
 </navigation>

@@ -9,6 +9,7 @@ import com.example.progettoprogrammazionemobile.databinding.ActivityLoginBinding
 import com.google.firebase.FirebaseApiNotAvailableException
 import com.google.firebase.auth.ActionCodeEmailInfo
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,7 +20,7 @@ class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
-
+    private var database = FirebaseDatabase.getInstance().getReference("Users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +39,17 @@ class Login : AppCompatActivity() {
         val email = binding.email.text.toString()
         val password = binding.password.text.toString().trim()
         val check = checkFields(email, password)
+
         auth = FirebaseAuth.getInstance()
 
         if(check == true){
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this){
                 if(it.isSuccessful){
+                    val user = auth.currentUser
+                    val userReference = database?.child(user?.uid!!)
                     Toast.makeText(this, "You've been succesfully logged!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "You've been succesfully logged!" + userReference, Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, HomeActivity::class.java))
                 }
                 else{
                     Toast.makeText(this, "You're not registred yet", Toast.LENGTH_LONG).show()

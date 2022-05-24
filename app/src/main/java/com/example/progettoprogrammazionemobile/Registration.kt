@@ -12,8 +12,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.core.Tag
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 
@@ -43,9 +41,8 @@ class Registration : AppCompatActivity() {
         val textdateOfBirth = binding.dateofbirth.text.toString().trim()
         val description = binding.description.text.toString().trim()
         val check = checkFields(textName, textSurname, textEmail, textPassword, textConPassword, textdateOfBirth)
+
         auth = Firebase.auth
-
-
 
         if (check == true) {
             val user = User(textName, textSurname, textConPassword, textdateOfBirth, textState, description)
