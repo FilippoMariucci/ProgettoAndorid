@@ -12,7 +12,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.core.Tag
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+
 
 class Registration : AppCompatActivity() {
 
@@ -48,8 +51,12 @@ class Registration : AppCompatActivity() {
             val user = User(textName, textSurname, textConPassword, textdateOfBirth, textState, description)
             auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(this) {
                 if (it.isSuccessful) {
-                    Toast.makeText(this, "You've been succesfully registred!", Toast.LENGTH_LONG).show()
                     val firebaseUser: FirebaseUser = it.result!!.user!!
+                    database.child(firebaseUser.uid).setValue(user).addOnSuccessListener {
+                        Toast.makeText(this, "grazie signore che ci hai dato il calcio", Toast.LENGTH_LONG).show()
+
+                    }
+                    Toast.makeText(this, "You've been succesfully registred!", Toast.LENGTH_LONG).show()
                 }
                 else{
                     Toast.makeText(this, "sorry", Toast.LENGTH_LONG).show()
@@ -83,7 +90,6 @@ class Registration : AppCompatActivity() {
             binding.email.setError("Email missing @!")
             binding.email.requestFocus()
             return false
-
         }
 
         if (textPassword.isEmpty()) {
