@@ -50,7 +50,6 @@ class Registration : AppCompatActivity() {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "You've been succesfully registred!", Toast.LENGTH_LONG).show()
                     val firebaseUser: FirebaseUser = it.result!!.user!!
-                    firebaseUser.
                 }
                 else{
                     Toast.makeText(this, "sorry", Toast.LENGTH_LONG).show()
