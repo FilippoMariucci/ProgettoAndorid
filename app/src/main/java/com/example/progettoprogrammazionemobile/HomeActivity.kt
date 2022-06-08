@@ -4,32 +4,38 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
+
+    private val homeFragment = com.example.progettoprogrammazionemobile.homeFragment()
+    private val userFragment = profilo()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-
-
-
         //val navController = this.findNavController(R.id.myNavHostFragment)
-        setSupportActionBar(findViewById(R.id.topAppBar))
-
+        //setSupportActionBar(findViewById(R.id.topAppBar))
+        replaceFragment(homeFragment)
 
         val mOnNavigationItemSelectedListener =
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.icon_user -> {
-                        val navController = this.findNavController(R.id.myNavHostFragment)
-                        navController.navigate(R.id.action_homeFragment_to_profilo)
+                        replaceFragment(userFragment)
+                        //val navController = this.findNavController(R.id.myNavHostFragment)
+                        //navController.navigate(R.id.action_homeFragment_to_profilo)
+                        return@OnNavigationItemSelectedListener true
+                    }
+                    R.id.icon_discover -> {
+                        replaceFragment(homeFragment)
+                        //val navController = this.findNavController(R.id.myNavHostFragment)
+                        //navController.navigate(R.id.action_homeFragment_to_profilo)
                         return@OnNavigationItemSelectedListener true
                     }
 
@@ -47,7 +53,11 @@ class HomeActivity : AppCompatActivity() {
         return true
     }
 
-
+    private fun replaceFragment(fragment: Fragment){
+        if(fragment != null){
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.myNavHostFragment, fragment)
+            transaction.commit()
+        }
+    }
 }
-
-
