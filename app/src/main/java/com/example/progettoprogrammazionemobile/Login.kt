@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.progettoprogrammazionemobile.databinding.ActivityLoginBinding
 import com.google.firebase.FirebaseApiNotAvailableException
@@ -50,6 +51,7 @@ class Login : AppCompatActivity() {
                     Toast.makeText(this, "You've been succesfully logged!", Toast.LENGTH_LONG).show()
                     Toast.makeText(this, "You've been succesfully logged!" + userReference, Toast.LENGTH_LONG).show()
                     startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
                 }
                 else{
                     Toast.makeText(this, "You're not registred yet", Toast.LENGTH_LONG).show()

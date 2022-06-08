@@ -25,8 +25,6 @@ class Registration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         binding.registrationButton.setOnClickListener{ registrationFunction() }
 
     }
@@ -51,7 +49,6 @@ class Registration : AppCompatActivity() {
                     val firebaseUser: FirebaseUser = it.result!!.user!!
                     database.child(firebaseUser.uid).setValue(user).addOnSuccessListener {
                         Toast.makeText(this, "grazie signore che ci hai dato il calcio", Toast.LENGTH_LONG).show()
-
                     }
                     Toast.makeText(this, "You've been succesfully registred!", Toast.LENGTH_LONG).show()
                 }
