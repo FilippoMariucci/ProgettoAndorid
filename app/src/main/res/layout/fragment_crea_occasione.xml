@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".crea_occasione">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="272dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="84dp"
+                android:text="Meet new friends"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Titolo"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView11"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="284dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView12"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N. persone"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="69dp"
+                tools:layout_editor_absoluteY="267dp" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName3"
+                android:layout_width="288dp"
+                android:layout_height="43dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="69dp"
+                tools:layout_editor_absoluteY="458dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Indirizzo"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="69dp"
+                tools:layout_editor_absoluteY="403dp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Questo evento ha un costo?"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="69dp"
+                tools:layout_editor_absoluteY="532dp" />
+
+            <EditText
+                android:id="@+id/editTextNumber"
+                android:layout_width="286dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="number"
+                tools:layout_editor_absoluteX="69dp"
+                tools:layout_editor_absoluteY="321dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Si"
+                tools:layout_editor_absoluteX="62dp"
+                tools:layout_editor_absoluteY="576dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                tools:layout_editor_absoluteX="132dp"
+                tools:layout_editor_absoluteY="576dp" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categoria"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="62dp"
+                tools:layout_editor_absoluteY="661dp" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName5"
+                android:layout_width="290dp"
+                android:layout_height="42dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="62dp"
+                tools:layout_editor_absoluteY="710dp" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="250dp"
+                android:layout_height="45dp"
+                android:text="Clicca per aggiungere una foto"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="62dp"
+                tools:layout_editor_absoluteY="784dp" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                tools:layout_editor_absoluteX="147dp"
+                tools:layout_editor_absoluteY="871dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </ScrollView>
+
+</FrameLayout>

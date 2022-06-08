@@ -8,65 +8,86 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="420dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="350dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/poppins"
+
         android:text="LOGIN"
         android:textAlignment="center"
+        android:textColor="@color/orange"
         android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textStyle="bold"/>
+        app:layout_constraintVertical_bias="0.031" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="324dp"
+        android:layout_height="50dp"
         android:hint="insert your email"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="@color/orange"
+        android:inputType="textEmailAddress"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318"
-        tools:layout_editor_absoluteX="5dp"
-        android:inputType="textEmailAddress">
+        app:layout_constraintVertical_bias="0.318">
 
     </EditText>
 
+
     <EditText
         android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="324dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="@color/orange"
         android:hint="insert your password"
         android:inputType="textPassword"
         android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
-        tools:layout_editor_absoluteX="-4dp" />
-
+        app:layout_constraintBottom_toTopOf="@+id/loginbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintVertical_bias="0.351" />
 
     <TextView
         android:id="@+id/registrationRoot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="317dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="44dp"
         android:clickable="true"
         android:text="Don't have an account? Register here"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginbutton"
-        tools:layout_editor_absoluteX="-4dp" />
+        app:layout_constraintVertical_bias="0.075" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginbutton"
         android:layout_width="133dp"
         android:layout_height="58dp"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="@color/orange"
+        android:fontFamily="@font/poppins"
         android:text="Login"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.579">
+        app:layout_constraintVertical_bias="0.631">
 
     </androidx.appcompat.widget.AppCompatButton>
 

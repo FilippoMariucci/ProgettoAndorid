@@ -1,118 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Registration">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/app_name"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"></TextView>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="181dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="44dp"
+            android:fontFamily="@font/poppins"
+            android:text="Registration"
+            android:textColor="@color/orange"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <EditText
-        android:id="@+id/nome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:hint="insert your name"
-        android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"></EditText>
+        <EditText
+            android:id="@+id/nome"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="244dp"
+            android:hint="insert your name"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/email"
+            app:layout_constraintStart_toStartOf="@+id/email"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
 
-    <EditText
-        android:id="@+id/surname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="224dp"
-        android:hint="insert your surname"
-        android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"></EditText>
+        <EditText
+            android:id="@+id/surname"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="332dp"
+            android:hint="insert your surname"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/nome"
+            app:layout_constraintStart_toStartOf="@+id/nome"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:hint="insert your email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="152dp"
+            android:hint="insert your email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </EditText>
+        </EditText>
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:hint="insert your password"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"></EditText>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="520dp"
+            android:hint="insert your password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/state"
+            app:layout_constraintStart_toStartOf="@+id/state"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
 
-    <EditText
-        android:id="@+id/passconfirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="412dp"
-        android:hint="confirm your password"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp">
+        <EditText
+            android:id="@+id/passconfirm"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="620dp"
+            android:hint="confirm your password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/password"
+            app:layout_constraintStart_toStartOf="@+id/password"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </EditText>
+        </EditText>
 
-    <EditText
-        android:id="@+id/state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
-        android:hint="which state are you from"
-        android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-16dp"></EditText>
+        <EditText
+            android:id="@+id/state"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="428dp"
+            android:hint="which state are you from"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/surname"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/surname"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
 
-    <EditText
-        android:id="@+id/dateofbirth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="488dp"
-        android:hint="your date of birth"
-        android:inputType="date"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="26dp"></EditText>
+        <EditText
+            android:id="@+id/dateofbirth"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="712dp"
+            android:hint="your date of birth"
+            android:inputType="date"
+            app:layout_constraintEnd_toEndOf="@+id/passconfirm"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/passconfirm"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
 
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="548dp"
-        android:hint="little description of yourself"
-        android:inputType="textMultiLine"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp">
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="321dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="804dp"
+            android:hint="little description of yourself"
+            android:inputType="textMultiLine"
 
-    </EditText>
+            app:layout_constraintEnd_toEndOf="@+id/dateofbirth"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/dateofbirth"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/registrationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="664dp"
-        android:layout_marginEnd="168dp"
-        android:text="REGISTER"
-        android:textColor="@color/purple_200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatButton>
+        </EditText>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registrationButton"
+            android:layout_width="107dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/btn_background"
+            android:backgroundTint="@color/orange"
+            android:text="Register"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/description"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/description"></androidx.appcompat.widget.AppCompatButton>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
