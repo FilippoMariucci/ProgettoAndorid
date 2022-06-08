@@ -13,15 +13,15 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
 
-        val navController = this.findNavController(R.id.myNavHostFragment)
+        //val navController = this.findNavController(R.id.myNavHostFragment)
         print("provaosva")
-        //setSupportActionBar(findViewById(R.id.topAppBar))
+        setSupportActionBar(findViewById(R.id.topAppBar))
 
     }
 
-   /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
+   override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.top_menu, menu)
         return true
-    }*/
+    }
 }
