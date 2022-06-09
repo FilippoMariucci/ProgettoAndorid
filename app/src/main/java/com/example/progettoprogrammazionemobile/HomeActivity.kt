@@ -13,6 +13,7 @@ class HomeActivity : AppCompatActivity() {
 
     private val homeFragment = com.example.progettoprogrammazionemobile.homeFragment()
     private val userFragment = profilo()
+    private val creaOccasioneFragment = crea_occasione()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,13 @@ class HomeActivity : AppCompatActivity() {
                     }
                     R.id.icon_discover -> {
                         replaceFragment(homeFragment)
+                        //val navController = this.findNavController(R.id.myNavHostFragment)
+                        //navController.navigate(R.id.action_homeFragment_to_profilo)
+                        return@OnNavigationItemSelectedListener true
+                    }
+
+                    R.id.icon_add -> {
+                        replaceFragment(creaOccasioneFragment)
                         //val navController = this.findNavController(R.id.myNavHostFragment)
                         //navController.navigate(R.id.action_homeFragment_to_profilo)
                         return@OnNavigationItemSelectedListener true

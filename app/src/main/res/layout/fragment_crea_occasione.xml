@@ -7,10 +7,9 @@
     tools:context=".crea_occasione">
 
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:fillViewport="true">
 
 
@@ -19,207 +18,131 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView11"
-                android:layout_width="315dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="84dp"
-                android:fontFamily="@font/poppins"
-                android:text="Meet new friends"
-                android:textColor="@color/orange"
-                android:textSize="37sp"
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Una nuova occasione"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.551"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView12"
+            <EditText
+                android:id="@+id/titolo_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
                 android:text="Titolo"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView11"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="284dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/input_back"
+                android:id="@+id/descrizione_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:fontFamily="@font/poppins"
                 android:inputType="textPersonName"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView12"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/poppins"
-                android:text="N. persone"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                android:text="Descrizione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titolo_evento" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="284dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/input_back"
+                android:id="@+id/lingue_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:fontFamily="@font/poppins"
                 android:inputType="textPersonName"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView15"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/textView15"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/poppins"
-                android:text="Indirizzo"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextNumber"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextNumber"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:fontFamily="@font/poppins"
-                android:text="Questo evento ha un costo?"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+                android:text="Lingue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descrizione_evento" />
 
             <EditText
-                android:id="@+id/editTextNumber"
-                android:layout_width="284dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/input_back"
+                android:id="@+id/categorie_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:fontFamily="@font/poppins"
+                android:inputType="textPersonName"
+                android:text="Categorie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lingue_evento" />
+
+            <EditText
+                android:id="@+id/citta_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Citta"
+                app:layout_constraintTop_toBottomOf="@+id/categorie_evento"
+                tools:layout_editor_absoluteX="101dp" />
+
+            <EditText
+                android:id="@+id/indirizzo_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="indirizzo"
+                app:layout_constraintTop_toBottomOf="@+id/citta_evento"
+                tools:layout_editor_absoluteX="101dp" />
+
+            <EditText
+                android:id="@+id/costo_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:text="Costo"
+                app:layout_constraintTop_toBottomOf="@+id/data_evento"
+                tools:layout_editor_absoluteX="101dp" />
+
+            <EditText
+                android:id="@+id/npersone_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
                 android:inputType="number"
-                app:layout_constraintEnd_toEndOf="@+id/textView14"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
-                android:text="Si"
-                app:layout_constraintEnd_toStartOf="@+id/radioButton2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="168dp"
-                android:text="No"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="113dp"
-                android:layout_height="27dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins"
-                android:text="Categoria"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/radioButton2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/radioButton"
-                app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+                android:text="Npersone"
+                app:layout_constraintTop_toBottomOf="@+id/costo_evento"
+                tools:layout_editor_absoluteX="103dp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName5"
-                android:layout_width="284dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/input_back"
+                android:id="@+id/data_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:fontFamily="@font/poppins"
+                android:inputType="date"
+                android:text="Data"
+                app:layout_constraintTop_toBottomOf="@+id/indirizzo_evento"
+                tools:layout_editor_absoluteX="101dp" />
+
+            <EditText
+                android:id="@+id/foto_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
                 android:inputType="textPersonName"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView17"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                android:text="Foto"
+                app:layout_constraintTop_toBottomOf="@+id/npersone_evento"
+                tools:layout_editor_absoluteX="103dp" />
 
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="259dp"
-                android:layout_height="58dp"
-                android:layout_marginTop="28dp"
-                android:clickable="true"
-                android:fontFamily="@font/poppins"
-                android:text="Clicca per aggiungere una foto"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button4"
-                android:layout_width="150dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/btn_background"
-                android:backgroundTint="@color/orange"
-                android:fontFamily="@font/poppins"
+            <Button
+                android:id="@+id/btnadd_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
                 android:text="Aggiungi"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView20"
-                app:layout_constraintHorizontal_bias="0.543"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/foto_evento"
+                tools:layout_editor_absoluteX="152dp" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>

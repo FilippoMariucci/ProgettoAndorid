@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_homeFragment_to_profilo"
             app:destination="@id/profilo" />
+        <action
+            android:id="@+id/action_homeFragment_to_crea_occasione"
+            app:destination="@id/crea_occasione" />
     </fragment>
     <fragment
         android:id="@+id/profilo"
         android:name="com.example.progettoprogrammazionemobile.profilo"
         android:label="fragment_profilo"
         tools:layout="@layout/fragment_profilo" />
+    <fragment
+        android:id="@+id/crea_occasione"
+        android:name="com.example.progettoprogrammazionemobile.crea_occasione"
+        android:label="fragment_crea_occasione"
+        tools:layout="@layout/fragment_crea_occasione" />
 </navigation>

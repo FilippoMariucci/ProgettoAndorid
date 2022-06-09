@@ -14,6 +14,11 @@
         android:title="Profile" />
 
     <item
+        android:id="@+id/icon_add"
+        android:icon="@drawable/plus_icon_ok"
+        android:title="Add" />
+
+    <item
         android:id="@+id/icon_map"
         android:icon="@drawable/ic_map"
         android:title="Map"
