@@ -1,6 +1,7 @@
 package com.example.progettoprogrammazionemobile
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -47,10 +48,12 @@ class Registration : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(this) {
                 if (it.isSuccessful) {
                     val firebaseUser: FirebaseUser = it.result!!.user!!
-                    database.child(firebaseUser.uid).setValue(user).addOnSuccessListener {
-                        Toast.makeText(this, "grazie signore che ci hai dato il calcio", Toast.LENGTH_LONG).show()
-                    }
+                    database.child(firebaseUser.uid).setValue(user)
                     Toast.makeText(this, "You've been succesfully registred!", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, Login::class.java))
+
+
+                    finish()
                 }
                 else{
                     Toast.makeText(this, "sorry", Toast.LENGTH_LONG).show()

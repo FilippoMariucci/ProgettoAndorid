@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.firebase.database.ValueEventListener
 
 
-class modifica_profilo : Fragment() {
+class occasioni_accettate : Fragment() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,15 +16,12 @@ class modifica_profilo : Fragment() {
     }
 
     override fun onCreateView(
-
-
-
-
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_modifica_profilo, container, false)
+        return inflater.inflate(R.layout.fragment_occasioni_accettate, container, false)
     }
+
 
 }

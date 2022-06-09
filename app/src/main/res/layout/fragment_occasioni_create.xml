@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/occas3" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/occasioni_create_titolo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="52dp"
@@ -240,7 +240,7 @@
                 android:clickable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.552"
-                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@+id/occasioni_create_titolo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/plus_icon_ok"
                 tools:ignore="SpeakableTextPresentCheck" />

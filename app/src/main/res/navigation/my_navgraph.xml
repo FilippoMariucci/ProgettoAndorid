@@ -12,18 +12,35 @@
         <action
             android:id="@+id/action_homeFragment_to_profilo"
             app:destination="@id/profilo" />
-        <action
-            android:id="@+id/action_homeFragment_to_crea_occasione"
-            app:destination="@id/crea_occasione" />
     </fragment>
     <fragment
         android:id="@+id/profilo"
         android:name="com.example.progettoprogrammazionemobile.profilo"
         android:label="fragment_profilo"
-        tools:layout="@layout/fragment_profilo" />
+        tools:layout="@layout/fragment_profilo" >
+        <action
+            android:id="@+id/action_profilo_to_modifica_profiloFragment2"
+            app:destination="@id/modifica_profilo" />
+        <action
+            android:id="@+id/action_profilo_to_occasioni_accettate"
+            app:destination="@id/occasioni_accettate" />
+        <action
+            android:id="@+id/action_profilo_to_occasioni_create"
+            app:destination="@id/occasioni_create" />
+    </fragment>
     <fragment
-        android:id="@+id/crea_occasione"
-        android:name="com.example.progettoprogrammazionemobile.crea_occasione"
-        android:label="fragment_crea_occasione"
-        tools:layout="@layout/fragment_crea_occasione" />
+        android:id="@+id/modifica_profilo"
+        android:name="com.example.progettoprogrammazionemobile.modifica_profilo"
+        android:label="fragment_modifica_profilo"
+        tools:layout="@layout/fragment_modifica_profilo" />
+    <fragment
+        android:id="@+id/occasioni_accettate"
+        android:name="com.example.progettoprogrammazionemobile.occasioni_accettate"
+        android:label="fragment_occasioni_accettate"
+        tools:layout="@layout/fragment_occasioni_accettate" />
+    <fragment
+        android:id="@+id/occasioni_create"
+        android:name="com.example.progettoprogrammazionemobile.occasioni_create"
+        android:label="fragment_occasioni_create"
+        tools:layout="@layout/fragment_occasioni_create" />
 </navigation>

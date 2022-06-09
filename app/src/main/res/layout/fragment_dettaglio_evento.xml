@@ -17,18 +17,19 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/fotoEvento"
                 android:layout_width="412dp"
                 android:layout_height="306dp"
+                android:layout_marginTop="16dp"
                 android:src="@drawable/googleg_standard_color_18"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/titolo_evento_dett"
                 android:layout_width="230dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="64dp"
                 android:fontFamily="@font/poppins"
                 android:text="Titolo evento"
                 android:textSize="25sp"
@@ -36,22 +37,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.237"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/fotoEvento" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/persona_mancante_dett"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
                 android:text="Persona mancante"
-                app:layout_constraintEnd_toEndOf="@+id/textView10"
+                app:layout_constraintEnd_toEndOf="@+id/titolo_evento_dett"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintStart_toStartOf="@+id/titolo_evento_dett"
+                app:layout_constraintTop_toBottomOf="@+id/titolo_evento_dett" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/indirizzo_dett"
                 android:layout_width="263dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="36dp"
@@ -59,13 +60,13 @@
                 android:text="Indirizzo:"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView13"
+                app:layout_constraintEnd_toEndOf="@+id/persona_mancante_dett"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintStart_toStartOf="@+id/persona_mancante_dett"
+                app:layout_constraintTop_toBottomOf="@+id/persona_mancante_dett" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/data_dett"
                 android:layout_width="263dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="22dp"
@@ -73,12 +74,12 @@
                 android:text="Data:"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView18"
-                app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintEnd_toEndOf="@+id/indirizzo_dett"
+                app:layout_constraintStart_toStartOf="@+id/indirizzo_dett"
+                app:layout_constraintTop_toBottomOf="@+id/indirizzo_dett" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/creatore_occasione_dett"
                 android:layout_width="263dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="36dp"
@@ -86,13 +87,13 @@
                 android:text="Occasione creata da:"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView22"
+                app:layout_constraintEnd_toEndOf="@+id/lingua_evento_dett"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintStart_toStartOf="@+id/lingua_evento_dett"
+                app:layout_constraintTop_toBottomOf="@+id/lingua_evento_dett" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/lingua_evento_dett"
                 android:layout_width="263dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="24dp"
@@ -100,13 +101,13 @@
                 android:text="Le persone parlano:"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView19"
+                app:layout_constraintEnd_toEndOf="@+id/data_dett"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView19"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintStart_toStartOf="@+id/data_dett"
+                app:layout_constraintTop_toBottomOf="@+id/data_dett" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button5"
+                android:id="@+id/button_partecipo_dett"
                 android:layout_width="158dp"
                 android:layout_height="44dp"
                 android:layout_marginTop="88dp"
@@ -118,10 +119,10 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView21"
+                app:layout_constraintEnd_toEndOf="@+id/creatore_occasione_dett"
                 app:layout_constraintHorizontal_bias="0.79"
-                app:layout_constraintStart_toStartOf="@+id/textView21"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                app:layout_constraintStart_toStartOf="@+id/creatore_occasione_dett"
+                app:layout_constraintTop_toBottomOf="@+id/creatore_occasione_dett" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

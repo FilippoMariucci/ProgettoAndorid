@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".crea_occasione">
+    tools:context=".modifica_profilo">
 
 
 
@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/modifica_profilo_sezione"
                 android:layout_width="315dp"
                 android:layout_height="49dp"
                 android:layout_marginTop="84dp"
@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/nome_modifica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -42,13 +42,13 @@
                 android:text="Nome"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView11"
+                app:layout_constraintEnd_toEndOf="@+id/modifica_profilo_sezione"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintStart_toStartOf="@+id/modifica_profilo_sezione"
+                app:layout_constraintTop_toBottomOf="@+id/modifica_profilo_sezione" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/input_nome_modifica"
                 android:layout_width="284dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="32dp"
@@ -57,13 +57,13 @@
                 android:fontFamily="@font/poppins"
                 android:inputType="textPersonName"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="@+id/nome_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintStart_toStartOf="@+id/nome_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/nome_modifica" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/cognome_modifica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -71,13 +71,13 @@
                 android:text="Cognome"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/input_nome_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintStart_toStartOf="@+id/input_nome_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/input_nome_modifica" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/input_email_modifica"
                 android:layout_width="284dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="32dp"
@@ -86,14 +86,14 @@
                 android:fontFamily="@font/poppins"
                 android:inputType="textPersonName"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView15"
+                app:layout_constraintEnd_toEndOf="@+id/email_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                app:layout_constraintStart_toStartOf="@+id/email_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/email_modifica"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/email_modifica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
@@ -101,10 +101,10 @@
                 android:text="Email"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editText"
+                app:layout_constraintEnd_toEndOf="@+id/cognome_input_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editText"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintStart_toStartOf="@+id/cognome_input_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/cognome_input_modifica" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -114,13 +114,13 @@
                 android:fontFamily="@font/poppins"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
+                app:layout_constraintEnd_toEndOf="@+id/input_email_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+                app:layout_constraintStart_toStartOf="@+id/input_email_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/input_email_modifica" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/cognome_input_modifica"
                 android:layout_width="284dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="28dp"
@@ -128,49 +128,26 @@
                 android:ems="10"
                 android:fontFamily="@font/poppins"
                 android:inputType="number"
-                app:layout_constraintEnd_toEndOf="@+id/textView14"
+                app:layout_constraintEnd_toEndOf="@+id/cognome_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
-                android:text="Si"
-                app:layout_constraintEnd_toStartOf="@+id/radioButton2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="168dp"
-                android:text="No"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintStart_toStartOf="@+id/cognome_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/cognome_modifica" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/password_modifica"
                 android:layout_width="113dp"
                 android:layout_height="27dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="168dp"
                 android:fontFamily="@font/poppins"
-                android:text="Categoria"
+                android:text="Password"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/radioButton2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/radioButton"
-                app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+                app:layout_constraintEnd_toEndOf="@+id/input_email_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/input_email_modifica" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName5"
+                android:id="@+id/input_password_modifica"
                 android:layout_width="284dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="32dp"
@@ -179,10 +156,10 @@
                 android:fontFamily="@font/poppins"
                 android:inputType="textPersonName"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView17"
+                app:layout_constraintEnd_toEndOf="@+id/password_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintStart_toStartOf="@+id/password_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/password_modifica" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -194,10 +171,10 @@
                 android:text="Clicca per aggiungere una foto"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
+                app:layout_constraintEnd_toEndOf="@+id/input_password_modifica"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+                app:layout_constraintStart_toStartOf="@+id/input_password_modifica"
+                app:layout_constraintTop_toBottomOf="@+id/input_password_modifica" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button4"

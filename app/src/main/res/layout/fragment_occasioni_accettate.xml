@@ -27,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/occasioni_create_titolo" />
 
             <View
                 android:id="@+id/occas2"
@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/occas3" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/occasioni_create_titolo"
                 android:layout_width="209dp"
                 android:layout_height="86dp"
                 android:layout_marginTop="56dp"
@@ -201,7 +201,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/occas1" />
 
             <TextView
-                android:id="@+id/pers_manc_"
+                android:id="@+id/cancella_occ_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="112dp"
@@ -216,7 +216,7 @@
                 app:layout_constraintVertical_bias="0.588" />
 
             <TextView
-                android:id="@+id/pers_manc_6"
+                android:id="@+id/cancella_occ_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="112dp"
@@ -231,7 +231,7 @@
                 app:layout_constraintVertical_bias="0.625" />
 
             <TextView
-                android:id="@+id/pers_manc_7"
+                android:id="@+id/cancella_occ_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -278,7 +278,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/occas4" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button"
+                android:id="@+id/button_see_1"
                 android:layout_width="88dp"
                 android:layout_height="48dp"
                 android:background="@drawable/btn_background"
@@ -295,7 +295,7 @@
                 app:layout_constraintVertical_bias="0.737" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button2"
+                android:id="@+id/button_see_2"
                 android:layout_width="88dp"
                 android:layout_height="48dp"
                 android:background="@drawable/btn_background"
@@ -312,7 +312,7 @@
                 app:layout_constraintVertical_bias="0.745" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button3"
+                android:id="@+id/button_see_3"
                 android:layout_width="88dp"
                 android:layout_height="48dp"
                 android:background="@drawable/btn_background"
