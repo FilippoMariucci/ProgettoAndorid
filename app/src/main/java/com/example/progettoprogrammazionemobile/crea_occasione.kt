@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase
 class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
 
-    private var id_evento = 0
     private var _binding: FragmentCreaOccasioneBinding? = null
     // This property is only valid between onCreateView and
 // onDestroyView.
@@ -36,19 +35,20 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 //    }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout XML file and return a binding object instance
-        val binding = FragmentCreaOccasioneBinding.inflate(inflater, container, false)
-        val view = binding.root
-
-        reference = FirebaseDatabase.getInstance().getReference("Evento")
-        binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
-
-        return view
+         _binding= FragmentCreaOccasioneBinding.inflate(inflater, container, false)
+         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        reference = FirebaseDatabase.getInstance().getReference("Evento")
+        binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
+    }
 
 
 
@@ -68,7 +68,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 //    }
 
     private fun saveEvento(){
-        Toast.makeText(this.context, "grazie signore che ci hai dato il calcio", Toast.LENGTH_LONG).show()
 
         val titolo_evento = binding.titoloEvento.text.toString().trim()
         val descrizione_evento = binding.descrizioneEvento.text.toString().trim()
@@ -82,14 +81,14 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
         val categoria_evento = binding.categorieEvento.text.toString().trim()
 
          if(titolo_evento.isEmpty()){
-             binding.titoloEvento.error = "adfaf"
-            return
-        }
+             Toast.makeText(this.context, "pppppp", Toast.LENGTH_LONG).show()
+                    }
 
-          val id_evento = reference.push().key
+        val id_evento = "prova1"
 
-//        println("id_evento" + id_evento)
-        val model= Evento(id_evento, titolo_evento, descrizione_evento, lingue_evento, categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento, npersone_evento, foto_evento)
+        val model= Evento(titolo_evento, descrizione_evento, lingue_evento,
+            categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
+            npersone_evento, foto_evento)
 
 
         if (id_evento != null) {
@@ -102,4 +101,4 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
         }
 
     }
-}
+        }
