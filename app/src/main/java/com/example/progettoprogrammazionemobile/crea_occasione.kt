@@ -84,7 +84,8 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
              Toast.makeText(this.context, "pppppp", Toast.LENGTH_LONG).show()
                     }
 
-        val id_evento = "prova1"
+        val id_evento = "prova222"
+
 
         val model= Evento(titolo_evento, descrizione_evento, lingue_evento,
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
