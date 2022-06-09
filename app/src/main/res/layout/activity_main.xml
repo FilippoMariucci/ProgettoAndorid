@@ -7,19 +7,75 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView2"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="Thread iniziale dell'app"
-        android:textColor="#FF5722"
-        android:visibility="visible" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="-53dp">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="431dp"
-        android:layout_height="314dp"
-        app:srcCompat="@drawable/dancing_triangle" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="296dp"
+            android:layout_height="134dp"
+            android:text="Vibe"
+            android:textAlignment="center"
+            android:textColor="@color/orange"
+            android:textSize="100sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.268" />
 
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="84dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintStart_toStartOf="@+id/imageView9"
+            app:layout_constraintTop_toBottomOf="@+id/imageView8"
+            app:srcCompat="@drawable/music_color" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="115dp"
+            android:layout_height="93dp"
+            android:layout_marginTop="88dp"
+            android:layout_marginEnd="52dp"
+            android:rotation="-88"
+            android:rotationX="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:srcCompat="@drawable/festa" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="103dp"
+            android:layout_height="89dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="88dp"
+            android:rotation="21"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:srcCompat="@drawable/cinema_color" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="86dp"
+            android:layout_height="73dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="148dp"
+            android:rotation="-8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:srcCompat="@drawable/sport_color" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
