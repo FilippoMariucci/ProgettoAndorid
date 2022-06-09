@@ -55,10 +55,8 @@ class Login : AppCompatActivity() {
                 }
                 else{
                     Toast.makeText(this, "You're not registred yet", Toast.LENGTH_LONG).show()
-
                 }
             }
-
         }
     }
 
