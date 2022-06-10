@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profilo"
             app:destination="@id/profilo" />
+        <action
+            android:id="@+id/action_homeFragment_to_dettaglio_evento"
+            app:destination="@id/dettaglio_evento" />
     </fragment>
     <fragment
         android:id="@+id/profilo"
@@ -43,4 +46,13 @@
         android:name="com.example.progettoprogrammazionemobile.occasioni_create"
         android:label="fragment_occasioni_create"
         tools:layout="@layout/fragment_occasioni_create" />
+    <fragment
+        android:id="@+id/dettaglio_evento"
+        android:name="com.example.progettoprogrammazionemobile.dettaglio_evento"
+        android:label="fragment_dettaglio_evento"
+        tools:layout="@layout/fragment_dettaglio_evento" >
+        <argument
+            android:name="titoloEventoPass"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -12,8 +12,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
+import com.example.progettoprogrammazionemobile.model.Evento
+import com.google.firebase.database.*
 
 class homeFragment : Fragment(R.layout.fragment_home) {
+
+    private lateinit var eventsRec: RecyclerView
+    private lateinit var eventList: ArrayList<Evento>
+    private lateinit var dbRef: DatabaseReference
+
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -26,6 +33,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     ): View? {
         val contesto = this.requireContext()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
         return binding.root
     }
 
@@ -59,8 +68,48 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         var adapter = Adapter(imgs, this.requireContext())
         var page = binding.viewPager
         page.adapter = adapter
+
+        eventsRec = binding.rvEvents
+        eventsRec.layoutManager = LinearLayoutManager(this.requireContext())
+        eventsRec.setHasFixedSize(true)
+
+        eventList = arrayListOf<Evento>()
+
+        getEventsData()
     }
 
+    private fun getEventsData(){
+        eventsRec.visibility = View.GONE
+
+        dbRef = FirebaseDatabase.getInstance().getReference("Evento")
+        dbRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                eventList.clear()
+                if(snapshot.exists()){
+                    for(eventSnap in snapshot.children){
+                        val eventoSingolo = eventSnap.getValue(Evento::class.java)
+                        eventList.add(eventoSingolo!!)
+                    }
+                    val eAdapter = EventsAdapter(eventList)
+                    eventsRec.adapter = eAdapter
+
+                    eAdapter.setOnItemClickListener(object : EventsAdapter.onItemClickListener{
+                        override fun onItemClick(position: String) {
+                            Toast.makeText(requireContext(), "Clicked on item $position", Toast.LENGTH_SHORT).show()
+                        }
+
+                    })
+
+                    eventsRec.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
 }
 
 

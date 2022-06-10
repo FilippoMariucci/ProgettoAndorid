@@ -8,22 +8,20 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories"
-        android:clickable="true"
         android:layout_width="413dp"
         android:layout_height="91dp"
         android:verticalScrollbarPosition="defaultPosition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:contextClickable="true"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="horizontal"
-        tools:listitem="@layout/category"
-        app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
-        android:layout_width="403dp"
-        android:layout_height="358dp"
+        android:layout_width="398dp"
+        android:layout_height="84dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,5 +62,15 @@
             app:layout_anchorGravity="bottom|center" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEvents"
+        android:layout_width="409dp"
+        tools:listitem="@layout/event_item"
+        android:layout_height="441dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

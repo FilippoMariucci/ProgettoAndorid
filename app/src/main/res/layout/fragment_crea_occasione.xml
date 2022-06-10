@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".crea_occasione">
 
-
     <ScrollView
+
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -80,8 +81,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Citta"
-                app:layout_constraintTop_toBottomOf="@+id/categorie_evento"
-                tools:layout_editor_absoluteX="101dp" />
+                app:layout_constraintStart_toStartOf="@+id/categorie_evento"
+                app:layout_constraintTop_toBottomOf="@+id/categorie_evento" />
 
             <EditText
                 android:id="@+id/indirizzo_evento"
@@ -90,8 +91,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="indirizzo"
-                app:layout_constraintTop_toBottomOf="@+id/citta_evento"
-                tools:layout_editor_absoluteX="101dp" />
+                app:layout_constraintStart_toStartOf="@+id/citta_evento"
+                app:layout_constraintTop_toBottomOf="@+id/citta_evento" />
 
             <EditText
                 android:id="@+id/costo_evento"
@@ -100,18 +101,19 @@
                 android:ems="10"
                 android:inputType="numberDecimal"
                 android:text="Costo"
-                app:layout_constraintTop_toBottomOf="@+id/data_evento"
-                tools:layout_editor_absoluteX="101dp" />
+                app:layout_constraintStart_toStartOf="@+id/data_evento"
+                app:layout_constraintTop_toBottomOf="@+id/data_evento" />
 
             <EditText
                 android:id="@+id/npersone_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:ems="10"
                 android:inputType="number"
                 android:text="Npersone"
-                app:layout_constraintTop_toBottomOf="@+id/costo_evento"
-                tools:layout_editor_absoluteX="103dp" />
+                app:layout_constraintStart_toStartOf="@+id/costo_evento"
+                app:layout_constraintTop_toBottomOf="@+id/costo_evento" />
 
             <EditText
                 android:id="@+id/data_evento"
@@ -120,8 +122,8 @@
                 android:ems="10"
                 android:inputType="date"
                 android:text="Data"
-                app:layout_constraintTop_toBottomOf="@+id/indirizzo_evento"
-                tools:layout_editor_absoluteX="101dp" />
+                app:layout_constraintStart_toStartOf="@+id/indirizzo_evento"
+                app:layout_constraintTop_toBottomOf="@+id/indirizzo_evento" />
 
             <EditText
                 android:id="@+id/foto_evento"
@@ -130,8 +132,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Foto"
-                app:layout_constraintTop_toBottomOf="@+id/npersone_evento"
-                tools:layout_editor_absoluteX="103dp" />
+                app:layout_constraintStart_toStartOf="@+id/npersone_evento"
+                app:layout_constraintTop_toBottomOf="@+id/npersone_evento" />
 
             <Button
                 android:id="@+id/btnadd_evento"
@@ -139,8 +141,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:text="Aggiungi"
-                app:layout_constraintTop_toBottomOf="@+id/foto_evento"
-                tools:layout_editor_absoluteX="152dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foto_evento" />
+
+            <TextView
+                android:id="@+id/TestoMagico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="64dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btnadd_evento" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
