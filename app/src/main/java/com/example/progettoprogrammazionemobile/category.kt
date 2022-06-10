@@ -1,6 +1,6 @@
 package com.example.progettoprogrammazionemobile
 
-data class category (  val id : Int,
-                       val imageSrc: Int,
-                       val type: String)
-
+data class category(
+                    val imageSrc: Int,
+                    val text: String
+                    )

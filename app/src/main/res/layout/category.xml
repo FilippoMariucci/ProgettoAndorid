@@ -13,30 +13,26 @@
         android:clickable="true">
 
         <ImageView
-            android:paddingRight="50dp"
-            android:paddingLeft="20dp"
             android:id="@+id/image_category"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="123dp"
             android:adjustViewBounds="true"
-            android:clickable="true">
+            android:clickable="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="50dp"></ImageView>
 
-        </ImageView>
-
-        <!--
         <TextView
+            android:id="@+id/categoryTitle"
             android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/white"
             android:fontFamily="@font/poppins"
             android:gravity="bottom"
-            android:text="ADVENTURE"
             android:textColor="@color/orange"
             android:textSize="23dp"
             android:layout_marginStart="139dp"
             android:textStyle="bold"></TextView>
-         -->
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>

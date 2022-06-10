@@ -95,7 +95,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
         if (id_evento != null) {
             reference.child(id_evento).setValue(model)
                 .addOnCompleteListener{
-                    Toast.makeText(this.context, "grazie signore che ci hai dato il calcio", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this.context, "dennis signore che ci hai dato il calcio", Toast.LENGTH_LONG).show()
                 }.addOnFailureListener{
                     Toast.makeText(this.context, "errore", Toast.LENGTH_LONG).show()
                 }

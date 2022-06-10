@@ -8,13 +8,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories"
+        android:clickable="true"
         android:layout_width="413dp"
         android:layout_height="91dp"
         android:verticalScrollbarPosition="defaultPosition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:contextClickable="true"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="horizontal"
+        tools:listitem="@layout/category"
         app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
     <androidx.viewpager.widget.ViewPager
