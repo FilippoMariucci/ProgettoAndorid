@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.IdRes
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +44,10 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnClose.setOnClickListener{
+            view.findNavController().navigate(R.id.action_homeFragment_to_dettaglio_evento)
+        }
+
         var imgs = listOf<Int>(R.drawable.chicco, R.drawable.rico, R.drawable.ilmioamico)
 
         var categoryimgs = listOf<category>(
@@ -67,6 +73,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 Toast.makeText(requireContext(), "${position}",Toast.LENGTH_LONG).show()
             }
         })
+
+
+
         var adapter = Adapter(imgs, this.requireContext())
         var page = binding.viewPager
         page.adapter = adapter
@@ -98,6 +107,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                     eAdapter.setOnItemClickListener(object : EventsAdapter.onItemClickListener{
                         override fun onItemClick(position: String) {
                             Toast.makeText(requireContext(), "Clicked on item $position", Toast.LENGTH_SHORT).show()
+                            go_away(position)
+
                         }
 
                     })
@@ -111,6 +122,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             }
 
         })
+    }
+
+
+
+    fun go_away(title: String){
+        val action = homeFragmentDirections.actionHomeFragmentToDettaglioEvento(title)
+        val navController = this.findNavController()
+        navController.navigate(R.id.action_homeFragment_to_dettaglio_evento)
+
     }
 }
 

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
@@ -20,6 +21,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
         //val navController = this.findNavController(R.id.myNavHostFragment)
         //setSupportActionBar(findViewById(R.id.topAppBar))
         replaceFragment(homeFragment)
