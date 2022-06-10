@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.MultiAutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,28 +24,13 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
 
     private var _binding: FragmentCreaOccasioneBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
     private val binding get() = _binding!!
 
+    private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
 
-    private lateinit var reference: DatabaseReference
-    private var database = FirebaseDatabase.getInstance().getReference("Evento")
 
     private val viewModelEvento: EventoViewModel by activityViewModels()
 
-    val events = mutableListOf<Evento>()
-
-
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        database=FirebaseDatabase.getInstance()
-//        reference=database.getReference("Evento")
-//
-//
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +39,13 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
     ): View? {
         // Inflate the layout XML file and return a binding object instance
         _binding= FragmentCreaOccasioneBinding.inflate(inflater, container, false)
+
+        val languageAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, languages)
+        binding.lingueEvento.setAdapter(languageAdapter)
+        binding.lingueEvento.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+
+
+
 
 //        var getData = object : ValueEventListener{
 //            override fun onDataChange(snapshot: DataSnapshot) {

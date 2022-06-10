@@ -1,4 +1,4 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.AdapterRV
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
-import com.google.android.material.textview.MaterialTextView
+import com.example.progettoprogrammazionemobile.R
 
 public class Adapter(var list:List<Int>, var ctx: Context) : PagerAdapter() {
 

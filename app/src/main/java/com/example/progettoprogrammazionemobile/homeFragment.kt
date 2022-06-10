@@ -14,9 +14,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.progettoprogrammazionemobile.AdapterRV.Adapter
 import com.example.progettoprogrammazionemobile.AdapterRV.EventsAdapter
+import com.example.progettoprogrammazionemobile.AdapterRV.ImageAdapter
 import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.model.Evento
+import com.example.progettoprogrammazionemobile.model.category
 import com.google.firebase.database.*
 
 class homeFragment : Fragment(R.layout.fragment_home) {
@@ -73,9 +76,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 Toast.makeText(requireContext(), "${position}",Toast.LENGTH_LONG).show()
             }
         })
-
-
-
         var adapter = Adapter(imgs, this.requireContext())
         var page = binding.viewPager
         page.adapter = adapter

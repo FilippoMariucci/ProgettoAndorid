@@ -1,14 +1,13 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.AdapterRV
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
-import java.util.*
+import com.example.progettoprogrammazionemobile.R
+import com.example.progettoprogrammazionemobile.model.category
 
 class ImageAdapter(private val categories: List<category>):RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
