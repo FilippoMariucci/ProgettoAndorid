@@ -45,13 +45,13 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         var imgs = listOf<Int>(R.drawable.chicco, R.drawable.rico, R.drawable.ilmioamico)
 
         var categoryimgs = listOf<category>(
-            category(  R.drawable.adventurecategory,"afad"),
-            category(  R.drawable.artcategory,"afad"),
-            category(  R.drawable.concertcategory,"afad"),
-            category(  R.drawable.sportcategory,"afad"),
-            category(  R.drawable.photocategory,"afad"),
-            category(  R.drawable.rolegamecategory,"afad"),
-            category(  R.drawable.partycategory,"afad"))
+            category(  R.drawable.adventurecategory,"Adventure"),
+            category(  R.drawable.artcategory,"Art"),
+            category(  R.drawable.concertcategory,"Concert"),
+            category(  R.drawable.sportcategory,"Sport"),
+            category(  R.drawable.photocategory,"Photo"),
+            category(  R.drawable.rolegamecategory,"Role Games"),
+            category(  R.drawable.partycategory,"Party"))
 
 
 
@@ -64,7 +64,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         mimmo.setOnItemClickListener(object : ImageAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(requireContext(), "dfsdfsdfdsfsfsfsdfsfd",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "${position}",Toast.LENGTH_LONG).show()
             }
         })
         var adapter = Adapter(imgs, this.requireContext())
