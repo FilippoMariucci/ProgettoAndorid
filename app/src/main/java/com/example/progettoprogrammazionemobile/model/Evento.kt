@@ -10,5 +10,6 @@ data class Evento (
     var data_evento: String ?=null,
     var costo: String ?=null,
     var n_persone: String ?=null,
-    var foto: String ?=null
+    var foto: String ?=null,
+    var userId: String ?= null
     )

@@ -17,7 +17,7 @@ class User {
         this.birth = birth
         this.state = state
         this.description = description
-
     }
+    constructor()
 }
 

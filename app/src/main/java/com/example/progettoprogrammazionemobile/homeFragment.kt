@@ -31,14 +31,13 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var contesto: Context
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val contesto = this.requireContext()
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
@@ -50,8 +49,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         binding.btnClose.setOnClickListener{
             view.findNavController().navigate(R.id.action_homeFragment_to_dettaglio_evento)
         }
-
-        var imgs = listOf<Int>(R.drawable.chicco, R.drawable.rico, R.drawable.ilmioamico)
 
         var categoryimgs = listOf<category>(
             category(  R.drawable.adventurecategory,"Adventure"),
@@ -76,9 +73,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 Toast.makeText(requireContext(), "${position}",Toast.LENGTH_LONG).show()
             }
         })
-        var adapter = Adapter(imgs, this.requireContext())
-        var page = binding.viewPager
-        page.adapter = adapter
+
 
         eventsRec = binding.rvEvents
         eventsRec.layoutManager = LinearLayoutManager(this.requireContext())
@@ -127,7 +122,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
 
     fun go_away(title: String){
-        val action = homeFragmentDirections.actionHomeFragmentToDettaglioEvento(title)
+        //val action = homeFragmentDirections.actionHomeFragmentToDettaglioEvento(title)
         val navController = this.findNavController()
         navController.navigate(R.id.action_homeFragment_to_dettaglio_evento)
 

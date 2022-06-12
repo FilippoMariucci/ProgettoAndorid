@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -12,21 +13,81 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
 
+
     private val homeFragment = com.example.progettoprogrammazionemobile.homeFragment()
-    private val userFragment = profilo()
+    private val userFragment = com.example.progettoprogrammazionemobile.profilo()
     private val creaOccasioneFragment = crea_occasione()
 
+    private lateinit var currrentFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, homeFragment()).commit()
+        val bottomNav : BottomNavigationView = findViewById(R.id.bottomAppBar)
+        bottomNav.setOnNavigationItemSelectedListener (navListener)
 
+    }
+
+    val navListener = BottomNavigationView.OnNavigationItemSelectedListener{
+        when(it.itemId){
+            R.id.icon_user -> {
+                currrentFragment = userFragment
+            }
+            R.id.icon_add -> {
+                currrentFragment = creaOccasioneFragment
+            }
+            R.id.icon_discover -> {
+                currrentFragment = homeFragment
+            }
+        }
+        supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, currrentFragment).commit()
+        true
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        //supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, homeFragment()).commit()
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
+        //val bottomNav : BottomNavigationView = findViewById(R.id.bottomAppBar)
         //val navController = this.findNavController(R.id.myNavHostFragment)
         //setSupportActionBar(findViewById(R.id.topAppBar))
-        replaceFragment(homeFragment)
 
         val mOnNavigationItemSelectedListener =
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -71,5 +132,5 @@ class HomeActivity : AppCompatActivity() {
             transaction.replace(R.id.myNavHostFragment, fragment)
             transaction.commit()
         }
-    }
-}
+
+         */

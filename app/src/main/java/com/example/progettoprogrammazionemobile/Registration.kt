@@ -51,8 +51,6 @@ class Registration : AppCompatActivity() {
                     database.child(firebaseUser.uid).setValue(user)
                     Toast.makeText(this, "You've been succesfully registred!", Toast.LENGTH_LONG).show()
                     startActivity(Intent(this, Login::class.java))
-
-
                     finish()
                 }
                 else{
