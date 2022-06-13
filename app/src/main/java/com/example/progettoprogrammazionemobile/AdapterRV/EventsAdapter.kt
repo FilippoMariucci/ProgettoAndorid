@@ -33,6 +33,7 @@ class EventsAdapter (private val eventList: ArrayList<Evento>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentEvent = eventList[position]
         holder.tvEvent.text = currentEvent.titolo
+        holder.idEvent = currentEvent.id_evento.toString()
     }
 
     override fun getItemCount(): Int {
@@ -41,10 +42,11 @@ class EventsAdapter (private val eventList: ArrayList<Evento>) :
 
     class ViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val tvEvent : TextView = itemView.findViewById(R.id.tvEventDesc)
+        var idEvent : String = ""
 
         init {
             itemView.setOnClickListener{
-                listener.onItemClick(tvEvent.text as String)
+                listener.onItemClick(idEvent as String)
             }
         }
     }

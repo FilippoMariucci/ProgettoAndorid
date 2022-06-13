@@ -13,19 +13,17 @@ import com.google.firebase.storage.StorageReference
 class EventoViewModel: ViewModel() {
 
         private lateinit var reference: DatabaseReference
-        private lateinit var id_evento: String
         private lateinit var storeRef : StorageReference
         private lateinit var imageUri: Uri
-        private val events: MutableList<Evento> = mutableListOf()
 
 
 
         fun saveEvent(event_to_save: Evento) {
             var ritorno = false
             reference = FirebaseDatabase.getInstance().getReference("Evento")
-            val id_evento = reference.push().getKey();
-            if (id_evento != null) {
-            reference.child(id_evento).setValue(event_to_save)
+            event_to_save.id_evento = reference.push().getKey();
+            if (event_to_save.id_evento != null) {
+            reference.child(event_to_save.id_evento!!).setValue(event_to_save)
                 .addOnCompleteListener{
                         if (it.isSuccessful) {
                             ritorno = true

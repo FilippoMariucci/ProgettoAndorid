@@ -1,6 +1,7 @@
 package com.example.progettoprogrammazionemobile.model
 
 data class Evento (
+    var id_evento: String ?= null,
     var titolo: String ?=null,
     var descrizione: String ?=null,
     var lingue: String ?=null,

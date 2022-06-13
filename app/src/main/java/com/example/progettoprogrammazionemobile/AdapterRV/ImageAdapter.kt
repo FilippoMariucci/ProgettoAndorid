@@ -32,7 +32,6 @@ class ImageAdapter(private val categories: List<category>):RecyclerView.Adapter<
 
         holder.imagesrc.setImageResource(currentItem.imageSrc)
         holder.pipo.text = currentItem.text
-
     }
 
     override fun getItemCount(): Int = categories.size

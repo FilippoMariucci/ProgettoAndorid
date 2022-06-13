@@ -27,7 +27,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var eventsRec: RecyclerView
     private lateinit var eventList: ArrayList<Evento>
     private lateinit var dbRef: DatabaseReference
-
+    private val dettaglioEvento = dettaglio_evento()
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -46,9 +46,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnClose.setOnClickListener{
-            view.findNavController().navigate(R.id.action_homeFragment_to_dettaglio_evento)
-        }
 
         var categoryimgs = listOf<category>(
             category(  R.drawable.adventurecategory,"Adventure"),
@@ -103,7 +100,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                         override fun onItemClick(position: String) {
                             Toast.makeText(requireContext(), "Clicked on item $position", Toast.LENGTH_SHORT).show()
                             go_away(position)
-
                         }
 
                     })
@@ -121,11 +117,11 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
 
 
-    fun go_away(title: String){
-        //val action = homeFragmentDirections.actionHomeFragmentToDettaglioEvento(title)
-        val navController = this.findNavController()
-        navController.navigate(R.id.action_homeFragment_to_dettaglio_evento)
-
+    fun go_away(idevento: String){
+        val bundle = Bundle()
+        bundle.putString("idEvento", idevento)
+        dettaglioEvento.arguments = bundle
+        if(isAdded)  fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, dettaglioEvento)?.commit()
     }
 }
 
