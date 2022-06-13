@@ -1,14 +1,15 @@
 package com.example.progettoprogrammazionemobile
 
-import android.content.ContentValues.TAG
+import android.app.Activity.RESULT_OK
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.MultiAutoCompleteTextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.progettoprogrammazionemobile.AdapterRV.EventsAdapter
@@ -17,22 +18,54 @@ import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasion
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
-import java.lang.StringBuilder
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 
 class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
 
-    private var _binding: FragmentCreaOccasioneBinding? = null
-    private val binding get() = _binding!!
+
     private lateinit var auth: FirebaseAuth
     private lateinit var uid : String
+    private var _binding: FragmentCreaOccasioneBinding? = null
+    private val binding get() = _binding!!
+    //private lateinit var binding: FragmentCreaOccasioneBinding
+    private lateinit var  databaseReference: DatabaseReference
+    private lateinit var  storageReference: StorageReference
+    private val mStorageRef = FirebaseStorage.getInstance().reference
+
+    private lateinit var imageUri: Uri
+    private  var button : Button ?= null
+    private  var imageView: ImageView ?= null
+
+    private var packageName = BuildConfig.APPLICATION_ID
 
     private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
 
 
     private val viewModelEvento: EventoViewModel by activityViewModels()
+
+    companion object{
+        val IMAGE_REQUEST_CODE = 100
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val languages = resources.getStringArray(R.array.languages)
+        val categories = resources.getStringArray(R.array.categories)
+        val arrayLanguagesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
+        val arrayCategoriesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
+        binding.autoCompleteCategories.setAdapter(arrayCategoriesAdapter)
+        binding.autoCompleteLanguages.setAdapter(arrayLanguagesAdapter)
+    }
+
 
 
     override fun onCreateView(
@@ -43,13 +76,8 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
         // Inflate the layout XML file and return a binding object instance
         _binding= FragmentCreaOccasioneBinding.inflate(inflater, container, false)
 
-        val languageAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, languages)
-        binding.lingueEvento.setAdapter(languageAdapter)
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
-        binding.lingueEvento.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-
-
 
 
 //        var getData = object : ValueEventListener{
@@ -75,29 +103,92 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //reference = FirebaseDatabase.getInstance().getReference("Evento")
+
+
+        button = getView()?.findViewById(R.id.scegliImmagine)
+        imageView = getView()?.findViewById(R.id.immagine)
+
+        button?.setOnClickListener {
+            pickImagegallery()
+        }
+
         binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
         //this.loadEventsFromDb()
         //viewModelEvento.loadEventsFromDb()
 
+
+
+
+        auth = FirebaseAuth.getInstance()
+        val uid = auth.currentUser?.uid
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
+        binding.btnaddEvento.setOnClickListener{
+
+            Toast.makeText(this.requireContext(), "chicco gay$packageName", Toast.LENGTH_SHORT).show()
+
+            this.uploadEventPicture()
+            this.saveEvento()
+
+        }
+
+
+    }
+
+    private fun pickImagegallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
+            imageView?.setImageURI(data?.data)
+            imageUri = data?.data!!
+        }
     }
 
 
+    private fun uploadEventPicture(){
+
+
+
+        storageReference = FirebaseStorage.getInstance().getReference("Users/"+ auth.currentUser?.uid)
+        storageReference.putFile(imageUri).addOnSuccessListener {
+
+            Toast.makeText(this.requireContext(), "immagine ok", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener{
+            Toast.makeText(this.requireContext(), "immagine failata", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
+
+
     private fun saveEvento(){
+
+
         val idEvento = ""
-        val titolo_evento = binding.titoloEvento.text.toString().trim()
-        val descrizione_evento = binding.descrizioneEvento.text.toString().trim()
-        val lingue_evento = binding.lingueEvento.text.toString().trim()
-        val indirizzo_evento = binding.indirizzoEvento.text.toString().trim()
-        val npersone_evento = binding.npersoneEvento.text.toString().trim()
-        val costo_evento = binding.costoEvento.text.toString().trim()
-        val citta_evento = binding.cittaEvento.text.toString().trim()
-        val data_evento = binding.dataEvento.text.toString().trim()
-        val foto_evento = binding.fotoEvento.text.toString().trim()
-        val categoria_evento = binding.categorieEvento.text.toString().trim()
+        val titolo_evento = binding.titoloEvento.editText?.text.toString().trim()
+        val descrizione_evento = binding.DescrizioneEvento.editText?.text.toString().trim()
+        val lingue_evento = binding.autoCompleteLanguages.text.toString().trim()
+        val indirizzo_evento = binding.indirizzoEvento.editText?.text.toString().trim()
+        val npersone_evento = binding.npersoneEvento.editText?.text.toString().trim()
+        val costo_evento = binding.prezzoEvento.editText?.text.toString().trim()
+        val citta_evento = binding.CittaEvento.editText?.text.toString().trim()
+        val data_evento = binding.dataEvento.editText?.text.toString().trim()
+        val foto_evento = imageUri.toString().trim()
+        val categoria_evento = binding.autoCompleteCategories.text.toString().trim()
         val userId = uid
+
+
+
 
         if(titolo_evento.isEmpty()){
             Toast.makeText(this.context, "pppppp", Toast.LENGTH_LONG).show()
@@ -107,6 +198,9 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
             npersone_evento, foto_evento, userId)
         viewModelEvento.saveEvent(model)
+
+
+
     }
 
 }

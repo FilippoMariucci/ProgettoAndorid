@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -46,8 +47,14 @@ class HomeActivity : AppCompatActivity() {
         true
     }
 }
-
-
+//
+//    private lateinit var navController: NavController
+//
+//
+//        val navHostFragment = supportFragment.findFragmentById(
+//            R.id.myNavHostFragment
+//        ) as NavHostFragment
+//        navController = navHostFragment.navController
 
 
 
@@ -83,8 +90,9 @@ class HomeActivity : AppCompatActivity() {
 
         /*
         //supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, homeFragment()).commit()
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
-        val navController = navHostFragment.navController
+
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
+//        val navController = navHostFragment.navController
         //val bottomNav : BottomNavigationView = findViewById(R.id.bottomAppBar)
         //val navController = this.findNavController(R.id.myNavHostFragment)
         //setSupportActionBar(findViewById(R.id.topAppBar))

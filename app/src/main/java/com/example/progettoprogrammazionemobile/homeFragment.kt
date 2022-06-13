@@ -29,7 +29,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var dbRef: DatabaseReference
     private val dettaglioEvento = dettaglio_evento()
 
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding : com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
