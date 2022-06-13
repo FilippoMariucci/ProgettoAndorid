@@ -3,6 +3,7 @@ package com.example.progettoprogrammazionemobile.AdapterRV
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.homeFragmentDirections
 import com.example.progettoprogrammazionemobile.model.Evento
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class EventsAdapter (private val eventList: ArrayList<Evento>) :
     RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
@@ -34,6 +36,11 @@ class EventsAdapter (private val eventList: ArrayList<Evento>) :
         val currentEvent = eventList[position]
         holder.tvEvent.text = currentEvent.titolo
         holder.idEvent = currentEvent.id_evento.toString()
+        holder.image.setImageResource(R.drawable.ilmioamico)
+        holder.prezzo.text = currentEvent.costo
+        holder.dataEv.text = currentEvent.data_evento
+        holder.categorieEv.text = currentEvent.categoria
+        holder.descrizioneEv.text = currentEvent.descrizione
     }
 
     override fun getItemCount(): Int {
@@ -43,9 +50,15 @@ class EventsAdapter (private val eventList: ArrayList<Evento>) :
     class ViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val tvEvent : TextView = itemView.findViewById(R.id.tvEventDesc)
         var idEvent : String = ""
+        val image : ImageView = itemView.findViewById(R.id.immagineEvento)
+        val prezzo : TextView = itemView.findViewById(R.id.prezzoEvento)
+        val dataEv : TextView = itemView.findViewById(R.id.dataEvento)
+        val categorieEv : TextView = itemView.findViewById(R.id.categoriaEvento)
+        val descrizioneEv : TextView = itemView.findViewById(R.id.descrizioneItemEvento)
+        val bottonInfo : FloatingActionButton = itemView.findViewById(R.id.buttonIminterest)
 
         init {
-            itemView.setOnClickListener{
+            bottonInfo.setOnClickListener{
                 listener.onItemClick(idEvent as String)
             }
         }

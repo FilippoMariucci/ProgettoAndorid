@@ -36,7 +36,6 @@ class dettaglio_evento : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(requireContext(), "$idEvento", Toast.LENGTH_SHORT).show()
         databaseReference = FirebaseDatabase.getInstance().getReference("Evento")
         getEventData()
     }

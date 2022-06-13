@@ -75,10 +75,10 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         eventsRec = binding.rvEvents
         eventsRec.layoutManager = LinearLayoutManager(this.requireContext())
         eventsRec.setHasFixedSize(true)
-
         eventList = arrayListOf<Evento>()
 
         getEventsData()
+
     }
 
     private fun getEventsData(){
