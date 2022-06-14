@@ -76,8 +76,8 @@ class dettaglio_evento : Fragment() {
 
         databaseReferencePartecipazione = FirebaseDatabase.getInstance().getReference("Partecipazione")
         val arrayList = databaseReferencePartecipazione.child("id_partecipante").get()
-
-        listPartecipanti.add(id_partecipante)
+        Toast.makeText(requireContext(), "$arrayList", Toast.LENGTH_SHORT).show()
+        listPartecipanti.add(arrayList.toString())
         Toast.makeText(requireContext(), "$listPartecipanti", Toast.LENGTH_SHORT).show()
 
         if (id_creatore.equals(id_partecipante)) Toast.makeText(requireContext(), "You already partecipate to your own event :)", Toast.LENGTH_SHORT).show()

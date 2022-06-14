@@ -58,7 +58,7 @@ class EventsAdapter (private val eventList: ArrayList<Evento>, private val mapBi
         val currentEvent = eventList[position]
         holder.tvEvent.text = currentEvent.titolo
         holder.idEvent = currentEvent.id_evento.toString()
-        holder.image.setImageBitmap(mapBitEvents[holder.idEvent])
+        //holder.image.setImageBitmap(mapBitEvents[holder.idEvent])
 //        holder.image.setImageBitmap(StringToBitMap(currentEvent.foto)?.let {
 //            Bitmap.createScaledBitmap(
 //                it, 120, 120, false)
