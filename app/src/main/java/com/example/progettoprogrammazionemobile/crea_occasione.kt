@@ -3,16 +3,19 @@ package com.example.progettoprogrammazionemobile
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.progettoprogrammazionemobile.AdapterRV.EventsAdapter
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasioneBinding
 import com.example.progettoprogrammazionemobile.model.Evento
@@ -111,6 +114,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
 
+
 //        var getData = object : ValueEventListener{
 //            override fun onDataChange(snapshot: DataSnapshot) {
 //                var sb = StringBuilder()
@@ -187,7 +191,9 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
     private fun uploadEventPicture(){
 
-        storageReference = FirebaseStorage.getInstance().getReference("Users/"+ auth.currentUser?.uid+".jpg")
+
+
+        storageReference = FirebaseStorage.getInstance().getReference("Users/"+ auth.currentUser?.uid)
         storageReference.putFile(imageUri).addOnSuccessListener {
 
             Toast.makeText(this.requireContext(), "immagine ok", Toast.LENGTH_SHORT).show()
@@ -236,7 +242,4 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
 
     }
-
-
-
 }

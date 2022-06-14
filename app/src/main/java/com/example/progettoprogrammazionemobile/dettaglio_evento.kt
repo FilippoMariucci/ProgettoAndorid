@@ -10,13 +10,19 @@ import androidx.navigation.fragment.navArgs
 import com.example.progettoprogrammazionemobile.databinding.FragmentDettaglioEventoBinding
 import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.model.Evento
+import com.example.progettoprogrammazionemobile.model.Partecipazione
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 
 class dettaglio_evento : Fragment() {
 
     private lateinit var idEvento : String
-    private lateinit var databaseReference: DatabaseReference
+
+    private lateinit var databaseReferenceUser: DatabaseReference
+    private lateinit var databaseReferencePartecipazione: DatabaseReference
+
+    private lateinit var listPartecipanti : ArrayList<String>
     private lateinit var evento : Evento
     private var _binding : FragmentDettaglioEventoBinding? = null
     private val binding get() = _binding!!
@@ -36,12 +42,14 @@ class dettaglio_evento : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        databaseReference = FirebaseDatabase.getInstance().getReference("Evento")
+        databaseReferenceUser = FirebaseDatabase.getInstance().getReference("Evento")
         getEventData()
+        binding.buttonPartecipoDett.setOnClickListener{paretecipaEvento()}
     }
 
+
     private fun getEventData() {
-        databaseReference.child(idEvento).addValueEventListener(object : ValueEventListener{
+        databaseReferenceUser.child(idEvento).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento :: class.java)!!
                 binding.titoloEventoDett.setText(evento.titolo)
@@ -55,6 +63,35 @@ class dettaglio_evento : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    private fun paretecipaEvento(){
+        val auth = FirebaseAuth.getInstance()
+        val uid = auth.currentUser?.uid.toString().trim()
+        val id_evento = evento.id_evento
+        val id_creatore = evento.userId
+        val id_partecipante = uid
+        listPartecipanti = ArrayList<String>()
+        //listPartecipanti.size <= evento.n_persone
+
+        databaseReferencePartecipazione = FirebaseDatabase.getInstance().getReference("Partecipazione")
+        val arrayList = databaseReferencePartecipazione.child("id_partecipante").get()
+
+        listPartecipanti.add(id_partecipante)
+        Toast.makeText(requireContext(), "$listPartecipanti", Toast.LENGTH_SHORT).show()
+
+        if (id_creatore.equals(id_partecipante)) Toast.makeText(requireContext(), "You already partecipate to your own event :)", Toast.LENGTH_SHORT).show()
+        else{
+            val partecipazione = Partecipazione(id_creatore, listPartecipanti)
+            if (id_evento != null) {
+                databaseReferencePartecipazione.child(id_evento).setValue(partecipazione).addOnSuccessListener {
+                    Toast.makeText(requireContext(), "Your application for this event was succesful!", Toast.LENGTH_LONG).show()
+                }.addOnFailureListener{
+                    Toast.makeText(requireContext(), "Sorry we got troubles!", Toast.LENGTH_LONG).show()
+                }
+
+            }
+        }
     }
 
 

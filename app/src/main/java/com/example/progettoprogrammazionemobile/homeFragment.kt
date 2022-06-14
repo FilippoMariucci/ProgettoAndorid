@@ -1,15 +1,21 @@
 package com.example.progettoprogrammazionemobile
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import android.widget.Toast
+import androidx.annotation.IdRes
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.progettoprogrammazionemobile.AdapterRV.Adapter
 import com.example.progettoprogrammazionemobile.AdapterRV.EventsAdapter
 import com.example.progettoprogrammazionemobile.AdapterRV.ImageAdapter
 import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
@@ -143,16 +149,21 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                     eventsRec.adapter = eAdapter
 
                     eAdapter.setOnItemClickListener(object : EventsAdapter.onItemClickListener{
-                        override fun onItemClick(position: String) {
-                            Toast.makeText(requireContext(), "Clicked on item $position", Toast.LENGTH_SHORT).show()
-                            go_away(position)
+                        override fun onItemClick(idevento: String) {
+                            Toast.makeText(requireContext(), "Clicked on item $idevento", Toast.LENGTH_SHORT).show()
+                            go_away(idevento)
                         }
 
+                        override fun skipEvent(posizione: String) {
+                            val actualPosition = Integer.parseInt(posizione)
+                            Toast.makeText(requireContext(), "$actualPosition", Toast.LENGTH_SHORT).show()
+                            val nextPosition = actualPosition + 1
+                            eventsRec.layoutManager?.scrollToPosition(nextPosition)
+                        }
                     })
 
                     eventsRec.visibility = View.VISIBLE
                 }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }

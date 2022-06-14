@@ -9,13 +9,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.accessibility.AccessibilityViewCommand
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.annotation.GlideExtension
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.annotation.GlideOption
+import com.bumptech.glide.annotation.GlideType
 import com.example.progettoprogrammazionemobile.R
+import com.example.progettoprogrammazionemobile.homeFragmentDirections
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineStart
 import java.lang.Integer.decode
 import kotlin.collections.ArrayList
+import com.squareup.picasso.Picasso
+import kotlin.coroutines.coroutineContext
 
 
 class EventsAdapter (private val eventList: ArrayList<Evento>, private val mapBitEvents: Map<String,Bitmap>) :
@@ -24,7 +35,8 @@ class EventsAdapter (private val eventList: ArrayList<Evento>, private val mapBi
     private lateinit var eListener : onItemClickListener
 
     interface onItemClickListener{
-        fun onItemClick(position: String)
+        fun onItemClick(idEvento: String)
+        fun skipEvent (posizione: String)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -70,10 +82,14 @@ class EventsAdapter (private val eventList: ArrayList<Evento>, private val mapBi
         val categorieEv : TextView = itemView.findViewById(R.id.categoriaEvento)
         val descrizioneEv : TextView = itemView.findViewById(R.id.descrizioneItemEvento)
         val bottonInfo : FloatingActionButton = itemView.findViewById(R.id.buttonIminterest)
+        val bottonDelete : FloatingActionButton = itemView.findViewById(R.id.buttonNoInterest)
 
         init {
             bottonInfo.setOnClickListener{
                 listener.onItemClick(idEvent as String)
+            }
+            bottonDelete.setOnClickListener{
+                listener.skipEvent(adapterPosition.toString() as String)
             }
         }
     }
