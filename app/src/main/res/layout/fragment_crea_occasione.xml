@@ -257,21 +257,11 @@
                 android:text="English" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
-            android:id="@+id/immagine"
-            android:layout_width="181dp"
-            android:layout_height="122dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLanguages" />
-
         <Button
             android:id="@+id/scegliImmagine"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins"
             android:text="Choose image"
             android:textColor="@color/orange"
@@ -296,8 +286,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scegliImmagine" />
+            app:layout_constraintTop_toBottomOf="@+id/scegliImmagine"
+            app:layout_constraintVertical_bias="1.0" />
 
+        <ImageView
+            android:id="@+id/immagine"
+            android:layout_width="153dp"
+            android:layout_height="118dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/image_not_found"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLanguages" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

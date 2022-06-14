@@ -5,9 +5,12 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.progettoprogrammazionemobile.crea_occasione
+import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasioneBinding
 import com.example.progettoprogrammazionemobile.homeFragment
 import com.example.progettoprogrammazionemobile.model.Evento
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.util.*
 import kotlin.collections.ArrayList
@@ -17,25 +20,51 @@ class EventoViewModel: ViewModel() {
         private lateinit var reference: DatabaseReference
         private lateinit var storeRef : StorageReference
         private lateinit var imageUri: Uri
-
+        lateinit var creaOccasione : crea_occasione
+        private lateinit var  databaseReferenceEvento: DatabaseReference
+        private lateinit var  storageReference: StorageReference
+    private lateinit var auth: FirebaseAuth
 
 
         fun saveEvent(event_to_save: Evento) {
             var ritorno = false
             reference = FirebaseDatabase.getInstance().getReference("Evento")
             event_to_save.id_evento = reference.push().getKey();
+            uploadEventPicture(event_to_save.id_evento)
+
             if (event_to_save.id_evento != null) {
-            reference.child(event_to_save.id_evento!!).setValue(event_to_save)
-                .addOnCompleteListener{
+                reference.child(event_to_save.id_evento!!).setValue(event_to_save)
+                    .addOnCompleteListener {
                         if (it.isSuccessful) {
                             ritorno = true
                         }
-                }.addOnFailureListener{
+                    }.addOnFailureListener {
                         ritorno = false
-                }
+                    }
             }
             print(ritorno)
         }
+
+    public fun setUri(imageUri: Uri){
+
+        this.imageUri = imageUri
+    }
+
+    public fun uploadEventPicture (idEvento: String ?= null) {
+
+
+        auth = FirebaseAuth.getInstance()
+
+        storageReference = FirebaseStorage.getInstance().getReference("Users/" + auth.currentUser?.uid + "/" + idEvento)
+        storageReference.putFile(imageUri)
+
+    }
+
+
+
+
+
+
 
         fun getDateTimeCalendar(): ArrayList<Int> {
             val cal = Calendar.getInstance()

@@ -83,4 +83,5 @@ class modifica_profilo : Fragment(R.layout.fragment_modifica_profilo) {
             Toast.makeText(this.requireContext(), "Failed to update", Toast.LENGTH_SHORT).show()
         }
     }
+
 }

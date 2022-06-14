@@ -1,18 +1,26 @@
 package com.example.progettoprogrammazionemobile
 
+
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker.checkSelfPermission
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.progettoprogrammazionemobile.AdapterRV.EventsAdapter
@@ -29,6 +37,9 @@ import java.util.*
 class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
 
+class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
+
+
 
     private lateinit var auth: FirebaseAuth
     private lateinit var uid : String
@@ -36,8 +47,13 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     private val binding get() = _binding!!
     //private lateinit var binding: FragmentCreaOccasioneBinding
     private lateinit var  databaseReference: DatabaseReference
+    private lateinit var  databaseReferenceEvento: DatabaseReference
     private lateinit var  storageReference: StorageReference
     private val mStorageRef = FirebaseStorage.getInstance().reference
+    private var idEvento : String ?= null
+
+    private lateinit var idEventoFoto : String
+    private lateinit var reference: DatabaseReference
 
     private lateinit var imageUri: Uri
     private  var button : Button ?= null
@@ -45,6 +61,9 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
     private var packageName = BuildConfig.APPLICATION_ID
 
+    private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
+
+    private lateinit var evento : Evento
     private val viewModelEvento: EventoViewModel by activityViewModels()
     var array_date_time = arrayListOf<Int>()
     var savedDay = 0
@@ -54,7 +73,8 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     var savedMinute = 0
 
     companion object{
-        val IMAGE_REQUEST_CODE = 100
+        private val IMAGE_REQUEST_CODE = 100
+        private val PERMISSION_CODE = 1001
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,14 +162,29 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //reference = FirebaseDatabase.getInstance().getReference("Evento")
+
+
 
 
         button = getView()?.findViewById(R.id.scegliImmagine)
         imageView = getView()?.findViewById(R.id.immagine)
 
         button?.setOnClickListener {
-            pickImagegallery()
+            activity?.let{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if (ContextCompat.checkSelfPermission(it.applicationContext, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ){
+                        val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        requestPermissions(permissions, PERMISSION_CODE)
+                    } else{
+                        pickImagegallery()
+                    }
+                }else{
+                    pickImagegallery()
+                }
+
+            }
+
+           //pickImagegallery()
         }
 
         binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
@@ -166,13 +201,34 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
             Toast.makeText(this.requireContext(), "chicco gay$packageName", Toast.LENGTH_SHORT).show()
 
-            this.uploadEventPicture()
+
             this.saveEvento()
 
         }
 
 
     }
+
+
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    pickImagegallery()
+                }else{
+                    Toast.makeText(this.requireContext(),"Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
 
     private fun pickImagegallery() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -185,22 +241,15 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
             imageView?.setImageURI(data?.data)
             imageUri = data?.data!!
+            viewModelEvento.setUri(imageUri)
         }
     }
 
 
-    private fun uploadEventPicture(){
 
 
 
-        storageReference = FirebaseStorage.getInstance().getReference("Users/"+ auth.currentUser?.uid)
-        storageReference.putFile(imageUri).addOnSuccessListener {
 
-            Toast.makeText(this.requireContext(), "immagine ok", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener{
-            Toast.makeText(this.requireContext(), "immagine failata", Toast.LENGTH_SHORT).show()
-        }
-    }
 
 
 
