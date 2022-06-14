@@ -1,18 +1,18 @@
 package com.example.progettoprogrammazionemobile
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.progettoprogrammazionemobile.AdapterRV.EventsAdapter
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasioneBinding
 import com.example.progettoprogrammazionemobile.model.Evento
@@ -20,9 +20,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.util.*
 
 
-class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
+class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
 
 
@@ -41,10 +42,13 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
     private var packageName = BuildConfig.APPLICATION_ID
 
-    private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
-
-
     private val viewModelEvento: EventoViewModel by activityViewModels()
+    var array_date_time = arrayListOf<Int>()
+    var savedDay = 0
+    var savedMonth = 0
+    var savedYear = 0
+    var savedHour = 0
+    var savedMinute = 0
 
     companion object{
         val IMAGE_REQUEST_CODE = 100
@@ -60,10 +64,38 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
         super.onResume()
         val languages = resources.getStringArray(R.array.languages)
         val categories = resources.getStringArray(R.array.categories)
-        val arrayLanguagesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
-        val arrayCategoriesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
+        val arrayLanguagesAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
+        val arrayCategoriesAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
         binding.autoCompleteCategories.setAdapter(arrayCategoriesAdapter)
         binding.autoCompleteLanguages.setAdapter(arrayLanguagesAdapter)
+
+
+
+        binding.InputDataEvento.setOnClickListener(View.OnClickListener {
+            array_date_time = viewModelEvento.getDateTimeCalendar()
+
+            DatePickerDialog(requireContext(), this, array_date_time.get(2), array_date_time.get(1), array_date_time.get(0)).show()
+        })
+    }
+
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayofMonth: Int) {
+        savedDay = dayofMonth
+        savedMonth = month
+        savedYear = year
+
+        array_date_time = arrayListOf<Int>()
+        array_date_time = viewModelEvento.getDateTimeCalendar()
+        TimePickerDialog(requireContext(), this, array_date_time.get(3), array_date_time.get(4), true).show()
+    }
+
+    override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
+        savedHour = hour
+        savedMinute = minute
+
+        binding.textDateEvento.text = "$savedDay-$savedMonth-$savedYear at $savedHour:$savedMinute"
     }
 
 
@@ -78,7 +110,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
-
 
 //        var getData = object : ValueEventListener{
 //            override fun onDataChange(snapshot: DataSnapshot) {
@@ -156,9 +187,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
     private fun uploadEventPicture(){
 
-
-
-        storageReference = FirebaseStorage.getInstance().getReference("Users/"+ auth.currentUser?.uid)
+        storageReference = FirebaseStorage.getInstance().getReference("Users/"+ auth.currentUser?.uid+".jpg")
         storageReference.putFile(imageUri).addOnSuccessListener {
 
             Toast.makeText(this.requireContext(), "immagine ok", Toast.LENGTH_SHORT).show()
@@ -184,6 +213,11 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
         val citta_evento = binding.CittaEvento.editText?.text.toString().trim()
         val data_evento = binding.dataEvento.editText?.text.toString().trim()
         val foto_evento = imageUri.toString().trim()
+        val conf = Bitmap.Config.ARGB_8888 // see other conf types
+        val w: Int = 1
+        val h: Int = 1
+        val bmp = Bitmap.createBitmap(w, h, conf)
+
         val categoria_evento = binding.autoCompleteCategories.text.toString().trim()
         val userId = uid
 
@@ -202,5 +236,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
 
     }
+
+
 
 }

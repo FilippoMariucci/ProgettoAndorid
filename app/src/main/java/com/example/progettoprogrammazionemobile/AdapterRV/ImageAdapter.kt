@@ -15,7 +15,7 @@ class ImageAdapter(private val categories: List<category>):RecyclerView.Adapter<
 
     interface onItemClickListener{
 
-        fun onItemClick(position: Int)
+        fun onItemClick(position: String)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -31,18 +31,18 @@ class ImageAdapter(private val categories: List<category>):RecyclerView.Adapter<
         val currentItem = categories[position]
 
         holder.imagesrc.setImageResource(currentItem.imageSrc)
-        holder.pipo.text = currentItem.text
+        holder.titleCategory.text = currentItem.text
     }
 
     override fun getItemCount(): Int = categories.size
 
     class ImageViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         val imagesrc : ImageView = itemView.findViewById<ImageView>(R.id.image_category)
-        val pipo : TextView = itemView.findViewById(R.id.categoryTitle)
+        val titleCategory : TextView = itemView.findViewById(R.id.categoryTitle)
 
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
+                listener.onItemClick(titleCategory.text.toString())
             }
         }
 

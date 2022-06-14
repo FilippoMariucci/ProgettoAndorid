@@ -46,6 +46,10 @@ class occasioni_create : Fragment() {
 
         createdEvents = arrayListOf<Evento>()
         getUserEvents()
+
+        binding.btnAddEvent.setOnClickListener{
+            fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, crea_occasione())?.commit()
+        }
     }
 
     private fun getUserEvents() {

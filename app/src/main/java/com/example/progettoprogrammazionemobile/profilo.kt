@@ -1,4 +1,5 @@
 package com.example.progettoprogrammazionemobile
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,13 @@ class profilo : Fragment()  {
         val button_occas_create = binding.occasionicreateProfilo
         button_occas_create.setOnClickListener{
             fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
+        }
+
+        // LOGOUT
+        binding.btnLogout.setOnClickListener{
+            auth.signOut()
+            val intent = Intent (getActivity(), Login::class.java)
+            getActivity()?.startActivity(intent)
         }
     }
 }

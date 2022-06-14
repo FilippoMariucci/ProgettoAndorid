@@ -1,5 +1,7 @@
 package com.example.progettoprogrammazionemobile.model
 
+import android.graphics.Bitmap
+
 data class Evento (
     var id_evento: String ?= null,
     var titolo: String ?=null,

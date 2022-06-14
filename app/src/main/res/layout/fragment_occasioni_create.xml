@@ -11,43 +11,46 @@
         android:layout_height="match_parent">
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerOccasioniCreate"
+            android:layout_width="408dp"
+            android:layout_height="581dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/occasioni_create_titolo">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
         <TextView
             android:id="@+id/occasioni_create_titolo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins"
             android:text="Occasioni create"
             android:textSize="28sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddEvent"
+            app:layout_constraintHorizontal_bias="0.584"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteY="119dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/plus_button"
+            android:id="@+id/btnAddEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="76dp"
-            android:backgroundTint="#F88F2E"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/orange_bold"
             android:clickable="true"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerOccasioniCreate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.552"
-            app:layout_constraintStart_toEndOf="@+id/occasioni_create_titolo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/plus_icon_ok"
+            app:rippleColor="@color/white"
+            app:srcCompat="@drawable/ic_add_icon"
             tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerOccasioniCreate"
-            android:layout_width="411dp"
-            android:layout_height="561dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
