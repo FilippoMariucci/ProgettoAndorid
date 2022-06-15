@@ -13,15 +13,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutCardEvent"
-        android:layout_width="332dp"
-        android:layout_height="430dp"
+        android:layout_width="346dp"
+        android:layout_height="523dp"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/immagineEvento"
-            android:layout_width="293dp"
-            android:layout_height="196dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="340dp"
+            android:layout_height="265dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -31,15 +30,14 @@
             android:layout_width="260dp"
             android:layout_height="34dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="36dp"
             android:fontFamily="@font/poppins"
             android:hint="titolo evento"
             android:textColor="@color/black"
-            android:textSize="24dp"
+            android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintHorizontal_bias="0.348"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/immagineEvento">
+            tools:layout_editor_absoluteY="290dp">
 
         </TextView>
 
@@ -47,14 +45,14 @@
             android:id="@+id/dataEvento"
             android:layout_width="117dp"
             android:layout_height="21dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins"
             android:hint="gg/mm/aaaa"
             android:textAlignment="viewStart"
             android:textColor="@color/black"
             android:textSize="15dp"
             app:layout_constraintEnd_toStartOf="@+id/prezzoEvento"
-            app:layout_constraintHorizontal_bias="0.561"
+            app:layout_constraintHorizontal_bias="0.605"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvEventDesc"></TextView>
 
@@ -87,27 +85,29 @@
             android:id="@+id/buttonIminterest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
+            android:layout_marginEnd="52dp"
             android:layout_marginBottom="4dp"
             android:backgroundTint="@color/orange"
             android:src="@drawable/ic_icons8_amore_cerchiato"
             android:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prezzoEvento" />
+            app:layout_constraintTop_toBottomOf="@+id/prezzoEvento"
+            app:layout_constraintVertical_bias="0.419" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonNoInterest"
             android:layout_width="59dp"
             android:layout_height="55dp"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="44dp"
             android:layout_marginBottom="4dp"
             android:backgroundTint="@color/orange"
             android:src="@drawable/ic_baseline_clear_24"
             android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoriaEvento" />
+            app:layout_constraintTop_toBottomOf="@+id/categoriaEvento"
+            app:layout_constraintVertical_bias="0.395" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

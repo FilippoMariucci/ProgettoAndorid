@@ -6,10 +6,14 @@ import android.widget.CursorAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.model.Evento
+import kotlinx.android.synthetic.main.event_item.view.*
+import kotlinx.android.synthetic.main.occasioni_create_card.view.*
 
-class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>):
+class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>,
+    val urls: List<String>):
     RecyclerView.Adapter<occasioniCreateAdapter.viewHolder>() {
 
 
@@ -20,7 +24,9 @@ class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>):
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         val currentEvent = occasioniUtente[position]
-        holder.iCreated.setImageResource(R.drawable.rico)
+        val url = urls[position]
+        Glide.with(holder.itemView).load(url).into(holder.itemView.fotoEventoUtente)
+        //holder.iCreated.setImageResource(R.drawable.rico)
         holder.tCreated.text = currentEvent.titolo
         holder.cCreated.text = currentEvent.categoria
         holder.dCreated.text = currentEvent.data_evento

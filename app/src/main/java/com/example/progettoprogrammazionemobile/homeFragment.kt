@@ -103,7 +103,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     private fun listFiles() = CoroutineScope(Dispatchers.IO).launch {
         try{
-            val images = imageRef.child("Users/$uid/").listAll().await()
+            val images = imageRef.child("Users/").listAll().await()
             val imageUrls = mutableListOf<String>()
             for(i in images.items){
                 val url = i.downloadUrl.await()

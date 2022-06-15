@@ -10,25 +10,26 @@ import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.model.Evento
 
 class occasioniAccettateAdapter(private val occasioniAccettate: ArrayList<Evento>):
-RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
+    RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
+    private lateinit var aListener : OnEventClickListener
 
-  //  private lateinit var aListener : OnEventClickListener
-/*
     interface OnEventClickListener{
         fun seeMoreclick(idEvento: String)
-        fun cancelclick (idPartecipante: String)
+        fun cancelclick (idEvento: String)
     }
 
     fun setOnEventClickListener(listener : OnEventClickListener){
         aListener = listener
     }
-*/
+
     override fun getItemCount(): Int {
         return occasioniAccettate.size
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         val currentAcceptedEvent = occasioniAccettate[position]
+        holder.idEvento = currentAcceptedEvent.id_evento.toString()
+
         holder.tAccepted.text = currentAcceptedEvent.titolo
         holder.dAccepted.text = currentAcceptedEvent.data_evento
         holder.cAccepted.text = currentAcceptedEvent.citta
@@ -38,31 +39,27 @@ RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.occasioniaccettate_item, parent, false)
-        return viewHolder(itemView)
-    //, aListener
+        return viewHolder(itemView, aListener)
     }
 
-//, listener: OnEventClickListener
-    class viewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class viewHolder(itemView: View, listener: OnEventClickListener) : RecyclerView.ViewHolder(itemView){
         val tAccepted : TextView = itemView.findViewById(R.id.TitoloEventoAccettato)
-        val idEvento : String = ""
-        val idPartecipante : String = ""
+        var idEvento : String = ""
+        var idPartecipante : String = ""
         val dAccepted : TextView = itemView.findViewById(R.id.dataEventoAccettato)
         val cAccepted : TextView = itemView.findViewById(R.id.cittaEventoAccettato)
         val pAccepted : TextView = itemView.findViewById(R.id.prezzoEventoAccettato)
         val seeMore : Button = itemView.findViewById(R.id.seeMore)
         val cancel : Button = itemView.findViewById(R.id.cancelPartecipazione)
-/*
-    init {
+
+        init {
             seeMore.setOnClickListener{
                 listener.seeMoreclick(idEvento as String)
             }
             cancel.setOnClickListener{
-                listener.cancelclick(idPartecipante  as String)
+                listener.cancelclick(idEvento as String)
             }
         }
-
- */
 
     }
 }

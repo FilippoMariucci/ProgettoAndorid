@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="10dp"
-    app:cardCornerRadius="2dp"
-    app:cardPreventCornerOverlap="false"
-    android:layout_height="wrap_content">
+    app:cardPreventCornerOverlap="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,18 +15,21 @@
 
         <ImageView
             android:id="@+id/fotoEventoUtente"
-            android:layout_width="156dp"
-            android:layout_height="145dp"
+            android:layout_width="158dp"
+            android:layout_height="155dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/titoloEventoCreato"
-            android:layout_width="115dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="30dp"
+            android:layout_width="213dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="16dp"
-            android:text="PPPPPPP"
+            android:fontFamily="@font/poppins_bold"
+            android:hint="Titolo"
+            android:textColor="@color/orange"
+            android:textSize="20dp"
             app:layout_constraintStart_toEndOf="@+id/fotoEventoUtente"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
@@ -33,19 +37,23 @@
             android:id="@+id/dataEventoCreato"
             android:layout_width="72dp"
             android:layout_height="20dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins"
             android:text="25/12/2022"
-            android:textSize="8dp"
+            android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@+id/fotoEventoUtente"
             app:layout_constraintTop_toBottomOf="@+id/titoloEventoCreato" />
 
         <TextView
             android:id="@+id/categoriaEventoCreato"
-            android:layout_width="154dp"
-            android:layout_height="27dp"
+            android:layout_width="208dp"
+            android:layout_height="26dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
+            android:hint="categoria"
+            android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/fotoEventoUtente"
             app:layout_constraintTop_toBottomOf="@+id/dataEventoCreato"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>

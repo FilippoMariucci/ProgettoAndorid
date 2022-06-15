@@ -1,5 +1,6 @@
 package com.example.progettoprogrammazionemobile
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.progettoprogrammazionemobile.AdapterRV.occasioniAccettateAdapter
 import com.example.progettoprogrammazionemobile.databinding.FragmentOccasioniAccettateBinding
-import com.example.progettoprogrammazionemobile.databinding.FragmentOccasioniCreateBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.Partecipazione
 import com.google.firebase.auth.FirebaseAuth
@@ -22,11 +22,15 @@ class occasioni_accettate : Fragment() {
     private lateinit var AcceptedEventsRec : RecyclerView
     private lateinit var AcceptedEventsUser : ArrayList<Evento>
     private lateinit var PartecipazioneUser : ArrayList<Partecipazione>
+    //private val dettaglioEventoAccettato  = dettaglio_evento_accettato()
+    private lateinit var key : String
     private lateinit var auth: FirebaseAuth
     private lateinit var uid: String
 
     private var _binding: FragmentOccasioniAccettateBinding? = null
     private val binding get() = _binding!!
+
+    private var key_array = ArrayList<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
             View? {
@@ -34,69 +38,106 @@ class occasioni_accettate : Fragment() {
         _binding = FragmentOccasioniAccettateBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getEventsKey()
+        //getEventsKey()
 
         AcceptedEventsRec = binding.recyclerOccasioniAccettate
         AcceptedEventsRec.layoutManager = LinearLayoutManager(this.requireContext())
         AcceptedEventsRec.setHasFixedSize(true)
         AcceptedEventsUser = arrayListOf<Evento>()
-        getEventsKey()
 
+
+        getEventsKey()
     }
 
-    private fun getEventsKey() {
+    private fun getEventsKey(){
+        val key_events = ArrayList<String>()
+        var lista_partecipanti = ArrayList<String>()
         val PartecipazioneDb = FirebaseDatabase.getInstance().getReference("Partecipazione").
         addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                var pipetto = snapshot.children
-                pipetto.forEach{
-                    val mario = it.child("id_partecipante").getValue() as ArrayList<String>
-                    val size = mario.size
+                var partecipazioni_list = snapshot.children
+                partecipazioni_list.forEach{
+                    if(it.child("id_partecipante").getValue() != null)
+                        lista_partecipanti = it.child("id_partecipante").getValue() as ArrayList<String>
+                    val size = lista_partecipanti.size
                     for(i in 0..size-1){
-                        if (mario[i] == uid){
-                            var key = it.key.toString()
-                            getUserFavouriteEvent(key)
-
+                        if (lista_partecipanti[i] != null){
+                            val prova = lista_partecipanti[i]
+                            if (lista_partecipanti[i] == uid) {
+                                key = it.key.toString()
+                                key_events.add(key)
+                            }
                         }
                     }
                 }
+                getUserFavouriteEvent(key_events)
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
 
-    private fun getUserFavouriteEvent(key : String){
+    private fun getUserFavouriteEvent(key : ArrayList<String>) {
         AcceptedEventsRec.visibility = View.GONE
+        AcceptedEventsUser.clear()
+        val Eventi = FirebaseDatabase.getInstance().getReference("Evento")
 
-        val Eventi = FirebaseDatabase.getInstance().getReference("Evento").orderByChild("id_evento").equalTo(key)
-        Log.d("eventi", "$Eventi")
-        Eventi.addValueEventListener(object: ValueEventListener{
+        Eventi.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                AcceptedEventsUser.clear()
-                if(snapshot.exists()){
-                    for(eventSnap in snapshot.children){
-                        val singoloEvento = eventSnap.getValue(Evento :: class.java)
-                        Log.d("singoloevento","$singoloEvento")
-                        AcceptedEventsUser.add(singoloEvento!!)
+                if (snapshot.exists()) {
+                    for (eventSnap in snapshot.children) {
+                        val eventoSingolo = eventSnap.getValue(Evento::class.java)
+                        for(i in key) {
+                            if (eventoSingolo != null) {
+                                if(eventoSingolo.id_evento == i) {
+                                    AcceptedEventsUser.add(eventoSingolo)
+                                }
+                            }
+                        }
                     }
+                    val adapter = occasioniAccettateAdapter(AcceptedEventsUser)
+                    AcceptedEventsRec.adapter = adapter
+                    AcceptedEventsRec.visibility = View.VISIBLE
+
+                    adapter.setOnEventClickListener(object : occasioniAccettateAdapter.OnEventClickListener{
+                        override fun cancelclick( idEvento: String) {
+                            var IndexList = ArrayList<String>()
+                            val PartecipazioneDb =
+                                FirebaseDatabase.getInstance().getReference("Partecipazione")
+                                    .child(idEvento).child("id_partecipante").get()
+                                    .addOnSuccessListener {
+                                        IndexList = it.value as ArrayList<String>
+                                        val index = IndexList.indexOf(uid)
+                                        FirebaseDatabase.getInstance()
+                                            .getReference("Partecipazione").child(idEvento)
+                                            .child("id_partecipante").child(index.toString())
+                                            .removeValue()
+                                    }
+                        }
+
+                        override fun seeMoreclick(idEvento: String) {
+                            //go_Dettaglio(idEvento)
+                        }
+                    })
                 }
-                val adapter = occasioniAccettateAdapter(AcceptedEventsUser)
-                AcceptedEventsRec.adapter = adapter
             }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
-
-        AcceptedEventsRec.visibility = View.VISIBLE
     }
 
+//    fun go_Dettaglio(idevento: String){
+//        val bundleOccasioni = Bundle()
+//        bundleOccasioni.putString("idEventoAccettato", idevento)
+//        dettaglioEventoAccettato.arguments = bundleOccasioni
+//        if(isAdded)  fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, dettaglioEventoAccettato)?.commit()
+//    }
 }

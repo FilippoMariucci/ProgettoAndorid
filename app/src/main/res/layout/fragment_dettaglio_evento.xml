@@ -20,7 +20,6 @@
                 android:id="@+id/fotoEvento"
                 android:layout_width="397dp"
                 android:layout_height="238dp"
-                android:src="@drawable/googleg_standard_color_18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titolo_evento_dett" />
@@ -29,7 +28,7 @@
                 android:id="@+id/titolo_evento_dett"
                 android:layout_width="377dp"
                 android:layout_height="38dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Titolo evento"
                 android:textColor="@color/black"

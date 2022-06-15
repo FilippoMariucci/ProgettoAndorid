@@ -23,7 +23,6 @@ import androidx.core.content.PermissionChecker.checkSelfPermission
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.progettoprogrammazionemobile.AdapterRV.EventsAdapter
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasioneBinding
 import com.example.progettoprogrammazionemobile.model.Evento
