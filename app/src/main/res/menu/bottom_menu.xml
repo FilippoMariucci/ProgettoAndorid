@@ -9,24 +9,13 @@
         android:title="Discover" />
 
     <item
-        android:id="@+id/icon_user"
-        android:icon="@drawable/ic_user"
-        android:title="Profile" />
-
-    <item
         android:id="@+id/icon_add"
         android:icon="@drawable/plus_icon_ok"
         android:title="Add" />
 
     <item
-        android:id="@+id/icon_map"
-        android:icon="@drawable/ic_map"
-        android:title="Map"
-        />
+        android:id="@+id/icon_user"
+        android:icon="@drawable/ic_user"
+        android:title="Profile" />
 
-    <item
-        android:id="@+id/icon_chat"
-        android:icon="@drawable/ic_chat"
-        android:title="Chat"
-        />
 </menu>

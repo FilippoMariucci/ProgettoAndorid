@@ -14,8 +14,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories"
-        android:layout_width="413dp"
-        android:layout_height="120dp"
+        android:layout_width="404dp"
+        android:layout_height="104dp"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="horizontal"
         android:verticalScrollbarPosition="defaultPosition"
@@ -25,9 +25,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEvents"
-        android:layout_width="416dp"
-        android:layout_height="635dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="318dp"
+        android:layout_height="474dp"
+        android:layout_marginTop="20dp"
+        android:foregroundGravity="center_horizontal"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"

@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.progettoprogrammazionemobile.databinding.FragmentDettaglioEventoBinding
+import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.Partecipazione
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.event_item.view.*
 
 
 class dettaglio_evento : Fragment() {
@@ -26,6 +30,7 @@ class dettaglio_evento : Fragment() {
     private lateinit var evento : Evento
     private var _binding : FragmentDettaglioEventoBinding? = null
     private val binding get() = _binding!!
+    private lateinit var urlImageEvento : String
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -34,6 +39,7 @@ class dettaglio_evento : Fragment() {
         // Inflate the layout for this fragment
         val args = this.arguments
         val argsEvento = args?.get("idEvento")
+        urlImageEvento = args?.get("url_image") as String
         idEvento = argsEvento.toString()
         _binding = FragmentDettaglioEventoBinding.inflate(inflater, container, false)
         return binding.root
@@ -52,11 +58,16 @@ class dettaglio_evento : Fragment() {
         databaseReferenceUser.child(idEvento).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento :: class.java)!!
+                Glide.with(requireContext()).load(urlImageEvento).into(binding.fotoEvento)
                 binding.titoloEventoDett.setText(evento.titolo)
-                binding.fotoEvento.setImageResource(R.drawable.rico)
+                //binding.fotoEvento.setImageResource(R.drawable.rico)
                 binding.dataDett.setText(evento.data_evento)
                 binding.indirizzoDett.setText(evento.indirizzo)
                 binding.linguaEventoDett.setText(evento.lingue)
+                binding.categoriaEventoDett.setText(evento.categoria)
+                binding.cittaDett.setText(evento.citta)
+                binding.indirizzoDett.setText(evento.indirizzo)
+                binding.descEventoDett.setText(evento.descrizione)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -77,6 +88,7 @@ class dettaglio_evento : Fragment() {
         //listPartecipanti.size <= evento.n_persone
 
         databaseReferencePartecipazione = FirebaseDatabase.getInstance().getReference("Partecipazione")
+        val arrayList = databaseReferencePartecipazione.child("id_partecipante").get()
 
         var loadArray = FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento)
         loadArray.addListenerForSingleValueEvent(object : ValueEventListener{

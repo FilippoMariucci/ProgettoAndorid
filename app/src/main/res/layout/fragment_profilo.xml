@@ -11,74 +11,123 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="483dp"
+            android:layout_height="178dp"
+            android:src="@drawable/ic_ellipse_7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="0dp" />
+
         <TextView
             android:id="@+id/profilo_user"
             android:layout_width="259dp"
             android:layout_height="52dp"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/poppins"
-            android:text="Profilo di Nicola"
+            android:layout_marginTop="48dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Il tuo profilo"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="33sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/modificaprofiloButt"
-            android:layout_width="259dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="56dp"
+            android:id="@+id/occasionicreateProfilo"
+            android:layout_width="256dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="32dp"
             android:clickable="true"
             android:fontFamily="@font/poppins"
-            android:text="Modifica profilo"
+            android:text="Occasioni create"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
             android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
+            app:layout_constraintTop_toBottomOf="@+id/modificaprofiloButt" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="132dp"
+            android:src="@drawable/ic_icons8_modificare"
+            app:layout_constraintEnd_toStartOf="@+id/modificaprofiloButt"
+            app:layout_constraintHorizontal_bias="0.55"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profilo_user" />
 
         <TextView
-            android:id="@+id/occasionicreateProfilo"
-            android:layout_width="259dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="34dp"
+            android:id="@+id/modificaprofiloButt"
+            android:layout_width="256dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="132dp"
+            android:layout_marginEnd="32dp"
             android:clickable="true"
             android:fontFamily="@font/poppins"
-            android:text="Occasioni create"
+            android:text="Modifica profilo"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
             android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/modificaprofiloButt" />
+            app:layout_constraintTop_toBottomOf="@+id/profilo_user" />
 
-        <TextView
-            android:id="@+id/occasioni_accettate_prof"
-            android:layout_width="259dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="34dp"
-            android:clickable="true"
-            android:fontFamily="@font/poppins"
-            android:text="Occasioni accettate"
-            android:textSize="23sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/ic_icons8_stella_mezza_vuota"
+            app:layout_constraintEnd_toStartOf="@+id/occasionicreateProfilo"
+            app:layout_constraintHorizontal_bias="0.55"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/occasionicreateProfilo" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="152dp"
             android:layout_height="46dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="56dp"
             android:background="@color/orange_bold"
             android:backgroundTint="@color/orange_bold"
+            android:fontFamily="@font/poppins_bold"
             android:text="LOGOUT"
             app:icon="@drawable/ic_baseline_logout_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.254"
+            app:layout_constraintHorizontal_bias="0.189"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/occasioni_accettate_prof" />
+
+        <TextView
+            android:id="@+id/occasioni_accettate_prof"
+            android:layout_width="260dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="32dp"
+            android:clickable="true"
+            android:fontFamily="@font/poppins"
+            android:text="Occasioni accettate"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/occasionicreateProfilo" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/ic_icons8_stelle_cadenti"
+            app:layout_constraintEnd_toStartOf="@+id/occasioni_accettate_prof"
+            app:layout_constraintHorizontal_bias="0.576"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -35,6 +35,10 @@ import java.util.*
 
 
 class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+
+
+
+
     private lateinit var auth: FirebaseAuth
     private lateinit var uid : String
     private var _binding: FragmentCreaOccasioneBinding? = null
@@ -240,49 +244,63 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     }
 
 
-
-
-
-
-
-
-
-
-
-    private fun saveEvento() {
+    private fun saveEvento(){
 
 
         val idEvento = ""
         val titolo_evento = binding.titoloEvento.editText?.text.toString().trim()
+        if(titolo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi un titolo all'evento!"); return}
         val descrizione_evento = binding.DescrizioneEvento.editText?.text.toString().trim()
+        if(descrizione_evento.isEmpty()){binding.errorMsg.setText("Aggiungi una descrizione all'evento!"); return}
         val lingue_evento = binding.autoCompleteLanguages.text.toString().trim()
+        if(lingue_evento.isEmpty()){binding.errorMsg.setText("Aggiungi una lingua che parlerete all'evento!"); return}
         val indirizzo_evento = binding.indirizzoEvento.editText?.text.toString().trim()
+        if(indirizzo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi l'indirizzo dell'evento!"); return}
         val npersone_evento = binding.npersoneEvento.editText?.text.toString().trim()
+        if(npersone_evento.isEmpty() ){
+            binding.errorMsg.setText("Aggiungi il numero di persone richiesto per l'evento!"); return
+        }else {
+            try {npersone_evento.toInt()}
+            catch (e:Exception) {
+                binding.errorMsg.setText("Il numero di persone deve essere un numero! ;)"); return
+            }
+        }
         val costo_evento = binding.prezzoEvento.editText?.text.toString().trim()
+        if(costo_evento.isEmpty()){
+            binding.errorMsg.setText("Aggiungi il costo dell'evento!"); return
+        }else {
+            try {costo_evento.toFloat()}
+            catch (e:Exception) {
+                binding.errorMsg.setText("Il prezzo deve essere un numero! ;)"); return
+            }
+        }
         val citta_evento = binding.CittaEvento.editText?.text.toString().trim()
-        val data_evento = binding.dataEvento.editText?.text.toString().trim()
-        val foto_evento = imageUri.toString().trim()
-        val conf = Bitmap.Config.ARGB_8888 // see other conf types
-        val w: Int = 1
-        val h: Int = 1
-        val bmp = Bitmap.createBitmap(w, h, conf)
-
+        if(citta_evento.isEmpty()){binding.errorMsg.setText("Aggiungi la città dell'evento!"); return}
+        val data_evento = binding.textDateEvento.text.toString().trim()
+        if(data_evento.isEmpty()){
+            binding.errorMsg.setText("Aggiungi la data e l'ora dell'evento"); return
+        }else{
+            if(savedYear < array_date_time.get(2)){
+               binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
+            }
+            else if(savedYear == array_date_time.get(2) && savedMonth < array_date_time.get(1)) {
+                    binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
+            }
+            else if(savedYear == array_date_time.get(2) && savedMonth == array_date_time.get(1) && savedDay <= array_date_time.get(0)) {
+                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
+            }
+        }
+        val foto_evento : String
+        try{foto_evento = imageUri.toString().trim()}
+        catch (e: Exception){binding.errorMsg.setText("Aggiungi un'immagine dell'evento"); return}
         val categoria_evento = binding.autoCompleteCategories.text.toString().trim()
+        if(categoria_evento.isEmpty()){binding.errorMsg.setText("Aggiungi la categoria dell'evento"); return}
         val userId = uid
 
 
-
-
-        if (titolo_evento.isEmpty()) {
-            Toast.makeText(this.context, "pppppp", Toast.LENGTH_LONG).show()
-        }
-
-        val model = Evento(
-            idEvento, titolo_evento, descrizione_evento, lingue_evento,
+        val model= Evento(idEvento, titolo_evento, descrizione_evento, lingue_evento,
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
-            npersone_evento, foto_evento, userId
-        )
+            npersone_evento, foto_evento, userId)
         viewModelEvento.saveEvent(model)
-
     }
 }

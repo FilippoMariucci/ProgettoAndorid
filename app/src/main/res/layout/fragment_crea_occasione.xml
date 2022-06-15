@@ -44,7 +44,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -66,7 +67,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +89,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +111,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -130,7 +134,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -152,7 +157,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -187,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:backgroundTint="@color/white"
+                    android:fontFamily="@font/poppins"
                     android:text="Data"
                     android:textAlignment="gravity"
                     android:textColor="@color/browser_actions_title_color"
@@ -199,12 +206,13 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="0"
+                    android:autofillHints=""
+                    android:fontFamily="@font/poppins"
                     android:hint="gg/mm/aaaa"
                     android:padding="7dp"
                     android:textAlignment="center"
                     android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:autofillHints="" />
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -231,6 +239,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:inputType="none"
                 android:text="Adventure" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -253,6 +263,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/poppins"
                 android:inputType="none"
                 android:text="English" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -275,19 +286,18 @@
         <Button
             android:id="@+id/btnadd_evento"
             style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
-            android:layout_marginBottom="50dp"
+            android:layout_width="172dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
             android:backgroundTint="@color/orange_bold"
+            android:fontFamily="@font/poppins_bold"
             android:text="Aggiungi"
             android:textColor="@color/white"
+            app:cornerRadius="20dp"
             app:iconTint="@color/orange_bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scegliImmagine"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/errorMsg" />
 
         <ImageView
             android:id="@+id/immagine"
@@ -298,6 +308,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLanguages" />
+
+        <TextView
+            android:id="@+id/errorMsg"
+            android:layout_width="346dp"
+            android:layout_height="52dp"
+            android:fontFamily="@font/poppins"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/btnadd_evento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scegliImmagine" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
