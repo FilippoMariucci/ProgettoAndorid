@@ -59,6 +59,7 @@ class dettaglio_evento : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento :: class.java)!!
                 Glide.with(requireContext()).load(urlImageEvento).into(binding.fotoEvento)
+
                 binding.titoloEventoDett.setText(evento.titolo)
                 //binding.fotoEvento.setImageResource(R.drawable.rico)
                 binding.dataDett.setText(evento.data_evento)
@@ -68,6 +69,7 @@ class dettaglio_evento : Fragment() {
                 binding.cittaDett.setText(evento.citta)
                 binding.indirizzoDett.setText(evento.indirizzo)
                 binding.descEventoDett.setText(evento.descrizione)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -86,37 +88,56 @@ class dettaglio_evento : Fragment() {
         listPartecipanti = ArrayList<String>()
 
         //listPartecipanti.size <= evento.n_persone
+        if(id_creatore.equals(id_partecipante)) {
+            Toast.makeText(requireContext(), "You can't apply for your own event", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else {
+            databaseReferencePartecipazione = FirebaseDatabase.getInstance().getReference("Partecipazione")
 
-        databaseReferencePartecipazione = FirebaseDatabase.getInstance().getReference("Partecipazione")
-        val arrayList = databaseReferencePartecipazione.child("id_partecipante").get()
-
-        var loadArray = FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento)
-        loadArray.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                listPartecipanti.clear()
-                if (snapshot.child("id_partecipante").getValue() as ArrayList <String> != null) {
-                    var nome = snapshot.child("id_partecipante").getValue() as ArrayList<String>
-                    val size = nome.size
-                    for (i in 0..size - 1) {
-                        listPartecipanti.add(nome[i])
-                    }
-                }
-                if (id_creatore.equals(id_partecipante) || listPartecipanti.contains(id_partecipante)) Toast.makeText(requireContext(), "You can't apply for this event", Toast.LENGTH_SHORT).show()
-                else {
-                    listPartecipanti.add(id_partecipante)
-                    val partecipazione = Partecipazione(id_creatore, listPartecipanti)
-                    if (id_evento != null) {
-                        databaseReferencePartecipazione.child(id_evento).setValue(partecipazione)
-                            .addOnSuccessListener { Toast.makeText(requireContext(), "Your application for this event was succesful!", Toast.LENGTH_LONG).show() }.
-                            addOnFailureListener { Toast.makeText(requireContext(), "Sorry we got troubles!", Toast.LENGTH_LONG).show()
+            var loadArray = FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento)
+            loadArray.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    listPartecipanti.clear()
+                    try {
+                            var nome = snapshot.child("id_partecipante").getValue() as ArrayList<String>
+                            val size = nome.size
+                            for (i in 0..size - 1) {
+                                listPartecipanti.add(nome[i])
                             }
                     }
+                    catch (e:Exception) {
+                        Toast.makeText(requireContext(), "Sei il primo a partecipare!", Toast.LENGTH_SHORT).show()
+                    }
+                    if (listPartecipanti.contains(id_partecipante)) Toast.makeText(requireContext(), "You can't apply for this event", Toast.LENGTH_SHORT).show()
+                    else {
+                        listPartecipanti.add(id_partecipante)
+                        val partecipazione = Partecipazione(id_creatore, listPartecipanti)
+                        if (id_evento != null) {
+                            databaseReferencePartecipazione.child(id_evento)
+                                .setValue(partecipazione)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Your application for this event was succesful!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Sorry we got troubles!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                        }
+                    }
                 }
-            }
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
 
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
     }
+
 }

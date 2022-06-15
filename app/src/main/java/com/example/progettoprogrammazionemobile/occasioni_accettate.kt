@@ -22,7 +22,7 @@ class occasioni_accettate : Fragment() {
     private lateinit var AcceptedEventsRec : RecyclerView
     private lateinit var AcceptedEventsUser : ArrayList<Evento>
     private lateinit var PartecipazioneUser : ArrayList<Partecipazione>
-    //private val dettaglioEventoAccettato  = dettaglio_evento_accettato()
+    private val dettaglioEventoAccettato  = dettaglio_evento_accettato()
     private lateinit var key : String
     private lateinit var auth: FirebaseAuth
     private lateinit var uid: String
@@ -122,7 +122,7 @@ class occasioni_accettate : Fragment() {
                         }
 
                         override fun seeMoreclick(idEvento: String) {
-                            //go_Dettaglio(idEvento)
+                            go_Dettaglio(idEvento)
                         }
                     })
                 }
@@ -134,10 +134,10 @@ class occasioni_accettate : Fragment() {
         })
     }
 
-//    fun go_Dettaglio(idevento: String){
-//        val bundleOccasioni = Bundle()
-//        bundleOccasioni.putString("idEventoAccettato", idevento)
-//        dettaglioEventoAccettato.arguments = bundleOccasioni
-//        if(isAdded)  fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, dettaglioEventoAccettato)?.commit()
-//    }
+    fun go_Dettaglio(idevento: String){
+        val bundleOccasioni = Bundle()
+        bundleOccasioni.putString("idEventoAccettato", idevento)
+        dettaglioEventoAccettato.arguments = bundleOccasioni
+        if(isAdded)  fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, dettaglioEventoAccettato)?.commit()
+    }
 }

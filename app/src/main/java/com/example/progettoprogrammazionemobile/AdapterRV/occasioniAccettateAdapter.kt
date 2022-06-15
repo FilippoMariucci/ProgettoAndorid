@@ -10,7 +10,7 @@ import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.model.Evento
 
 class occasioniAccettateAdapter(private val occasioniAccettate: ArrayList<Evento>):
-    RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
+RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
     private lateinit var aListener : OnEventClickListener
 
     interface OnEventClickListener{
@@ -52,7 +52,7 @@ class occasioniAccettateAdapter(private val occasioniAccettate: ArrayList<Evento
         val seeMore : Button = itemView.findViewById(R.id.seeMore)
         val cancel : Button = itemView.findViewById(R.id.cancelPartecipazione)
 
-        init {
+    init {
             seeMore.setOnClickListener{
                 listener.seeMoreclick(idEvento as String)
             }

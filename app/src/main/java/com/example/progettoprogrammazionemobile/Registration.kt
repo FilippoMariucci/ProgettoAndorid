@@ -48,7 +48,8 @@ class Registration : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(this) {
                 if (it.isSuccessful) {
                     val firebaseUser: FirebaseUser = it.result!!.user!!
-                    database.child(firebaseUser.uid).setValue(user)
+                    database.child(firebaseUser.uid).setValue(
+                        user)
                     Toast.makeText(this, "You've been succesfully registred!", Toast.LENGTH_LONG).show()
                     startActivity(Intent(this, Login::class.java))
                     finish()

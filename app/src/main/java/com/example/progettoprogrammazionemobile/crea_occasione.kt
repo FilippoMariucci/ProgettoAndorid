@@ -161,8 +161,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
         button = getView()?.findViewById(R.id.scegliImmagine)
         imageView = getView()?.findViewById(R.id.immagine)
 
@@ -254,7 +252,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         val lingue_evento = binding.autoCompleteLanguages.text.toString().trim()
         if(lingue_evento.isEmpty()){binding.errorMsg.setText("Aggiungi una lingua che parlerete all'evento!"); return}
         val indirizzo_evento = binding.indirizzoEvento.editText?.text.toString().trim()
-        if(indirizzo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi l'indirizzo dell'evento!"); return}
+        //if(indirizzo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi l'indirizzo dell'evento!"); return}
         val npersone_evento = binding.npersoneEvento.editText?.text.toString().trim()
         if(npersone_evento.isEmpty() ){
             binding.errorMsg.setText("Aggiungi il numero di persone richiesto per l'evento!"); return

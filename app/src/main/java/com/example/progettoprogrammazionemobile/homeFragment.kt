@@ -79,7 +79,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         AdapterCategories.setOnItemClickListener(object : ImageAdapter.onItemClickListener{
             override fun onItemClick(titleCat: String) {
                 Toast.makeText(requireContext(), "${titleCat}",Toast.LENGTH_LONG).show()
-                if(getEventsData(titleCat)) {listFiles()}
+                val prova = getEventsData(titleCat)
+                listFiles()
             }
         })
 
@@ -96,8 +97,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         //getImages("-N4WbFcIhZz-3BAJnuDa")
 
-        if(getEventsData("")){ listFiles() }
-
+        getEventsData("")
+        listFiles()
     }
 
 
@@ -119,7 +120,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
                 imageAdapter.setOnItemClickListener(object : AdapterImageEvent.onItemClickListener{
                     override fun onItemClick(idevento: String, url_image: String) {
-                        Toast.makeText(requireContext(), "Clicked on item $idevento", Toast.LENGTH_SHORT).show()
                         go_away(idevento, url_image)
                     }
 
