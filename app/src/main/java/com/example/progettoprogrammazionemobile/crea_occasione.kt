@@ -35,12 +35,6 @@ import java.util.*
 
 
 class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-
-
-class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
-
-
-
     private lateinit var auth: FirebaseAuth
     private lateinit var uid : String
     private var _binding: FragmentCreaOccasioneBinding? = null
@@ -255,7 +249,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
 
 
-    private fun saveEvento(){
+    private fun saveEvento() {
 
 
         val idEvento = ""
@@ -279,16 +273,16 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione) {
 
 
 
-        if(titolo_evento.isEmpty()){
+        if (titolo_evento.isEmpty()) {
             Toast.makeText(this.context, "pppppp", Toast.LENGTH_LONG).show()
         }
 
-        val model= Evento(idEvento, titolo_evento, descrizione_evento, lingue_evento,
+        val model = Evento(
+            idEvento, titolo_evento, descrizione_evento, lingue_evento,
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
-            npersone_evento, foto_evento, userId)
+            npersone_evento, foto_evento, userId
+        )
         viewModelEvento.saveEvent(model)
-
-
 
     }
 }

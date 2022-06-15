@@ -109,15 +109,17 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                         // prendo foto dallo storage
 
                         var eventoSingolo = eventSnap.getValue(Evento::class.java)
-                        var id_evento_for_foto = eventoSingolo?.id_evento
-                        var islandRef = storageRef.child("$id_evento_for_foto.jpg")
-                        val localFile = File.createTempFile(uid, "jpg")
-
+                        //var id_evento_for_foto = eventoSingolo?.id_evento
+                        //var islandRef = storageRef.child("$id_evento_for_foto.jpg")
+                        //val localFile = File.createTempFile(uid, "jpg")
+/*
                         islandRef.getFile(localFile).addOnSuccessListener {
                             prova.add("pipo")
                         }.addOnFailureListener {
                             Toast.makeText(requireContext(), "FALLIMENTO", Toast.LENGTH_LONG).show()
                         }
+
+ */
 //                            var localfile = File.createTempFile(uid, "")
 //                            path.getFile(localfile).addOnSuccessListener {
 //                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)

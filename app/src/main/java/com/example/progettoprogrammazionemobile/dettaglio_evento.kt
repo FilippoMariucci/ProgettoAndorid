@@ -1,14 +1,13 @@
 package com.example.progettoprogrammazionemobile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.navArgs
 import com.example.progettoprogrammazionemobile.databinding.FragmentDettaglioEventoBinding
-import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.Partecipazione
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +22,7 @@ class dettaglio_evento : Fragment() {
     private lateinit var databaseReferencePartecipazione: DatabaseReference
 
     private lateinit var listPartecipanti : ArrayList<String>
+
     private lateinit var evento : Evento
     private var _binding : FragmentDettaglioEventoBinding? = null
     private val binding get() = _binding!!
@@ -71,28 +71,40 @@ class dettaglio_evento : Fragment() {
         val id_evento = evento.id_evento
         val id_creatore = evento.userId
         val id_partecipante = uid
+
         listPartecipanti = ArrayList<String>()
+
         //listPartecipanti.size <= evento.n_persone
 
         databaseReferencePartecipazione = FirebaseDatabase.getInstance().getReference("Partecipazione")
-        val arrayList = databaseReferencePartecipazione.child("id_partecipante").get()
-        Toast.makeText(requireContext(), "$arrayList", Toast.LENGTH_SHORT).show()
-        listPartecipanti.add(arrayList.toString())
-        Toast.makeText(requireContext(), "$listPartecipanti", Toast.LENGTH_SHORT).show()
 
-        if (id_creatore.equals(id_partecipante)) Toast.makeText(requireContext(), "You already partecipate to your own event :)", Toast.LENGTH_SHORT).show()
-        else{
-            val partecipazione = Partecipazione(id_creatore, listPartecipanti)
-            if (id_evento != null) {
-                databaseReferencePartecipazione.child(id_evento).setValue(partecipazione).addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Your application for this event was succesful!", Toast.LENGTH_LONG).show()
-                }.addOnFailureListener{
-                    Toast.makeText(requireContext(), "Sorry we got troubles!", Toast.LENGTH_LONG).show()
+        var loadArray = FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento)
+        loadArray.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                listPartecipanti.clear()
+                if (snapshot.child("id_partecipante").getValue() as ArrayList <String> != null) {
+                    var nome = snapshot.child("id_partecipante").getValue() as ArrayList<String>
+                    val size = nome.size
+                    for (i in 0..size - 1) {
+                        listPartecipanti.add(nome[i])
+                    }
                 }
-
+                if (id_creatore.equals(id_partecipante) || listPartecipanti.contains(id_partecipante)) Toast.makeText(requireContext(), "You can't apply for this event", Toast.LENGTH_SHORT).show()
+                else {
+                    listPartecipanti.add(id_partecipante)
+                    val partecipazione = Partecipazione(id_creatore, listPartecipanti)
+                    if (id_evento != null) {
+                        databaseReferencePartecipazione.child(id_evento).setValue(partecipazione)
+                            .addOnSuccessListener { Toast.makeText(requireContext(), "Your application for this event was succesful!", Toast.LENGTH_LONG).show() }.
+                            addOnFailureListener { Toast.makeText(requireContext(), "Sorry we got troubles!", Toast.LENGTH_LONG).show()
+                            }
+                    }
+                }
             }
-        }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
     }
-
-
 }

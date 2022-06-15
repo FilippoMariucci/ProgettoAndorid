@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="2dp"
+    app:cardPreventCornerOverlap="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/TitoloEventoAccettato"
+            android:layout_width="226dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/poppins"
+            android:text="Esperienza in Canoa"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/dataEventoAccettato"
+            android:layout_width="105dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins"
+            android:text="11/09/2001"
+            app:layout_constraintStart_toStartOf="@+id/TitoloEventoAccettato"
+            app:layout_constraintTop_toBottomOf="@+id/TitoloEventoAccettato"></TextView>
+
+        <Button
+            android:id="@+id/seeMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="SEE MORE"
+            app:layout_constraintBottom_toBottomOf="@+id/dataEventoAccettato"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/prezzoEventoAccettato"
+            android:layout_width="97dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="44dp"
+            android:fontFamily="@font/poppins"
+            android:text="200€"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@+id/TitoloEventoAccettato"
+            app:layout_constraintTop_toTopOf="@+id/TitoloEventoAccettato"></TextView>
+
+        <TextView
+            android:id="@+id/cittaEventoAccettato"
+            android:layout_width="231dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins"
+            android:text="San Benedetto del Tronto"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="@+id/dataEventoAccettato"
+            app:layout_constraintTop_toBottomOf="@+id/dataEventoAccettato" />
+
+        <Button
+            android:id="@+id/cancelPartecipazione"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/Bordeaux"
+            android:text="CANCEL"
+            app:layout_constraintStart_toStartOf="@+id/cittaEventoAccettato"
+            app:layout_constraintTop_toBottomOf="@+id/cittaEventoAccettato" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

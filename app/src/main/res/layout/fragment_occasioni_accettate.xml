@@ -7,330 +7,36 @@
     tools:context=".occasioni_accettate">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/occasioni_create_titolo"
+            android:layout_width="209dp"
+            android:layout_height="86dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins"
+            android:text="Occasioni che hai accettato"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.412"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/occas1"
-                android:layout_width="262dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/occas_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/occasioni_create_titolo" />
-
-            <View
-                android:id="@+id/occas2"
-                android:layout_width="262dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/occas_back"
-                app:layout_constraintEnd_toEndOf="@+id/occas1"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/occas1"
-                app:layout_constraintTop_toBottomOf="@+id/occas1" />
-
-            <View
-                android:id="@+id/occas3"
-                android:layout_width="262dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/occas_back"
-                app:layout_constraintEnd_toEndOf="@+id/occas2"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/occas2"
-                app:layout_constraintTop_toBottomOf="@+id/occas2" />
-
-            <View
-                android:id="@+id/occas4"
-                android:layout_width="262dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="36dp"
-                android:background="@drawable/occas_back"
-                app:layout_constraintEnd_toEndOf="@+id/occas3"
-                app:layout_constraintStart_toStartOf="@+id/occas3"
-                app:layout_constraintTop_toBottomOf="@+id/occas3" />
-
-            <TextView
-                android:id="@+id/occasioni_create_titolo"
-                android:layout_width="209dp"
-                android:layout_height="86dp"
-                android:layout_marginTop="56dp"
-                android:fontFamily="@font/poppins"
-                android:text="Occasioni che hai accettato"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.306"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/data_occas1"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="152dp"
-                android:layout_marginBottom="28dp"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:fontFamily="@font/poppins"
-                android:inputType="date"
-                android:text="05/12/22"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/Titolo_occas1"
-                app:layout_constraintEnd_toEndOf="@+id/occas1"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <EditText
-                android:id="@+id/data_occas2"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="148dp"
-                android:layout_marginBottom="16dp"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:fontFamily="@font/poppins"
-                android:inputType="date"
-                android:text="05/12/22"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/titolo_occas2"
-                app:layout_constraintEnd_toEndOf="@+id/occas2"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <EditText
-                android:id="@+id/data_occas3"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="148dp"
-                android:layout_marginBottom="16dp"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:fontFamily="@font/poppins"
-                android:inputType="date"
-                android:text="05/12/22"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/titolo_occas3"
-                app:layout_constraintEnd_toEndOf="@+id/occas3"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <EditText
-                android:id="@+id/data_occas4"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="152dp"
-                android:layout_marginBottom="28dp"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:fontFamily="@font/poppins"
-                android:inputType="date"
-                android:text="05/12/22"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/titolo_occas4"
-                app:layout_constraintEnd_toEndOf="@+id/occas4" />
-
-            <TextView
-                android:id="@+id/Titolo_occas1"
-                android:layout_width="178dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="76dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/poppins"
-                android:text="Titolo_occas1"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/pers_manc_1"
-                app:layout_constraintEnd_toEndOf="@+id/occas1" />
-
-            <TextView
-                android:id="@+id/titolo_occas2"
-                android:layout_width="178dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="76dp"
-                android:layout_marginBottom="12dp"
-                android:fontFamily="@font/poppins"
-                android:text="Titolo_occas2"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/pers_manc_2"
-                app:layout_constraintEnd_toEndOf="@+id/occas2" />
-
-            <TextView
-                android:id="@+id/titolo_occas3"
-                android:layout_width="178dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="72dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/poppins"
-                android:text="Titolo_occas3"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/pers_manc_3"
-                app:layout_constraintEnd_toEndOf="@+id/occas3" />
-
-            <TextView
-                android:id="@+id/titolo_occas4"
-                android:layout_width="178dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="76dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/poppins"
-                android:text="Titolo_occas4"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/pers_manc_4"
-                app:layout_constraintEnd_toEndOf="@+id/occas4" />
-
-            <TextView
-                android:id="@+id/pers_manc_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="140dp"
-                android:layout_marginBottom="40dp"
-                android:text="persone_mancanti"
-                app:layout_constraintBottom_toBottomOf="@+id/occas1"
-                app:layout_constraintEnd_toEndOf="@+id/occas1" />
-
-            <TextView
-                android:id="@+id/cancella_occ_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="112dp"
-                android:clickable="true"
-                android:fontFamily="@font/poppins"
-                android:minHeight="48dp"
-                android:text="Cancella occasione"
-                android:textColor="#FF5722"
-                app:layout_constraintBottom_toBottomOf="@+id/occas1"
-                app:layout_constraintEnd_toEndOf="@+id/occas1"
-                app:layout_constraintTop_toBottomOf="@+id/pers_manc_1"
-                app:layout_constraintVertical_bias="0.588" />
-
-            <TextView
-                android:id="@+id/cancella_occ_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="112dp"
-                android:clickable="true"
-                android:fontFamily="@font/poppins"
-                android:minHeight="48dp"
-                android:text="Cancella occasione"
-                android:textColor="#FF5722"
-                app:layout_constraintBottom_toBottomOf="@+id/occas2"
-                app:layout_constraintEnd_toEndOf="@+id/occas2"
-                app:layout_constraintTop_toBottomOf="@+id/pers_manc_2"
-                app:layout_constraintVertical_bias="0.625" />
-
-            <TextView
-                android:id="@+id/cancella_occ_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:fontFamily="@font/poppins"
-                android:minHeight="48dp"
-                android:text="Cancella occasione"
-                android:textColor="#FF5722"
-                app:layout_constraintBottom_toBottomOf="@+id/occas3"
-                app:layout_constraintEnd_toEndOf="@+id/occas3"
-                app:layout_constraintHorizontal_bias="0.098"
-                app:layout_constraintStart_toStartOf="@+id/occas3"
-                app:layout_constraintTop_toBottomOf="@+id/pers_manc_3"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/pers_manc_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="136dp"
-                android:layout_marginBottom="40dp"
-                android:text="persone_mancanti"
-                app:layout_constraintBottom_toBottomOf="@+id/occas2"
-                app:layout_constraintEnd_toEndOf="@+id/occas2" />
-
-            <TextView
-                android:id="@+id/pers_manc_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="132dp"
-                android:layout_marginBottom="44dp"
-                android:text="persone_mancanti"
-                app:layout_constraintBottom_toBottomOf="@+id/occas3"
-                app:layout_constraintEnd_toEndOf="@+id/occas3" />
-
-            <TextView
-                android:id="@+id/pers_manc_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="140dp"
-                android:layout_marginBottom="28dp"
-                android:text="persone_mancanti"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/occas4" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_see_1"
-                android:layout_width="88dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_background"
-                android:backgroundTint="@color/orange"
-                android:fontFamily="@font/poppins"
-                android:text="See more"
-                android:textAllCaps="false"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/occas1"
-                app:layout_constraintEnd_toEndOf="@+id/occas1"
-                app:layout_constraintHorizontal_bias="0.807"
-                app:layout_constraintStart_toEndOf="@+id/pers_manc_1"
-                app:layout_constraintTop_toTopOf="@+id/occas1"
-                app:layout_constraintVertical_bias="0.737" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_see_2"
-                android:layout_width="88dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_background"
-                android:backgroundTint="@color/orange"
-                android:fontFamily="@font/poppins"
-                android:text="See more"
-                android:textAllCaps="false"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/occas2"
-                app:layout_constraintEnd_toEndOf="@+id/occas2"
-                app:layout_constraintHorizontal_bias="0.791"
-                app:layout_constraintStart_toEndOf="@+id/pers_manc_2"
-                app:layout_constraintTop_toTopOf="@+id/occas2"
-                app:layout_constraintVertical_bias="0.745" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_see_3"
-                android:layout_width="88dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_background"
-                android:backgroundTint="@color/orange"
-                android:fontFamily="@font/poppins"
-                android:text="See more"
-                android:textAllCaps="false"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/occas3"
-                app:layout_constraintEnd_toEndOf="@+id/occas3"
-                app:layout_constraintHorizontal_bias="0.777"
-                app:layout_constraintStart_toEndOf="@+id/pers_manc_3"
-                app:layout_constraintTop_toTopOf="@+id/occas3"
-                app:layout_constraintVertical_bias="0.694" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerOccasioniAccettate"
+            android:layout_width="413dp"
+            android:layout_height="605dp"
+            android:layout_marginTop="112dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/occasioni_create_titolo" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
 
 </FrameLayout>

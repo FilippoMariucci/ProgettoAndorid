@@ -68,13 +68,10 @@ class occasioni_create : Fragment() {
                             val adapter = occasioniCreateAdapter(createdEvents)
                             CreateEventsRec.adapter = adapter
                         }
-
                     }
-
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
                     }
-
                 })
                 CreateEventsRec.visibility = View.VISIBLE
             }
