@@ -80,8 +80,6 @@ class occasioni_create : Fragment() {
                         createdEvents.add(singoloEvento!!)
                     }
 
-//                            val adapter = occasioniCreateAdapter(createdEvents)
-//                            CreateEventsRec.adapter = adapter
                 }
             }
 
@@ -89,7 +87,6 @@ class occasioni_create : Fragment() {
                 TODO("Not yet implemented")
             }
         })
-        CreateEventsRec.visibility = View.VISIBLE
     }
 
     private fun listFiles(list: ArrayList<Evento>, rec: RecyclerView) = CoroutineScope(
@@ -117,6 +114,12 @@ class occasioni_create : Fragment() {
                     adapter = imageAdapter
                 }
 
+                imageAdapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
+                    override fun deleteEvent(idEvento: String) {
+                        eliminaEvento(idEvento)
+                    }
+                })
+
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
@@ -124,6 +127,12 @@ class occasioni_create : Fragment() {
             }
             //Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun eliminaEvento (idEvento : String){
+        dbRef = FirebaseDatabase.getInstance().getReference()
+        dbRef.child("Evento").child(idEvento).removeValue()
+        dbRef.child("Partecipazione").child(idEvento).removeValue()
     }
 }
 

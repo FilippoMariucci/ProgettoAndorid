@@ -21,7 +21,7 @@
         <entry key="..\:/Users/Utente/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/fragment_occasioni_create.xml" value="0.1" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/fragment_profilo.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/item.xml" value="0.11980749746707194" />
-        <entry key="..\:/Users/Utente/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/occasioni_create_card.xml" value="0.20018115942028986" />
+        <entry key="..\:/Users/Utente/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/occasioni_create_card.xml" value="0.4" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/occasioniaccettate_item.xml" value="0.25" />
         <entry key="..\:/Users/Utente/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/menu/main_menu.xml" value="0.264" />
         <entry key="..\:/Users/lol/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
@@ -40,8 +40,7 @@
         <entry key="..\:/Users/lol/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/fragment_occasioni_create.xml" value="0.21" />
         <entry key="..\:/Users/lol/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/fragment_profilo.xml" value="0.25" />
         <entry key="..\:/Users/lol/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/item.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/lol/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/occasioni_create_card.xml" value="0.33" />
-        <entry key="..\:/Users/lol/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/occasioniaccettate_item.xml" value="0.33" />
+        <entry key="..\:/Users/lol/AndroidStudioProjects/ProgettoProgrammazioneMobile/app/src/main/res/layout/occasioni_create_card.xml" value="0.22" />
       </map>
     </option>
   </component>
