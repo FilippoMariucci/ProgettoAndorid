@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
+
     <TextView
         android:id="@+id/occasioni_create_titolo"
-        android:layout_width="350dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="336dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="108dp"
         android:fontFamily="@font/poppins_bold"
 
         android:text="Get your Vibes"
@@ -18,12 +19,10 @@
         android:textColor="@color/orange_bold"
         android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/email"
@@ -40,12 +39,12 @@
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318">
+        app:layout_constraintTop_toBottomOf="@+id/occasioni_create_titolo"
+        app:layout_constraintVertical_bias="0.091">
 
     </EditText>
-
 
     <EditText
         android:id="@+id/password"
@@ -65,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.255" />
 
     <TextView
         android:id="@+id/registrationRoot"
@@ -87,7 +86,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginbutton"
-        android:layout_width="133dp"
+        android:layout_width="158dp"
         android:layout_height="58dp"
         android:background="@drawable/btn_background"
         android:backgroundTint="@color/orange_bold"
@@ -95,13 +94,13 @@
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.631">
+        app:layout_constraintVertical_bias="0.573">
 
     </androidx.appcompat.widget.AppCompatButton>
 

@@ -106,9 +106,20 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         try{
             val images = imageRef.child("Users/").listAll().await()
             val imageUrls = mutableListOf<String>()
-            for(i in images.items){
+//            for(i in images.items){
+//                val url = i.downloadUrl.await()
+//                imageUrls.add(url.toString())
+//            }
+            for (i in images.items) {
                 val url = i.downloadUrl.await()
-                imageUrls.add(url.toString())
+                val url_to_check = i.toString().substringAfterLast('/').substringBefore('.')
+
+                for (y in eventList) {
+                    if (url_to_check == y.id_evento) imageUrls.add(url.toString())
+                }
+//            val url = i.downloadUrl.await()
+//            Log.d("pr", "$url")
+//            imageUrls.add(url.toString())
             }
             withContext(Dispatchers.Main){
                 val imageAdapter = AdapterImageEvent(imageUrls, eventList)

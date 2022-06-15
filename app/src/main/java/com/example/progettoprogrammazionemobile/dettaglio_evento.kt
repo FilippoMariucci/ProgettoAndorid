@@ -50,7 +50,7 @@ class dettaglio_evento : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         databaseReferenceUser = FirebaseDatabase.getInstance().getReference("Evento")
         getEventData()
-        binding.buttonPartecipoDett.setOnClickListener{paretecipaEvento()}
+        //binding.buttonPartecipoDett.setOnClickListener{paretecipaEvento()}
     }
 
 
@@ -70,6 +70,30 @@ class dettaglio_evento : Fragment() {
                 binding.indirizzoDett.setText(evento.indirizzo)
                 binding.descEventoDett.setText(evento.descrizione)
 
+                val npersone = evento.n_persone?.toInt()
+                FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento).get().addOnSuccessListener{
+                    val listPartecipanti =  it.child("id_partecipante").getValue() as ArrayList<String>
+                    val size = listPartecipanti.size
+                    var partecipanti = 0
+                    for (i in 0..size-1) {
+                        if (listPartecipanti[i] != null) partecipanti += 1
+                    }
+                    val persone = npersone?.minus(partecipanti)
+                    if (persone != null) {
+                        binding.npersone.setText(persone.toString())
+                    }
+                    if(persone == 0) {
+                        binding.buttonPartecipoDett.visibility = View.INVISIBLE
+                        binding.fullEventoText.visibility = View.VISIBLE
+                        binding.fullEventoText.setText("Raggiunto il numero massimo di partecipanti")
+                    }
+                    else{
+                        binding.buttonPartecipoDett.setOnClickListener{
+                            partecipaEvento()
+                        }
+                    }
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -78,7 +102,7 @@ class dettaglio_evento : Fragment() {
         })
     }
 
-    private fun paretecipaEvento(){
+    private fun partecipaEvento(){
         val auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid.toString().trim()
         val id_evento = evento.id_evento

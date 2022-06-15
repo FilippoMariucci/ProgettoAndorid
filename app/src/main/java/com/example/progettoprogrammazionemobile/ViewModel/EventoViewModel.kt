@@ -67,7 +67,7 @@ class EventoViewModel: ViewModel() {
 
         auth = FirebaseAuth.getInstance()
 
-        storageReference = FirebaseStorage.getInstance().getReference("Users/" + auth.currentUser?.uid + "/" + idEvento)
+        storageReference = FirebaseStorage.getInstance().getReference("Users/" + idEvento)
         storageReference.putFile(imageUri)
 
     }
