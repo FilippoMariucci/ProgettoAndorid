@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.progettoprogrammazionemobile.databinding.FragmentProfiloBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 class profilo : Fragment()  {
@@ -37,6 +38,10 @@ class profilo : Fragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        FirebaseDatabase.getInstance().getReference("Users").child(uid).get().addOnSuccessListener {
+            binding.nomeProfilo.setText("${it.child("name").getValue()}")
+        }
 
         val button_mod = binding.modificaprofiloButt
         button_mod.setOnClickListener{

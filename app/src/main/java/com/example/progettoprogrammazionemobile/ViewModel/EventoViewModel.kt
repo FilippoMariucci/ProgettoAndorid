@@ -28,14 +28,15 @@ import kotlin.collections.ArrayList
 
 class EventoViewModel: ViewModel() {
 
-        private lateinit var reference: DatabaseReference
-        private lateinit var storeRef : StorageReference
-        private lateinit var imageUri: Uri
-        private lateinit var listPartecipanti : ArrayList<String>
-        lateinit var creaOccasione : crea_occasione
-        private lateinit var  databaseReferenceEvento: DatabaseReference
-        private lateinit var  storageReference: StorageReference
+    private lateinit var reference: DatabaseReference
+    private lateinit var storeRef : StorageReference
+    private lateinit var imageUri: Uri
+    private lateinit var listPartecipanti : ArrayList<String>
+    lateinit var creaOccasione : crea_occasione
+    private lateinit var  databaseReferenceEvento: DatabaseReference
+    private lateinit var  storageReference: StorageReference
     private lateinit var auth: FirebaseAuth
+
 
 
         fun saveEvent(event_to_save: Evento) {

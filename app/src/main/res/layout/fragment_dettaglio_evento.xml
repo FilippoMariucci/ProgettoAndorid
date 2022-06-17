@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/fotoEvento"
-                android:layout_width="397dp"
-                android:layout_height="238dp"
+                android:layout_width="412dp"
+                android:layout_height="246dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titolo_evento_dett" />
@@ -31,6 +31,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Titolo evento"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -41,12 +42,13 @@
 
             <TextView
                 android:id="@+id/persona_mancante_dett"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="153dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="Persona mancante"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fotoEvento" />
 
@@ -180,12 +182,13 @@
 
             <TextView
                 android:id="@+id/npersone"
-                android:layout_width="74dp"
-                android:layout_height="22dp"
+                android:layout_width="97dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="TextView"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.215"
                 app:layout_constraintStart_toEndOf="@+id/persona_mancante_dett"

@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.lifecycle.ViewModelProvider
+import com.example.progettoprogrammazionemobile.ViewModel.imageViewModel
+
 //import androidx.paging.Pager
 
 class MainActivity : AppCompatActivity() {

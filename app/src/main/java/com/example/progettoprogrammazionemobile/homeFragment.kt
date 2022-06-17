@@ -1,24 +1,21 @@
 package com.example.progettoprogrammazionemobile
 
 import android.graphics.Bitmap
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
 import android.widget.Toast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.progettoprogrammazionemobile.AdapterRV.AdapterImageEvent
 import com.example.progettoprogrammazionemobile.AdapterRV.ImageAdapter
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
+import com.example.progettoprogrammazionemobile.ViewModel.imageViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.category
@@ -26,9 +23,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 import java.lang.Exception
+import java.util.EnumSet.of
 
 class homeFragment : Fragment(R.layout.fragment_home) {
+    private lateinit var vm: eventViewModel
+    private lateinit var vm_image: imageViewModel
+    val adapter = AdapterImageEvent()
 
     private lateinit var eventsRec: RecyclerView
     private lateinit var eventList: ArrayList<Evento>
@@ -40,7 +43,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     val imagesUrl = listOf<String>()
 
 
-    private var _binding : com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding? = null
+    private var _binding: com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding? =
+        null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -51,150 +55,106 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        //getlistImage()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var categoryimgs = listOf<category>(
-            category(  R.drawable.ic_icons8_montagna,"Adventure"),
-            category(  R.drawable.ic_icons8_illustrator,"Art"),
-            category(  R.drawable.ic_icons8_musica__1_,"Concert"),
-            category(  R.drawable.ic_icons8_sports,"Sport"),
-            category(  R.drawable.ic_icons8_photo,"Photo"),
-            category(  R.drawable.ic_icons8_carte_da_gioco,"Games"),
-            category(  R.drawable.ic_icons8_festa_di_ballo,"Party"))
+        vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
+        vm_image = ViewModelProviders.of(requireActivity()).get(imageViewModel::class.java)
+        val rv = view.findViewById<RecyclerView>(R.id.rvEvents)
+        rv.adapter = adapter
+        rv.layoutManager = LinearLayoutManager(this.requireContext())
+        rv.setHasFixedSize(true)
 
+
+        // categories
+        var categoryimgs = listOf<category>(
+            category(R.drawable.ic_icons8_montagna, "Adventure"),
+            category(R.drawable.ic_icons8_illustrator, "Art"),
+            category(R.drawable.ic_icons8_musica__1_, "Concert"),
+            category(R.drawable.ic_icons8_sports, "Sport"),
+            category(R.drawable.ic_icons8_photo, "Photo"),
+            category(R.drawable.ic_icons8_carte_da_gioco, "Role Games"),
+            category(R.drawable.ic_icons8_festa_di_ballo, "Party")
+        )
 
 
         val recyclerView = binding.categories
         var AdapterCategories = ImageAdapter(categoryimgs)
-        recyclerView.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
         recyclerView.setHasFixedSize(true)
 
         recyclerView.adapter = AdapterCategories
 
-        AdapterCategories.setOnItemClickListener(object : ImageAdapter.onItemClickListener{
+        AdapterCategories.setOnItemClickListener(object : ImageAdapter.onItemClickListener {
             override fun onItemClick(titleCat: String) {
-                Toast.makeText(requireContext(), "${titleCat}",Toast.LENGTH_LONG).show()
-                val prova = getEventsData(titleCat)
-                listFiles()
+                Toast.makeText(requireContext(), "${titleCat}", Toast.LENGTH_LONG).show()
+                filterEvents(titleCat)
             }
         })
 
+        initialiseObservers()
+        fetchAll()
 
-        eventsRec = binding.rvEvents
-        val myLinearLayoutManager = object : LinearLayoutManager(requireContext()) {
-              override fun canScrollVertically(): Boolean {
-              return false
-           }
-        }
-        eventsRec.layoutManager = myLinearLayoutManager
-        eventsRec.setHasFixedSize(true)
-        eventList = arrayListOf<Evento>()
-
-        //getImages("-N4WbFcIhZz-3BAJnuDa")
-
-        getEventsData("")
-        listFiles()
-    }
-
-
-    private fun listFiles() = CoroutineScope(Dispatchers.IO).launch {
-        try{
-            val images = imageRef.child("Users/").listAll().await()
-            val imageUrls = mutableListOf<String>()
-//            for(i in images.items){
-//                val url = i.downloadUrl.await()
-//                imageUrls.add(url.toString())
-//            }
-            for (i in images.items) {
-                val url = i.downloadUrl.await()
-                val url_to_check = i.toString().substringAfterLast('/').substringBefore('.')
-
-                for (y in eventList) {
-                    if (url_to_check == y.id_evento) imageUrls.add(url.toString())
-                }
-//            val url = i.downloadUrl.await()
-//            Log.d("pr", "$url")
-//            imageUrls.add(url.toString())
-            }
-            withContext(Dispatchers.Main){
-                val imageAdapter = AdapterImageEvent(imageUrls, eventList)
-                eventsRec.apply {
-                    adapter = imageAdapter
-
-                }
-
-
-                imageAdapter.setOnItemClickListener(object : AdapterImageEvent.onItemClickListener{
-                    override fun onItemClick(idevento: String, url_image: String) {
-                        go_away(idevento, url_image)
-                    }
-
-                    override fun skipEvent(posizione: String, sizeList: Int) {
-                        val actualPosition = Integer.parseInt(posizione)
-                        Toast.makeText(requireContext(), "$actualPosition", Toast.LENGTH_SHORT).show()
-                        val nextPosition = actualPosition + 1
-                        if(nextPosition < sizeList) {
-                            eventsRec.layoutManager?.scrollToPosition(nextPosition)
-                        }
-                    }
-                })
-
-
-            }
-        }catch (e: Exception){
-            withContext(Dispatchers.Main){
-                Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun getEventsData(categoria : String) : Boolean{
-
-        dbRef = FirebaseDatabase.getInstance().getReference("Evento")
-        dbRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                eventList.clear()
-                if (snapshot.exists()) {
-                    for (eventSnap in snapshot.children) {
-                        // prendo foto dallo storage
-
-                        val eventoSingolo = eventSnap.getValue(Evento::class.java)
-
-                        // scelgo gli eventi se c'è stato il clic sulla categoria
-                        if (categoria.length != 0) {
-                            if (eventoSingolo != null) {
-                                if (eventoSingolo.categoria == categoria) {
-                                    eventList.add(eventoSingolo!!)
-                                }
-                            }
-                        } else {
-                            eventList.add(eventoSingolo!!)
-                        }
-                    }
-                }
+        adapter.setOnItemClickListener(object : AdapterImageEvent.onItemClickListener {
+            override fun onItemClick(idevento: String) {
+                Toast.makeText(requireContext(), "go away", Toast.LENGTH_SHORT).show()
+                go_away(idevento)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+            override fun skipEvent(posizione: String) {
+                val actualPosition = Integer.parseInt(posizione)
+                Toast.makeText(requireContext(), "$actualPosition", Toast.LENGTH_SHORT)
+                    .show()
+                //                val nextPosition = actualPosition + 1
+                //                if(nextPosition < sizeList) {
+                //                    eventsRec.layoutManager?.scrollToPosition(nextPosition)
+                //                }
             }
+
         })
-        if(eventList.size > 0) return true
-        else return false
     }
 
-    fun go_away(idevento: String, url: String){
+    private fun filterEvents(titleCat: String) {
+        vm.onFilterQuery(titleCat)
+    }
+
+    private fun initialiseObservers() {
+        vm.filterEventsLiveData.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
+    }
+
+    fun fetchAll() {
+
+            vm.getDataFromRemote()
+            Log.d("eventsvm", "${vm.readEventData}")
+
+            vm.readEventData.observe(requireActivity(), Observer { contact ->
+                adapter.setData(contact)
+                adapter.notifyDataSetChanged()
+                Log.d("aggiunta", "${vm.readEventData}")
+            })
+
+            vm_image.getDataFromRemote()
+            vm_image.readImageData.observe(requireActivity(), Observer { image ->
+                adapter.setImage(image)
+                Log.d("aggiunta", "$image")
+            })
+
+    }
+
+    fun go_away(idevento: String){
         val bundle = Bundle()
         bundle.putString("idEvento", idevento)
-        bundle.putString("url_image", url)
         dettaglioEvento.arguments = bundle
         if(isAdded)  fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, dettaglioEvento)?.commit()
     }
 }
+
 
 
 

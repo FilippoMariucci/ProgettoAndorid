@@ -63,9 +63,17 @@ class occasioni_accettate : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var partecipazioni_list = snapshot.children
                 partecipazioni_list.forEach{
-                    if(it.child("id_partecipante").getValue() != null)
-                        lista_partecipanti = it.child("id_partecipante").getValue() as ArrayList<String>
-                    val size = lista_partecipanti.size
+                    var size = -1
+                    if(it.child("id_partecipante").getValue() != null) {
+                        try {
+                            lista_partecipanti =
+                                it.child("id_partecipante").getValue() as ArrayList<String>
+                        } catch (e:Exception) {
+                            // c'è solo un partecipante
+                            size = 1
+                        }
+                    }
+                    size = lista_partecipanti.size
                     for(i in 0..size-1){
                         if (lista_partecipanti[i] != null){
                             val prova = lista_partecipanti[i]

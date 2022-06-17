@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.progettoprogrammazionemobile.R
+import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.category
 
 class ImageAdapter(private val categories: List<category>):RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
@@ -35,6 +36,8 @@ class ImageAdapter(private val categories: List<category>):RecyclerView.Adapter<
     }
 
     override fun getItemCount(): Int = categories.size
+
+
 
     class ImageViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         val imagesrc : ImageView = itemView.findViewById<ImageView>(R.id.image_category)
