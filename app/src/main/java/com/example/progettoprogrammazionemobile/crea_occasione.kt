@@ -23,7 +23,10 @@ import androidx.core.content.PermissionChecker.checkSelfPermission
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProviders
+import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasioneBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.firebase.auth.FirebaseAuth
@@ -44,22 +47,23 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     private val binding get() = _binding!!
     //private lateinit var binding: FragmentCreaOccasioneBinding
     private lateinit var  databaseReference: DatabaseReference
-    private lateinit var  databaseReferenceEvento: DatabaseReference
-    private lateinit var  storageReference: StorageReference
-    private val mStorageRef = FirebaseStorage.getInstance().reference
-    private var idEvento : String ?= null
-
-    private lateinit var idEventoFoto : String
-    private lateinit var reference: DatabaseReference
+//    private lateinit var  databaseReferenceEvento: DatabaseReference
+//    private lateinit var  storageReference: StorageReference
+//    private val mStorageRef = FirebaseStorage.getInstance().reference
+//    private var idEvento : String ?= null
+//
+//    private lateinit var idEventoFoto : String
+//    private lateinit var reference: DatabaseReference
 
     private lateinit var imageUri: Uri
     private  var button : Button ?= null
     private  var imageView: ImageView ?= null
 
     private var packageName = BuildConfig.APPLICATION_ID
+//    private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
 
     private lateinit var evento : Evento
-    private val viewModelEvento: EventoViewModel by activityViewModels()
+    private lateinit var vm: eventViewModel
     var array_date_time = arrayListOf<Int>()
     var savedDay = 0
     var savedMonth = 0
@@ -74,7 +78,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onResume() {
@@ -91,13 +94,14 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         })
     }
 
+
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayofMonth: Int) {
         savedDay = dayofMonth
         savedMonth = month
         savedYear = year
 
         array_date_time = arrayListOf<Int>()
-        array_date_time = viewModelEvento.getDateTimeCalendar()
+        array_date_time = vm.getDateTimeCalendar()
         TimePickerDialog(requireContext(), this, array_date_time.get(3), array_date_time.get(4), true).show()
     }
 
@@ -123,8 +127,11 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
+
 
         button = getView()?.findViewById(R.id.scegliImmagine)
         imageView = getView()?.findViewById(R.id.immagine)
@@ -143,16 +150,22 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
                 }
 
             }
+
+           //pickImagegallery()
         }
 
-        binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
+        //binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
+
         auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
+
         binding.btnaddEvento.setOnClickListener{
-            Toast.makeText(this.requireContext(), "chicco gay$packageName", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.requireContext(), "Hai creato una nuova occasione!", Toast.LENGTH_SHORT).show()
             this.saveEvento()
         }
+
+
     }
 
 
@@ -187,12 +200,14 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
             imageView?.setImageURI(data?.data)
             imageUri = data?.data!!
-            viewModelEvento.setUri(imageUri)
+            vm.setUri(imageUri)
         }
     }
 
-
+    // function that check fields
     private fun saveEvento(){
+
+
         val idEvento = ""
         val titolo_evento = binding.titoloEvento.editText?.text.toString().trim()
         if(titolo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi un titolo all'evento!"); return}
@@ -243,12 +258,9 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         if(categoria_evento.isEmpty()){binding.errorMsg.setText("Aggiungi la categoria dell'evento"); return}
         val userId = uid
 
-
-        val model= Evento(idEvento, titolo_evento, descrizione_evento, lingue_evento,
+        val model= EventoDb(idEvento, titolo_evento, descrizione_evento, lingue_evento,
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
             npersone_evento, foto_evento, userId)
-        val ritorno = viewModelEvento.saveEvent(model)
-        Log.d("ritorno", "$ritorno")
-        if (ritorno == true) fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
+        vm.saveEvento(model)
     }
 }

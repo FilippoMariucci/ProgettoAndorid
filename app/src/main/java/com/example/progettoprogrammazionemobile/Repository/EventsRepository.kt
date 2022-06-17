@@ -1,5 +1,6 @@
 package com.example.progettoprogrammazionemobile.Repository
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
@@ -28,5 +29,10 @@ class EventsRepository(private val database: EventsRoomDb) {
     fun filterCat(titleCat: String) : List<EventoDb>{
         val filtered = database.eventoDao().filterCategory(titleCat)
         return filtered
+    }
+
+    fun insert(model: EventoDb, imageUri: Uri) {
+        database.eventoDao().insert(model)
+        eventsData.inserEventRemote(model, imageUri)
     }
 }

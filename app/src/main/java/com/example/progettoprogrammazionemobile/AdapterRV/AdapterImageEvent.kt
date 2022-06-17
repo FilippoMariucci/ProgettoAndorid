@@ -52,13 +52,14 @@ class AdapterImageEvent: RecyclerView.Adapter<AdapterImageEvent.MyViewHolder>() 
         return contactsList.size
     }
 
-    public fun getItem(position: Int): EventoDb{
-        return contactsList[position]
-    }
+//    public fun getItem(position: Int): EventoDb{
+//        return contactsList[position]
+//    }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int){
         Log.d("listaAdapter", "$imageList")
         val currentItem = contactsList[position]
+        holder.idEvent = currentItem.id_evento.toString()
 //        val url = imageList[position]
         val url = currentItem.foto
         Log.d("urlchemostra", url)

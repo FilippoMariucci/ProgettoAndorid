@@ -12,16 +12,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/prova"
-        android:layout_width="411dp"
-        android:layout_height="51dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories"
         android:layout_width="404dp"
@@ -37,15 +27,29 @@
         android:id="@+id/rvEvents"
         android:layout_width="318dp"
         android:layout_height="474dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:foregroundGravity="center_horizontal"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories"
+        app:layout_constraintTop_toBottomOf="@+id/refreshBtn"
         tools:listitem="@layout/event_item" />
+
+    <TextView
+        android:id="@+id/refreshBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins"
+        android:text="Refresh"
+        android:textColor="@color/orange"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categories"
+        tools:text="Refresh" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -1,6 +1,7 @@
 package com.example.progettoprogrammazionemobile.ViewModel
 
 import android.app.Application
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
@@ -10,11 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 class eventViewModel(application: Application) : AndroidViewModel(application) {
 
     var readEventData: LiveData<List<EventoDb>>
     private val eventsRepository: EventsRepository
+    lateinit var imageUri: Uri
 
     val filterEventsLiveData = MutableLiveData<List<EventoDb>>()
 
@@ -58,4 +62,34 @@ class eventViewModel(application: Application) : AndroidViewModel(application) {
             filterEventsLiveData.postValue(filtered)
         }
     }
+
+
+    /* ------------------------------
+    FUN TO SAVE EVENT
+    ---------------------------------
+     */
+    fun saveEvento(model: EventoDb) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.insert(model, imageUri)
+        }
+    }
+    fun setUri(imageUri: Uri) {
+        this.imageUri = imageUri
+    }
+    fun getDateTimeCalendar(): ArrayList<Int> {
+        val cal = Calendar.getInstance()
+        var array = arrayListOf<Int>()
+        var day = cal.get(Calendar.DAY_OF_MONTH)
+        var month = cal.get(Calendar.MONTH)
+        var year = cal.get(Calendar.YEAR)
+        var hour = cal.get(Calendar.HOUR)
+        var minute = cal.get(Calendar.MINUTE)
+        array.add(day)
+        array.add(month)
+        array.add(year)
+        array.add(hour)
+        array.add(minute)
+        return array
+    }
+
 }

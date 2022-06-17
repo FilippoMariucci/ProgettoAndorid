@@ -68,7 +68,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         rv.layoutManager = LinearLayoutManager(this.requireContext())
         rv.setHasFixedSize(true)
 
-
+        binding.refreshBtn.setOnClickListener {
+            refreshFeed()
+        }
         // categories
         var categoryimgs = listOf<category>(
             category(R.drawable.ic_icons8_montagna, "Adventure"),
@@ -114,6 +116,11 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         })
     }
 
+    private fun refreshFeed() {
+        vm.getDataFromRemote()
+        vm_image.getDataFromRemote()
+    }
+
     private fun filterEvents(titleCat: String) {
         vm.onFilterQuery(titleCat)
     }
@@ -126,7 +133,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     fun fetchAll() {
 
-            vm.getDataFromRemote()
             Log.d("eventsvm", "${vm.readEventData}")
 
             vm.readEventData.observe(requireActivity(), Observer { contact ->
@@ -135,11 +141,10 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 Log.d("aggiunta", "${vm.readEventData}")
             })
 
-            vm_image.getDataFromRemote()
-            vm_image.readImageData.observe(requireActivity(), Observer { image ->
-                adapter.setImage(image)
-                Log.d("aggiunta", "$image")
-            })
+//            vm_image.readImageData.observe(requireActivity(), Observer { image ->
+//                adapter.setImage(image)
+//                Log.d("aggiunta", "$image")
+//            })
 
     }
 

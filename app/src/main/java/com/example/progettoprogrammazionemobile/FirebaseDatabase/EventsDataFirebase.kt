@@ -1,16 +1,21 @@
 package com.example.progettoprogrammazionemobile.FirebaseDatabase
 
+import android.net.Uri
 import android.util.Log
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.appericolo.ui.preferiti.contacts.database.EventsRoomDb
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EventsDataFirebase(private val database: EventsRoomDb) {
     var eventList = ArrayList<EventoDb>()
-
+    var auth = FirebaseAuth.getInstance()
+    private lateinit var  storageReference: StorageReference
     var databaseRemote: DatabaseReference = FirebaseDatabase.getInstance(
         "https://programmazionemobile-a1b11-default-rtdb.firebaseio.com/")
         .getReference("Evento")
@@ -74,6 +79,35 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
     private fun setList(eventdio: ArrayList<EventoDb>){
         this.eventList = eventdio
         Log.d("hovinto", "${eventList}")
+    }
+
+    fun inserEventRemote(model: EventoDb, imageUri: Uri) {
+            var ritorno = false
+            //reference = FirebaseDatabase.getInstance().getReference("Evento")
+            model.id_evento = databaseRemote.push().getKey().toString();
+
+            val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/ + ${model.id_evento}"
+            model.foto = url_storage
+
+            uploadEventPictureRemote(model.id_evento, imageUri)
+
+            if (model.id_evento != null) {
+                databaseRemote.child(model.id_evento!!).setValue(model)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            ritorno = true
+                        }
+                    }.addOnFailureListener {
+                        ritorno = false
+                    }
+            }
+            print(ritorno)
+    }
+
+    fun uploadEventPictureRemote (idEvento: String? = null, imageUri: Uri) {
+        auth = FirebaseAuth.getInstance()
+        storageReference = FirebaseStorage.getInstance().getReference("Users/" + idEvento)
+        storageReference.putFile(imageUri)
     }
 
 
