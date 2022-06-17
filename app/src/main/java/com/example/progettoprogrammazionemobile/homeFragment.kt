@@ -109,10 +109,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 val actualPosition = Integer.parseInt(posizione)
                 Toast.makeText(requireContext(), "$actualPosition", Toast.LENGTH_SHORT)
                     .show()
-                //                val nextPosition = actualPosition + 1
-                //                if(nextPosition < sizeList) {
-                //                    eventsRec.layoutManager?.scrollToPosition(nextPosition)
-                //                }
             }
 
         })

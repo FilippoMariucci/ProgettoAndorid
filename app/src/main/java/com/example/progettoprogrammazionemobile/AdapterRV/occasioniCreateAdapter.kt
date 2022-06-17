@@ -3,6 +3,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,7 @@ import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.model.Evento
 import kotlinx.android.synthetic.main.occasioni_create_card.view.*
 
-class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>,
-    val urls: List<String>):
+class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>):
     RecyclerView.Adapter<occasioniCreateAdapter.viewHolder>() {
     private lateinit var cListener : OnCreatedClickListener
 
@@ -32,8 +32,6 @@ class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>,
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         val currentEvent = occasioniUtente[position]
-        val url = urls[position]
-        Glide.with(holder.itemView).load(url).into(holder.itemView.fotoEventoUtente)
         holder.idEvento = currentEvent.id_evento.toString()
         holder.tCreated.text = currentEvent.titolo
         holder.cCreated.text = currentEvent.categoria
@@ -46,12 +44,11 @@ class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>,
 
     inner class viewHolder(itemView: View, listener: OnCreatedClickListener) : RecyclerView.ViewHolder(itemView){
         var idEvento : String = ""
-        val iCreated : ImageView = itemView.findViewById(R.id.fotoEventoUtente)
         val tCreated : TextView = itemView.findViewById(R.id.titoloEventoCreato)
         val dCreated : TextView = itemView.findViewById(R.id.dataEventoCreato)
         val cCreated : TextView = itemView.findViewById(R.id.categoriaEventoCreato)
-        val delete : Button = itemView.findViewById(R.id.deleteOccasione)
-        val modifica : Button = itemView.findViewById(R.id.modficaOccasione)
+        val delete : ImageButton = itemView.findViewById(R.id.deleteOccasione)
+        val modifica : ImageButton = itemView.findViewById(R.id.modficaOccasione)
 
         init {
             delete.setOnClickListener{
@@ -61,7 +58,6 @@ class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>,
                 listener.modificaEvent(idEvento as String)
                     }
             }
-
 
         }
 }

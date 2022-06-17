@@ -16,14 +16,6 @@ import com.example.progettoprogrammazionemobile.databinding.FragmentOccasioniCre
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class occasioni_create : Fragment() {
 
@@ -61,7 +53,6 @@ class occasioni_create : Fragment() {
         createdEvents = arrayListOf<Evento>()
 
         getUserEvents()
-        listFiles(createdEvents, CreateEventsRec)
 
         binding.btnAddEvent.setOnClickListener {
             fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, crea_occasione())
@@ -84,6 +75,18 @@ class occasioni_create : Fragment() {
                         createdEvents.add(singoloEvento!!)
                     }
                 }
+                val adapter = occasioniCreateAdapter(createdEvents)
+                CreateEventsRec.adapter = adapter
+                adapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
+                    override fun deleteEvent(idEvento: String, size: Int, position: String) {
+                        eliminaEvento(idEvento, adapter, position)
+                    }
+
+                    override fun modificaEvent(idEvento: String) {
+                        goModifica(idEvento)
+                    }
+                })
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -93,55 +96,7 @@ class occasioni_create : Fragment() {
         CreateEventsRec.visibility = View.VISIBLE
     }
 
-    private fun listFiles(list: ArrayList<Evento>, rec: RecyclerView) = CoroutineScope(
-        Dispatchers.IO
-    ).launch {
-        val storageReference = Firebase.storage.reference
-        try {
-            val images = storageReference.child("Users/").listAll().await()
-            val imageUrls = mutableListOf<String>()
-            val prova = images.items
-            for (i in images.items) {
-                val url = i.downloadUrl.await()
-                val url_to_check = i.toString().substringAfterLast('/').substringBefore('.')
-
-                for (y in list) {
-                    if (url_to_check == y.id_evento) imageUrls.add(url.toString())
-                }
-//            val url = i.downloadUrl.await()
-//            Log.d("pr", "$url")
-//            imageUrls.add(url.toString())
-            }
-            withContext(Dispatchers.Main) {
-                val imageAdapter = occasioniCreateAdapter(list, imageUrls)
-                rec.apply {
-                    adapter = imageAdapter
-                    imageAdapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
-                        override fun deleteEvent(idEvento: String, size: Int, position: String) {
-                            eliminaEvento(idEvento, imageAdapter, position, size)
-                        }
-
-                        override fun modificaEvent(idEvento: String) {
-                            goModifica(idEvento)
-                        }
-                    })
-                }
-
-            }
-        } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
-                Log.d("eccezione_immagini", e.message.toString())
-            }
-            //Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun eliminaEvento (
-        idEvento: String,
-        imageAdapter: occasioniCreateAdapter,
-        position: String,
-        size: Int
-    )
+    private fun eliminaEvento (idEvento: String, createdAdapter: occasioniCreateAdapter, position: String, )
     {
         Log.d("builderprova", "entrato")
         val builder = AlertDialog.Builder(requireActivity())
@@ -155,7 +110,7 @@ class occasioni_create : Fragment() {
                      dbRef.child("Evento").child(idEvento).removeValue()
                      dbRef.child("Partecipazione").child(idEvento).removeValue()
                      Log.d("position", "${position.toInt()}")
-                     imageAdapter.notifyItemRemoved(position.toInt())
+                     createdAdapter.notifyItemRemoved(position.toInt())
                      dialog.dismiss()
                  })
                 .setNegativeButton("No", DialogInterface.OnClickListener {
