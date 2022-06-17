@@ -39,7 +39,7 @@ class dettaglio_evento : Fragment() {
         // Inflate the layout for this fragment
         val args = this.arguments
         val argsEvento = args?.get("idEvento")
-//        urlImageEvento = args?.get("url_image") as String
+        urlImageEvento = args?.get("url_image") as String
         idEvento = argsEvento.toString()
         _binding = FragmentDettaglioEventoBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,10 +55,11 @@ class dettaglio_evento : Fragment() {
 
 
     private fun getEventData() {
+        var partecipanti = 0
         databaseReferenceUser.child(idEvento).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento :: class.java)!!
-//                Glide.with(requireContext()).load(urlImageEvento).into(binding.fotoEvento)
+                Glide.with(requireContext()).load(urlImageEvento).into(binding.fotoEvento)
 
                 binding.titoloEventoDett.setText(evento.titolo)
                 //binding.fotoEvento.setImageResource(R.drawable.rico)
@@ -70,43 +71,34 @@ class dettaglio_evento : Fragment() {
                 binding.indirizzoDett.setText(evento.indirizzo)
                 binding.descEventoDett.setText(evento.descrizione)
 
-                FirebaseDatabase.getInstance().getReference("Users").child(evento.userId.toString()).get().addOnSuccessListener {
-                    binding.creatoreOccasioneDett.setText("Occasione creata da ${it.child("name").getValue()}")
-                }
-
-
                 val npersone = evento.n_persone?.toInt()
-                FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento).get().addOnSuccessListener{
-                    var persone = -1
-
+                FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento).get().addOnSuccessListener{{}
                     try {
-                        val listPartecipanti =  it.child("id_partecipante").getValue() as ArrayList<String>
+                        val listPartecipanti = it.child("id_partecipante").getValue() as ArrayList<String>
                         val size = listPartecipanti.size
-                        var partecipanti = 0
-                        for (i in 0..size-1) {
+                        partecipanti = 0
+                        for (i in 0..size - 1) {
                             if (listPartecipanti[i] != null) partecipanti += 1
                         }
-                        persone = npersone?.minus(partecipanti)!!
+                    }catch (e : Exception){
+                        partecipanti = 0
+                    }
+
+                        val persone = npersone?.minus(partecipanti)
                         if (persone != null) {
                             binding.npersone.setText(persone.toString())
                         }
-                    }
-                    catch(e:Exception) {
-                        //nessuno ha partecipato ancora
-                        binding.npersone.setText(evento.n_persone)
-                    }
-
-                    if(persone == 0) {
-                        binding.buttonPartecipoDett.visibility = View.INVISIBLE
-                        binding.fullEventoText.visibility = View.VISIBLE
-                        binding.fullEventoText.setText("Raggiunto il numero massimo di partecipanti")
-                    }
-                    else{
-                        binding.buttonPartecipoDett.setOnClickListener{
-                            partecipaEvento()
+                        if(persone == 0) {
+                            binding.buttonPartecipoDett.visibility = View.INVISIBLE
+                            binding.fullEventoText.visibility = View.VISIBLE
+                            binding.fullEventoText.setText("Raggiunto il numero massimo di partecipanti")
+                        }
+                        else{
+                            binding.buttonPartecipoDett.setOnClickListener{
+                                partecipaEvento()
+                            }
                         }
                     }
-                }
 
             }
 

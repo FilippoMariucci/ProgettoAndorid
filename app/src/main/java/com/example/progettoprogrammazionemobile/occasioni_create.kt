@@ -1,15 +1,15 @@
 package com.example.progettoprogrammazionemobile
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.progettoprogrammazionemobile.AdapterRV.AdapterImageEvent
 import com.example.progettoprogrammazionemobile.AdapterRV.occasioniCreateAdapter
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentOccasioniCreateBinding
@@ -29,9 +29,11 @@ class occasioni_create : Fragment() {
 
     private lateinit var CreateEventsRec: RecyclerView
     private lateinit var createdEvents: ArrayList<Evento>
+    private val modificaOccasione = modifica_occasione()
     private lateinit var dbRef: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var uid: String
+
 
     private var _binding: FragmentOccasioniCreateBinding? = null
     private val binding get() = _binding!!
@@ -43,6 +45,7 @@ class occasioni_create : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentOccasioniCreateBinding.inflate(inflater, container, false,)
+
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
         return binding.root
@@ -56,6 +59,7 @@ class occasioni_create : Fragment() {
         CreateEventsRec.setHasFixedSize(true)
 
         createdEvents = arrayListOf<Evento>()
+
         getUserEvents()
         listFiles(createdEvents, CreateEventsRec)
 
@@ -79,7 +83,6 @@ class occasioni_create : Fragment() {
                         val singoloEvento = eventSnap.getValue(Evento::class.java)
                         createdEvents.add(singoloEvento!!)
                     }
-
                 }
             }
 
@@ -87,6 +90,7 @@ class occasioni_create : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+        CreateEventsRec.visibility = View.VISIBLE
     }
 
     private fun listFiles(list: ArrayList<Evento>, rec: RecyclerView) = CoroutineScope(
@@ -112,13 +116,16 @@ class occasioni_create : Fragment() {
                 val imageAdapter = occasioniCreateAdapter(list, imageUrls)
                 rec.apply {
                     adapter = imageAdapter
-                }
+                    imageAdapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
+                        override fun deleteEvent(idEvento: String, size: Int, position: String) {
+                            eliminaEvento(idEvento, imageAdapter, position, size)
+                        }
 
-                imageAdapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
-                    override fun deleteEvent(idEvento: String) {
-                        eliminaEvento(idEvento)
-                    }
-                })
+                        override fun modificaEvent(idEvento: String) {
+                            goModifica(idEvento)
+                        }
+                    })
+                }
 
             }
         } catch (e: Exception) {
@@ -129,10 +136,42 @@ class occasioni_create : Fragment() {
         }
     }
 
-    private fun eliminaEvento (idEvento : String){
-        dbRef = FirebaseDatabase.getInstance().getReference()
-        dbRef.child("Evento").child(idEvento).removeValue()
-        dbRef.child("Partecipazione").child(idEvento).removeValue()
+    private fun eliminaEvento (
+        idEvento: String,
+        imageAdapter: occasioniCreateAdapter,
+        position: String,
+        size: Int
+    )
+    {
+        Log.d("builderprova", "entrato")
+        val builder = AlertDialog.Builder(requireActivity())
+        Log.d("builderprova", "$builder")
+        builder.setMessage("Are you sure?")
+                 .setCancelable(true)
+                 .setPositiveButton("Yes", DialogInterface.OnClickListener {
+                     dialog, id ->
+                     Log.d("builderprova", "entrato")
+                     dbRef = FirebaseDatabase.getInstance().getReference()
+                     dbRef.child("Evento").child(idEvento).removeValue()
+                     dbRef.child("Partecipazione").child(idEvento).removeValue()
+                     Log.d("position", "${position.toInt()}")
+                     imageAdapter.notifyItemRemoved(position.toInt())
+                     dialog.dismiss()
+                 })
+                .setNegativeButton("No", DialogInterface.OnClickListener {
+                    dialog, id-> dialog.cancel()
+            })
+        val alert = builder.create()
+        alert.show()
     }
-}
 
+    private fun goModifica (idEvento: String){
+        val bundle = Bundle()
+        bundle.putString("idEvento", idEvento)
+        Log.d("idEvento", "$idEvento")
+        modificaOccasione.arguments = bundle
+        fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, modificaOccasione)?.commit()
+
+    }
+
+}

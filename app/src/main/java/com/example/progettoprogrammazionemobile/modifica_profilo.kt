@@ -44,7 +44,6 @@ class modifica_profilo : Fragment(R.layout.fragment_modifica_profilo) {
                 user = snapshot.getValue(User::class.java)!!
                 binding.inputNomeModifica.setText(user.name)
                 binding.cognomeInputModifica.setText(user.surname)
-// binding.inputEmailModifica.setText(user.email)
                 binding.inputStatoModifica.setText(user.state)
                 binding.inputDescrizioneModifica.setText(user.description)
                 binding.inputDataModifica.setText(user.birth)

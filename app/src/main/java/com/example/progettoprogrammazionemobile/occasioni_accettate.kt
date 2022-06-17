@@ -1,6 +1,7 @@
 package com.example.progettoprogrammazionemobile
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.Partecipazione
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 
@@ -57,33 +59,29 @@ class occasioni_accettate : Fragment() {
 
     private fun getEventsKey(){
         val key_events = ArrayList<String>()
-        var lista_partecipanti = ArrayList<String>()
-        val PartecipazioneDb = FirebaseDatabase.getInstance().getReference("Partecipazione").
+        var lista_partecipanti = ArrayList<String> ()
+        FirebaseDatabase.getInstance().getReference("Partecipazione").
         addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 var partecipazioni_list = snapshot.children
-                partecipazioni_list.forEach{
-                    var size = -1
-                    if(it.child("id_partecipante").getValue() != null) {
+                    partecipazioni_list.forEach {
+                        if (it.child("id_partecipante").getValue() != null) {
                         try {
                             lista_partecipanti =
                                 it.child("id_partecipante").getValue() as ArrayList<String>
-                        } catch (e:Exception) {
-                            // c'è solo un partecipante
-                            size = 1
-                        }
-                    }
-                    size = lista_partecipanti.size
-                    for(i in 0..size-1){
-                        if (lista_partecipanti[i] != null){
-                            val prova = lista_partecipanti[i]
-                            if (lista_partecipanti[i] == uid) {
-                                key = it.key.toString()
-                                key_events.add(key)
+                            val size = lista_partecipanti.size
+                            for (i in 0..size - 1) {
+                                if (lista_partecipanti[i] != null) {
+                                    if (lista_partecipanti[i] == uid) {
+                                        key = it.key.toString()
+                                        key_events.add(key)
+                                        Log.d("key", "$key_events")
+                                    }
+                                }
                             }
+                        }catch (e : Exception){ Log.d(" gyughgh", "  ee")}
                         }
                     }
-                }
                 getUserFavouriteEvent(key_events)
             }
             override fun onCancelled(error: DatabaseError) {
@@ -95,6 +93,9 @@ class occasioni_accettate : Fragment() {
         AcceptedEventsRec.visibility = View.GONE
         AcceptedEventsUser.clear()
         val Eventi = FirebaseDatabase.getInstance().getReference("Evento")
+        Log.d("key", "$key")
+        val mario = key.size
+        Log.d("key", "$mario")
 
         Eventi.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -116,20 +117,16 @@ class occasioni_accettate : Fragment() {
                     adapter.setOnEventClickListener(object : occasioniAccettateAdapter.OnEventClickListener{
                         override fun cancelclick( idEvento: String) {
                             var IndexList = ArrayList<String>()
-                            val PartecipazioneDb =
                                 FirebaseDatabase.getInstance().getReference("Partecipazione")
                                     .child(idEvento).child("id_partecipante").get()
                                     .addOnSuccessListener {
                                         IndexList = it.value as ArrayList<String>
                                         val index = IndexList.indexOf(uid)
-                                        FirebaseDatabase.getInstance()
-                                            .getReference("Partecipazione").child(idEvento)
-                                            .child("id_partecipante").child(index.toString())
-                                            .removeValue()
+                                        deletePartecipazione(idEvento, index.toString(), adapter)
                                     }
                         }
 
-                        override fun seeMoreclick(idEvento: String) {
+                        override fun seeMoreclick(idEvento: String, toString: String) {
                             go_Dettaglio(idEvento)
                         }
                     })
@@ -140,6 +137,33 @@ class occasioni_accettate : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    private fun deletePartecipazione(
+        idevento: String,
+        index: String,
+        occasioniAccettateAdapter: occasioniAccettateAdapter)  {
+            var flag : Boolean = false
+            Log.d("builderprova", "entrato")
+            val builder = AlertDialog.Builder(requireActivity())
+            Log.d("builderprova", "$builder")
+            builder.setMessage("Are you sure?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", DialogInterface.OnClickListener {
+                        dialog, id ->
+                    Log.d("builderprova", "entrato")
+                    FirebaseDatabase.getInstance()
+                                            .getReference("Partecipazione").child(idevento)
+                                            .child("id_partecipante").child(index.toString())
+                                            .removeValue()
+                    occasioniAccettateAdapter.notifyItemRemoved(index.toInt())
+                    dialog.dismiss()
+                })
+                .setNegativeButton("No", DialogInterface.OnClickListener {
+                        dialog, id-> dialog.cancel()
+                })
+            val alert = builder.create()
+            alert.show()
     }
 
     fun go_Dettaglio(idevento: String){

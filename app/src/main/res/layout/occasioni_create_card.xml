@@ -58,13 +58,25 @@
             app:layout_constraintTop_toBottomOf="@+id/dataEventoCreato"></TextView>
 
         <Button
-            android:layout_width="101dp"
-            android:layout_height="31dp"
+            android:id="@+id/deleteOccasione"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
             android:layout_marginStart="28dp"
             android:layout_marginTop="4dp"
             android:text="DELETE"
-            android:textSize="10dp"
+            android:textSize="9dp"
             app:layout_constraintStart_toEndOf="@+id/fotoEventoUtente"
+            app:layout_constraintTop_toBottomOf="@+id/categoriaEventoCreato" />
+
+        <Button
+            android:id="@+id/modficaOccasione"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="MODIFICA"
+            android:textSize="9dp"
+            app:layout_constraintStart_toEndOf="@+id/deleteOccasione"
             app:layout_constraintTop_toBottomOf="@+id/categoriaEventoCreato" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

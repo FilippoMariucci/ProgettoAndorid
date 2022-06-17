@@ -58,8 +58,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
     private var packageName = BuildConfig.APPLICATION_ID
 
-    private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
-
     private lateinit var evento : Evento
     private val viewModelEvento: EventoViewModel by activityViewModels()
     var array_date_time = arrayListOf<Int>()
@@ -77,29 +75,21 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
     }
 
     override fun onResume() {
         super.onResume()
         val languages = resources.getStringArray(R.array.languages)
         val categories = resources.getStringArray(R.array.categories)
-        val arrayLanguagesAdapter =
-            ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
-        val arrayCategoriesAdapter =
-            ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
+        val arrayLanguagesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
+        val arrayCategoriesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
         binding.autoCompleteCategories.setAdapter(arrayCategoriesAdapter)
         binding.autoCompleteLanguages.setAdapter(arrayLanguagesAdapter)
-
-
-
         binding.InputDataEvento.setOnClickListener(View.OnClickListener {
             array_date_time = viewModelEvento.getDateTimeCalendar()
-
             DatePickerDialog(requireContext(), this, array_date_time.get(2), array_date_time.get(1), array_date_time.get(0)).show()
         })
     }
-
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayofMonth: Int) {
         savedDay = dayofMonth
@@ -130,36 +120,11 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
-
-
-//        var getData = object : ValueEventListener{
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                var sb = StringBuilder()
-//                for(i in snapshot.children){
-//                    var event_titolo = i.child("titolo").getValue()
-//                    var event_categoria = i.child("categoria").getValue()
-//                    sb.append("${i.key}  $event_titolo $event_categoria")
-//                }
-//                binding.TestoMagico.setText(sb)
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//
-//        }
-//
-//        database.addValueEventListener(getData)
-//        database.addListenerForSingleValueEvent(getData)
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         button = getView()?.findViewById(R.id.scegliImmagine)
         imageView = getView()?.findViewById(R.id.immagine)
@@ -178,30 +143,16 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
                 }
 
             }
-
-           //pickImagegallery()
         }
 
         binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
-        //this.loadEventsFromDb()
-        //viewModelEvento.loadEventsFromDb()
-
-
-
-
         auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
         binding.btnaddEvento.setOnClickListener{
-
             Toast.makeText(this.requireContext(), "chicco gay$packageName", Toast.LENGTH_SHORT).show()
-
-
             this.saveEvento()
-
         }
-
-
     }
 
 
@@ -242,8 +193,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
 
     private fun saveEvento(){
-
-
         val idEvento = ""
         val titolo_evento = binding.titoloEvento.editText?.text.toString().trim()
         if(titolo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi un titolo all'evento!"); return}
@@ -298,6 +247,8 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         val model= Evento(idEvento, titolo_evento, descrizione_evento, lingue_evento,
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
             npersone_evento, foto_evento, userId)
-        viewModelEvento.saveEvent(model)
+        val ritorno = viewModelEvento.saveEvent(model)
+        Log.d("ritorno", "$ritorno")
+        if (ritorno == true) fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
     }
 }

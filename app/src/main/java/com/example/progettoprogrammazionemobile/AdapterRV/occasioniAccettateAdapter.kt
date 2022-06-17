@@ -14,7 +14,7 @@ RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
     private lateinit var aListener : OnEventClickListener
 
     interface OnEventClickListener{
-        fun seeMoreclick(idEvento: String)
+        fun seeMoreclick(idEvento: String, toString: String)
         fun cancelclick (idEvento: String)
     }
 
@@ -42,7 +42,8 @@ RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
         return viewHolder(itemView, aListener)
     }
 
-    class viewHolder(itemView: View, listener: OnEventClickListener) : RecyclerView.ViewHolder(itemView){
+
+    inner class viewHolder(itemView: View, listener: OnEventClickListener) : RecyclerView.ViewHolder(itemView){
         val tAccepted : TextView = itemView.findViewById(R.id.TitoloEventoAccettato)
         var idEvento : String = ""
         var idPartecipante : String = ""
@@ -54,7 +55,7 @@ RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
 
     init {
             seeMore.setOnClickListener{
-                listener.seeMoreclick(idEvento as String)
+                listener.seeMoreclick(idEvento as String, adapterPosition.toString())
             }
             cancel.setOnClickListener{
                 listener.cancelclick(idEvento as String)
