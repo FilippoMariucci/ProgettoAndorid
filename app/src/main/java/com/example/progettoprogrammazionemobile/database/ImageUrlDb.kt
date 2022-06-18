@@ -6,21 +6,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 @Entity(tableName = "image_table")
 
-class ImageUrlDb {
+data class ImageUrlDb(
     @PrimaryKey @ColumnInfo(name = "url")
-    var url: String
-        get() {
-            return field
-        }
-
-        set(value) {
-            field = value
-        }
-
-    constructor() : this("")
-    constructor(url: String){
-        this.url = url
-
-    }
-
+    var url: String,
+    @ColumnInfo(name = "id_evento")
+    var id_evento: String,
+){
+    constructor() : this("","",)
 }

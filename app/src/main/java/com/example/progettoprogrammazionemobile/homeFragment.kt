@@ -71,18 +71,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         binding.refreshBtn.setOnClickListener {
             refreshFeed()
         }
-        // categories
-        //var categoryimgs = getCategories()
-        var categoryimgs = listOf<category>(
-            category(R.drawable.ic_icons8_montagna, "Adventure"),
-            category(R.drawable.ic_icons8_illustrator, "Art"),
-            category(R.drawable.ic_icons8_musica__1_, "Concert"),
-            category(R.drawable.ic_icons8_sports, "Sport"),
-            category(R.drawable.ic_icons8_photo, "Photo"),
-            category(R.drawable.ic_icons8_carte_da_gioco, "Role Games"),
-            category(R.drawable.ic_icons8_festa_di_ballo, "Party")
-        )
 
+        // categories
+        var categoryimgs = getCategories()
 
         val recyclerView = binding.categories
         var AdapterCategories = ImageAdapter(categoryimgs)
@@ -98,6 +89,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 filterEvents(titleCat)
             }
         })
+
 
         initialiseObservers()
         fetchAll()
@@ -115,6 +107,24 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             }
 
         })
+    }
+
+
+
+
+
+
+    private fun getCategories(): List<category> {
+        var categoryimgs = listOf<category>(
+            category(R.drawable.ic_icons8_montagna, "Adventure"),
+            category(R.drawable.ic_icons8_illustrator, "Art"),
+            category(R.drawable.ic_icons8_musica__1_, "Concert"),
+            category(R.drawable.ic_icons8_sports, "Sport"),
+            category(R.drawable.ic_icons8_photo, "Photo"),
+            category(R.drawable.ic_icons8_carte_da_gioco, "Role Games"),
+            category(R.drawable.ic_icons8_festa_di_ballo, "Party")
+        )
+        return categoryimgs
     }
 
     private fun refreshFeed() {

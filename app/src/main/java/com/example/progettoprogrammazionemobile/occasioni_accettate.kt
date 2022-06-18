@@ -93,9 +93,7 @@ class occasioni_accettate : Fragment() {
         AcceptedEventsRec.visibility = View.GONE
         AcceptedEventsUser.clear()
         val Eventi = FirebaseDatabase.getInstance().getReference("Evento")
-        Log.d("key", "$key")
         val mario = key.size
-        Log.d("key", "$mario")
 
         Eventi.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

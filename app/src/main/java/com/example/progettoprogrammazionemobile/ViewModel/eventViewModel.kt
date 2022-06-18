@@ -7,6 +7,7 @@ import androidx.lifecycle.*
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.appericolo.ui.preferiti.contacts.database.EventsRoomDb
 import com.example.progettoprogrammazionemobile.Repository.EventsRepository
+import com.example.progettoprogrammazionemobile.model.Partecipazione
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -186,6 +187,12 @@ class eventViewModel(application: Application) : AndroidViewModel(application) {
     fun updateEventRemote(event: Map<String, String>, idEvento: String) {
         viewModelScope.launch(Dispatchers.IO) {
             eventsRepository.updateEventRemote(event, idEvento)
+        }
+    }
+
+    fun addPartecipazione(idEvento: String, partecipazione: Partecipazione) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.addPartecipazione(idEvento, partecipazione)
         }
     }
 

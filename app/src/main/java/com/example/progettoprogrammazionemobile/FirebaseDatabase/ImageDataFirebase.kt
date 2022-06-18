@@ -19,12 +19,14 @@ class ImageDataFirebase(private val database: EventsRoomDb) {
             val images = imageRef.child("Users/").listAll().await()
             for (i in images.items) {
                 val url = i.downloadUrl.await()
-                val url_singola = ImageUrlDb(url.toString())
-                list.add(url_singola)
-                database.imageDao().insert(url_singola)
+
 
                 val evento_for_image = i.toString().substringAfterLast('/').substringBefore('.')
                 val evento_to_change = database.eventoDao().getEventoFromId(evento_for_image)
+
+                val url_singola = ImageUrlDb(url.toString(), evento_for_image)
+                list.add(url_singola)
+                database.imageDao().insert(url_singola)
                 database.eventoDao().update_foto(url.toString(), evento_for_image)
 
                 Log.d("evento_to_change", "${evento_to_change}")

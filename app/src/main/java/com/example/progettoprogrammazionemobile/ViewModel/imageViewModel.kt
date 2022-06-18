@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 class imageViewModel(application: Application) : AndroidViewModel(application) {
 
     var readImageData: LiveData<List<ImageUrlDb>>
+    lateinit var ImageEvent: LiveData<ImageUrlDb>
     private val imagesRepository: ImageRepository
 
     init {
@@ -32,5 +33,10 @@ class imageViewModel(application: Application) : AndroidViewModel(application) {
             imagesRepository.getDataFromRemote()
         }
     }
+
+    fun refreshFeed() {
+        this.getDataFromRemote()
+    }
+
 
 }

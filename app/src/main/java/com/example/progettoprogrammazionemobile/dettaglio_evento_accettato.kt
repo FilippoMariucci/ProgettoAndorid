@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentDettaglioEventoAccettatoBinding
 import com.example.progettoprogrammazionemobile.model.Evento
+import com.example.progettoprogrammazionemobile.model.User
 import com.google.firebase.database.*
-import kotlin.properties.Delegates
 
 class dettaglio_evento_accettato : Fragment() {
     private var viewEvento = EventoViewModel()
@@ -74,7 +74,6 @@ class dettaglio_evento_accettato : Fragment() {
                                 binding.personeDettaglioAccettato.setText(persone.toString())
                             }
                         }
-
 
                         binding.indirizzoDettaglioAccettato.setText(evento.indirizzo)
                         binding.cittaDettaglioAccettato.setText(evento.citta)

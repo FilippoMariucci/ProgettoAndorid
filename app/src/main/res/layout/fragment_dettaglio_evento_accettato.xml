@@ -111,7 +111,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/categoriaDettaglioAccettato" />
 
             <TextView
-                android:id="@+id/generalTextView6"
+                android:id="@+id/dataDettaglioAccettato"
                 android:layout_width="161dp"
                 android:layout_height="27dp"
                 android:layout_marginTop="20dp"
@@ -121,11 +121,11 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/dataDettaglioAccettato"
+                app:layout_constraintStart_toEndOf="@+id/generalTV"
                 app:layout_constraintTop_toBottomOf="@+id/indirizzoDettaglioAccettato" />
 
             <TextView
-                android:id="@+id/dataDettaglioAccettato"
+                android:id="@+id/generalTV"
                 android:layout_width="77dp"
                 android:layout_height="29dp"
                 android:layout_marginStart="32dp"
@@ -209,7 +209,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dataDettaglioAccettato" />
+                app:layout_constraintTop_toBottomOf="@+id/generalTV" />
 
             <TextView
                 android:id="@+id/lingueDettaglioAccettato"
@@ -223,7 +223,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/generalTextView7"
-                app:layout_constraintTop_toBottomOf="@+id/generalTextView6" />
+                app:layout_constraintTop_toBottomOf="@+id/dataDettaglioAccettato" />
 
             <TextView
                 android:id="@+id/prezzodettaglioAccettato"
@@ -250,8 +250,9 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/generalTextView7"
-                tools:layout_editor_absoluteX="34dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/generalTextView7" />
 
             <TextView
                 android:id="@+id/textView7"

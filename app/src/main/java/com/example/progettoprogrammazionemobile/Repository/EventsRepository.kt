@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.appericolo.ui.preferiti.contacts.database.EventsRoomDb
 import com.example.progettoprogrammazionemobile.FirebaseDatabase.EventsDataFirebase
+import com.example.progettoprogrammazionemobile.model.Partecipazione
 
 class EventsRepository(private val database: EventsRoomDb) {
 
@@ -34,8 +35,8 @@ class EventsRepository(private val database: EventsRoomDb) {
     }
 
     fun insert(model: EventoDb, imageUri: Uri) {
-        val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/${model.id_evento}"
-        model.foto = url_storage
+        /*val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/${model.id_evento}"
+        model.foto = url_storage*/
         database.eventoDao().insert(model)
         eventsData.inserEventRemote(model, imageUri)
     }
@@ -87,5 +88,9 @@ class EventsRepository(private val database: EventsRoomDb) {
 
     fun updateEventRemote(event: Map<String, String>, idEvento: String) {
         eventsData.updateEventOnRemote(event, idEvento)
+    }
+
+    fun addPartecipazione(idEvento: String, partecipazione: Partecipazione) {
+        eventsData.addPartecipazioneRemote(idEvento, partecipazione)
     }
 }

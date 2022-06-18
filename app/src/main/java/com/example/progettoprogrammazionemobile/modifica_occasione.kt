@@ -161,7 +161,7 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
 
         vm.updateEventRemote(event, idEvento)
         Toast.makeText(requireContext(), " Evento Modificato con successo", Toast.LENGTH_SHORT).show()
-        fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
+//      fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
 
         //vm.updateEvent(event)
 //        databaseRef.updateChildren(event).addOnSuccessListener {

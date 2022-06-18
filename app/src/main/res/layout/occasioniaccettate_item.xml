@@ -27,8 +27,8 @@
 
         <TextView
             android:id="@+id/dataEventoAccettato"
-            android:layout_width="84dp"
-            android:layout_height="25dp"
+            android:layout_width="206dp"
+            android:layout_height="26dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"

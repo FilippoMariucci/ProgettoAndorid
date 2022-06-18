@@ -1,4 +1,4 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.model
 
 class User {
     var email: String? = null

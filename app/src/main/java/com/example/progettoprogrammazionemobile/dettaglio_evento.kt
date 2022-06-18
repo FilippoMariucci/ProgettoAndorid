@@ -7,15 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
+import com.example.progettoprogrammazionemobile.ViewModel.imageViewModel
+import com.example.progettoprogrammazionemobile.database.ImageUrlDb
 import com.example.progettoprogrammazionemobile.databinding.FragmentDettaglioEventoBinding
 import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.Partecipazione
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.event_item.view.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 
 
 class dettaglio_evento : Fragment() {
@@ -31,6 +40,9 @@ class dettaglio_evento : Fragment() {
     private var _binding : FragmentDettaglioEventoBinding? = null
     private val binding get() = _binding!!
     private lateinit var urlImageEvento : String
+
+    private lateinit var vm: eventViewModel
+    private lateinit var vm_image: imageViewModel
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -50,16 +62,25 @@ class dettaglio_evento : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         databaseReferenceUser = FirebaseDatabase.getInstance().getReference("Evento")
         getEventData()
+        vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
+        vm_image = ViewModelProviders.of(requireActivity()).get(imageViewModel::class.java)
         //binding.buttonPartecipoDett.setOnClickListener{paretecipaEvento()}
     }
 
 
     private fun getEventData() {
         var partecipanti = 0
+        // take event from local db
         databaseReferenceUser.child(idEvento).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento :: class.java)!!
-                Glide.with(requireContext()).load(evento.foto).into(binding.fotoEvento)
+                Log.d("eventofoto", "${evento.foto}")
+                getImage(idEvento)
+                //get image from local db
+//                vm_image.getEventImage(idEvento)
+//                vm_image.ImageEvent.observe(viewLifecycleOwner, Observer {
+//                    Glide.with(requireContext()).load(it.url).into(binding.fotoEvento)
+//                })
 
                 binding.titoloEventoDett.setText(evento.titolo)
                 binding.dataDett.setText(evento.data_evento)
@@ -107,6 +128,28 @@ class dettaglio_evento : Fragment() {
         })
     }
 
+    private fun getImage(idEvento: String) = CoroutineScope(Dispatchers.IO).launch{
+            var image_url = ""
+            try {
+                val images =  Firebase.storage.reference.child("Users/").listAll().await()
+                for (i in images.items) {
+                    val evento_for_image = i.toString().substringAfterLast('/').substringBefore('.')
+                    if(evento_for_image == idEvento){
+                        val url = i.downloadUrl.await()
+                        image_url = url.toString()
+                        Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                }
+            }
+            withContext(Dispatchers.Main) {
+                Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
+            }
+        }
+
+
     private fun partecipaEvento(){
         val auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid.toString().trim()
@@ -142,23 +185,29 @@ class dettaglio_evento : Fragment() {
                     else {
                         listPartecipanti.add(id_partecipante)
                         val partecipazione = Partecipazione(id_creatore, listPartecipanti)
-                        if (id_evento != null) {
-                            databaseReferencePartecipazione.child(id_evento)
-                                .setValue(partecipazione)
-                                .addOnSuccessListener {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Your application for this event was succesful!",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }.addOnFailureListener {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Sorry we got troubles!",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
+                        if(id_evento!=null) {
+                            vm.addPartecipazione(id_evento, partecipazione)
+                            Toast.makeText(requireContext(), "Your application for this event was succesful!", Toast.LENGTH_LONG).show()
+                            vm.refreshFeed()
+                            vm_image.refreshFeed()
                         }
+//                        if (id_evento != null) {
+//                            databaseReferencePartecipazione.child(id_evento)
+//                                .setValue(partecipazione)
+//                                .addOnSuccessListener {
+//                                    Toast.makeText(
+//                                        requireContext(),
+//                                        "Your application for this event was succesful!",
+//                                        Toast.LENGTH_LONG
+//                                    ).show()
+//                                }.addOnFailureListener {
+//                                    Toast.makeText(
+//                                        requireContext(),
+//                                        "Sorry we got troubles!",
+//                                        Toast.LENGTH_LONG
+//                                    ).show()
+//                                }
+//                        }
                     }
                 }
 
@@ -166,6 +215,7 @@ class dettaglio_evento : Fragment() {
                     TODO("Not yet implemented")
                 }
             })
+
         }
     }
 

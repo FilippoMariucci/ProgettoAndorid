@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 import com.example.progettoprogrammazionemobile.database.ImageUrlDb
 
 //entities=arrayOf(Contact::class)
-@Database(entities = [EventoDb::class, ImageUrlDb::class], version = 2, exportSchema = false)
+@Database(entities = [EventoDb::class, ImageUrlDb::class], version = 3, exportSchema = false)
 abstract class EventsRoomDb : RoomDatabase() {
 
     abstract fun eventoDao(): EventoDao

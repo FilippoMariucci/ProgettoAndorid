@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.appericolo.ui.preferiti.contacts.database.EventsRoomDb
+import com.example.progettoprogrammazionemobile.model.Partecipazione
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -122,6 +123,10 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
 
     fun updateEventOnRemote(event: Map<String, String>, idEvento: String) {
         databaseRemoteEvents.child(idEvento).updateChildren(event)
+    }
+
+    fun addPartecipazioneRemote(idEvento: String, partecipazione: Partecipazione) {
+        databaseRemotePartecipazione.child(idEvento).setValue(partecipazione)
     }
 
 
