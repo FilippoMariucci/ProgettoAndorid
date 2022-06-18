@@ -5,33 +5,25 @@ import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker.checkSelfPermission
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProviders
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
-import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
 import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasioneBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.util.*
 
@@ -39,22 +31,11 @@ import java.util.*
 class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
 
-
-
     private lateinit var auth: FirebaseAuth
     private lateinit var uid : String
     private var _binding: FragmentCreaOccasioneBinding? = null
     private val binding get() = _binding!!
-    //private lateinit var binding: FragmentCreaOccasioneBinding
     private lateinit var  databaseReference: DatabaseReference
-//    private lateinit var  databaseReferenceEvento: DatabaseReference
-//    private lateinit var  storageReference: StorageReference
-//    private val mStorageRef = FirebaseStorage.getInstance().reference
-//    private var idEvento : String ?= null
-//
-//    private lateinit var idEventoFoto : String
-//    private lateinit var reference: DatabaseReference
-
     private lateinit var imageUri: Uri
     private  var button : Button ?= null
     private  var imageView: ImageView ?= null
@@ -64,6 +45,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
     private lateinit var evento : Evento
     private lateinit var vm: eventViewModel
+
     var array_date_time = arrayListOf<Int>()
     var savedDay = 0
     var savedMonth = 0
@@ -80,6 +62,9 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         super.onCreate(savedInstanceState)
     }
 
+    /* SET DATA E ORA DIALOG ----------
+    -----------------------------------
+     */
     override fun onResume() {
         super.onResume()
         val languages = resources.getStringArray(R.array.languages)
@@ -89,12 +74,10 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         binding.autoCompleteCategories.setAdapter(arrayCategoriesAdapter)
         binding.autoCompleteLanguages.setAdapter(arrayLanguagesAdapter)
         binding.InputDataEvento.setOnClickListener(View.OnClickListener {
-            array_date_time = viewModelEvento.getDateTimeCalendar()
+            array_date_time = vm.getDateTimeCalendar()
             DatePickerDialog(requireContext(), this, array_date_time.get(2), array_date_time.get(1), array_date_time.get(0)).show()
         })
     }
-
-
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayofMonth: Int) {
         savedDay = dayofMonth
         savedMonth = month
@@ -104,7 +87,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         array_date_time = vm.getDateTimeCalendar()
         TimePickerDialog(requireContext(), this, array_date_time.get(3), array_date_time.get(4), true).show()
     }
-
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
         savedHour = hour
         savedMinute = minute

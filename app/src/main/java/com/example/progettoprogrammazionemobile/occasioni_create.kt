@@ -8,10 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.progettoprogrammazionemobile.AdapterRV.occasioniCreateAdapter
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentOccasioniCreateBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.firebase.auth.FirebaseAuth
@@ -20,11 +24,12 @@ import com.google.firebase.database.*
 class occasioni_create : Fragment() {
 
     private lateinit var CreateEventsRec: RecyclerView
-    private lateinit var createdEvents: ArrayList<Evento>
+    private lateinit var createdEvents: List<EventoDb>
     private val modificaOccasione = modifica_occasione()
     private lateinit var dbRef: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var uid: String
+    private lateinit var vm: eventViewModel
 
 
     private var _binding: FragmentOccasioniCreateBinding? = null
@@ -45,12 +50,13 @@ class occasioni_create : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
 
         CreateEventsRec = binding.recyclerOccasioniCreate
         CreateEventsRec.layoutManager = LinearLayoutManager(this.requireContext())
         CreateEventsRec.setHasFixedSize(true)
 
-        createdEvents = arrayListOf<Evento>()
+        createdEvents = emptyList<EventoDb>()
 
         getUserEvents()
 
@@ -63,53 +69,69 @@ class occasioni_create : Fragment() {
     private fun getUserEvents() {
         CreateEventsRec.visibility = View.GONE
 
-        dbRef = FirebaseDatabase.getInstance().reference
-        var dbUserOffer = dbRef.child("Evento").orderByChild("userId").equalTo(uid)
-        dbUserOffer.addValueEventListener(object : ValueEventListener {
-            val vm = EventoViewModel()
-            override fun onDataChange(snapshot: DataSnapshot) {
-                createdEvents.clear()
-                if (snapshot.exists()) {
-                    for (eventSnap in snapshot.children) {
-                        val singoloEvento = eventSnap.getValue(Evento::class.java)
-                        createdEvents.add(singoloEvento!!)
-                    }
-                }
-                val adapter = occasioniCreateAdapter(createdEvents)
-                CreateEventsRec.adapter = adapter
-                adapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
-                    override fun deleteEvent(idEvento: String, size: Int, position: String) {
-                        eliminaEvento(idEvento, adapter, position)
-                    }
+        vm.getUserEvent(uid)
 
-                    override fun modificaEvent(idEvento: String) {
-                        goModifica(idEvento)
-                    }
-                })
+        val adapter = occasioniCreateAdapter(createdEvents)
+        CreateEventsRec.adapter = adapter
+        vm.userEvent.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
 
+
+        adapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
+            override fun deleteEvent(idEvento: String, size: Int, position: String) {
+                eliminaEvento(idEvento, adapter, position)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+            override fun modificaEvent(idEvento: String) {
+                goModifica(idEvento)
             }
         })
+
+//        dbRef = FirebaseDatabase.getInstance().reference
+//        var dbUserOffer = dbRef.child("Evento").orderByChild("userId").equalTo(uid)
+//        dbUserOffer.addValueEventListener(object : ValueEventListener {
+//            val vm = EventoViewModel()
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                createdEvents.clear()
+//                if (snapshot.exists()) {
+//                    for (eventSnap in snapshot.children) {
+//                        val singoloEvento = eventSnap.getValue(Evento::class.java)
+//                        createdEvents.add(singoloEvento!!)
+//                    }
+//                }
+//
+//                // Adapter OnClick OCCASIONI CREATE
+//                val adapter = occasioniCreateAdapter(createdEvents)
+//                CreateEventsRec.adapter = adapter
+//                adapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
+//                    override fun deleteEvent(idEvento: String, size: Int, position: String) {
+//                        eliminaEvento(idEvento, adapter, position)
+//                    }
+//
+//                    override fun modificaEvent(idEvento: String) {
+//                        goModifica(idEvento)
+//                    }
+//                })
+//
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        })
         CreateEventsRec.visibility = View.VISIBLE
     }
 
     private fun eliminaEvento (idEvento: String, createdAdapter: occasioniCreateAdapter, position: String, )
     {
-        Log.d("builderprova", "entrato")
+        // Open dialog to confirm remove action
         val builder = AlertDialog.Builder(requireActivity())
-        Log.d("builderprova", "$builder")
         builder.setMessage("Are you sure?")
                  .setCancelable(true)
                  .setPositiveButton("Yes", DialogInterface.OnClickListener {
                      dialog, id ->
-                     Log.d("builderprova", "entrato")
-                     dbRef = FirebaseDatabase.getInstance().getReference()
-                     dbRef.child("Evento").child(idEvento).removeValue()
-                     dbRef.child("Partecipazione").child(idEvento).removeValue()
-                     Log.d("position", "${position.toInt()}")
+                     vm.deleteEvent(idEvento, uid)
                      createdAdapter.notifyItemRemoved(position.toInt())
                      dialog.dismiss()
                  })

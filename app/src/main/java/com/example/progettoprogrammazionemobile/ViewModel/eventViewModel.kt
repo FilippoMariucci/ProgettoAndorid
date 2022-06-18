@@ -21,6 +21,21 @@ class eventViewModel(application: Application) : AndroidViewModel(application) {
     lateinit var imageUri: Uri
 
     val filterEventsLiveData = MutableLiveData<List<EventoDb>>()
+    val userEvent = MutableLiveData<List<EventoDb>>()
+    var eventoBeforeUpdate = EventoDb(
+        "",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null"
+    )
 
     private var debouncePeriod: Long = 500
     private var searchJob: Job? = null
@@ -63,6 +78,10 @@ class eventViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun refreshFeed() {
+        this.getDataFromRemote()
+    }
+
 
     /* ------------------------------
     FUN TO SAVE EVENT
@@ -90,6 +109,84 @@ class eventViewModel(application: Application) : AndroidViewModel(application) {
         array.add(hour)
         array.add(minute)
         return array
+    }
+
+    fun deleteEvent(idEvento: String, uid:String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.delete(idEvento)
+            val list = eventsRepository.getUserEvent(uid)
+            userEvent.postValue(list)
+        }
+    }
+
+    fun getUserEvent(uid: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = eventsRepository.getUserEvent(uid)
+            userEvent.postValue(list)
+        }
+    }
+
+    fun eventoToUpdate(idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val event = eventsRepository.eventoToUpdate(idEvento)
+            eventoBeforeUpdate = event
+        }
+    }
+
+
+    /* -------------------
+    UPDATE CALLS TO REPOSITORY
+    ------------------------*/
+    fun updateTitle(titolo: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateTitle(titolo, idEvento)
+        }
+    }
+    fun updateCategory(categoria: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateCategory(categoria, idEvento)
+        }
+    }
+    fun updateCitta(citta: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateCitta(citta, idEvento)
+        }
+    }
+    fun updateCosto(costo: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateCosto(costo, idEvento)
+        }
+    }
+    fun updateData(data: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateData(data, idEvento)
+        }
+    }
+    fun updateDescrizione(descrizione: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateDescrizione(descrizione, idEvento)
+        }
+    }
+    fun updateIndirizzo(indirizzo: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateIndirizzo(indirizzo, idEvento)
+        }
+    }
+    fun updateLingue(lingua: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateLingue(lingua, idEvento)
+        }
+    }
+    fun updateNPersone(nPersone: String, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateNPersone(nPersone, idEvento)
+        }
+    }
+
+    fun updateEventRemote(event: Map<String, String>, idEvento: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventsRepository.updateEventRemote(event, idEvento)
+        }
     }
 
 }

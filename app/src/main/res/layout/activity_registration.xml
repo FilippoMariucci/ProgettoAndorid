@@ -30,40 +30,40 @@
             android:id="@+id/nome"
             android:layout_width="321dp"
             android:layout_height="54dp"
-            android:layout_marginTop="244dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:hint="insert your name"
             android:inputType="text"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/email"
-            app:layout_constraintStart_toStartOf="@+id/email"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email"></EditText>
 
         <EditText
             android:id="@+id/surname"
             android:layout_width="321dp"
             android:layout_height="54dp"
-            android:layout_marginTop="332dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:hint="insert your surname"
             android:inputType="text"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/nome"
-            app:layout_constraintStart_toStartOf="@+id/nome"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nome"></EditText>
 
         <EditText
             android:id="@+id/email"
             android:layout_width="321dp"
             android:layout_height="54dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:hint="insert your email"
             android:inputType="textEmailAddress"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintHorizontal_bias="0.485"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            tools:layout_editor_absoluteY="152dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         </EditText>
 
@@ -71,27 +71,27 @@
             android:id="@+id/password"
             android:layout_width="321dp"
             android:layout_height="54dp"
-            android:layout_marginTop="520dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:hint="insert your password"
             android:inputType="textPassword"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/state"
-            app:layout_constraintStart_toStartOf="@+id/state"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/state"></EditText>
 
         <EditText
             android:id="@+id/passconfirm"
             android:layout_width="321dp"
             android:layout_height="54dp"
-            android:layout_marginTop="620dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:hint="confirm your password"
             android:inputType="textPassword"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password">
 
         </EditText>
 
@@ -99,43 +99,40 @@
             android:id="@+id/state"
             android:layout_width="321dp"
             android:layout_height="54dp"
-            android:layout_marginTop="428dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:hint="which state are you from"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/surname"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/surname"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/surname"></EditText>
 
         <EditText
             android:id="@+id/dateofbirth"
             android:layout_width="321dp"
             android:layout_height="54dp"
-            android:layout_marginTop="712dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:hint="your date of birth"
             android:inputType="date"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/passconfirm"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/passconfirm"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passconfirm"></EditText>
 
         <EditText
             android:id="@+id/description"
             android:layout_width="321dp"
             android:layout_height="54dp"
-            android:layout_marginTop="804dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
-            android:hint="little description of yourself"
 
+            android:hint="little description of yourself"
             android:inputType="textMultiLine"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/dateofbirth"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/dateofbirth"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateofbirth">
 
         </EditText>
 

@@ -39,7 +39,7 @@ class dettaglio_evento : Fragment() {
         // Inflate the layout for this fragment
         val args = this.arguments
         val argsEvento = args?.get("idEvento")
-        urlImageEvento = args?.get("url_image") as String
+        //urlImageEvento = args?.get("url_image") as String
         idEvento = argsEvento.toString()
         _binding = FragmentDettaglioEventoBinding.inflate(inflater, container, false)
         return binding.root
@@ -59,10 +59,9 @@ class dettaglio_evento : Fragment() {
         databaseReferenceUser.child(idEvento).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento :: class.java)!!
-                Glide.with(requireContext()).load(urlImageEvento).into(binding.fotoEvento)
+                Glide.with(requireContext()).load(evento.foto).into(binding.fotoEvento)
 
                 binding.titoloEventoDett.setText(evento.titolo)
-                //binding.fotoEvento.setImageResource(R.drawable.rico)
                 binding.dataDett.setText(evento.data_evento)
                 binding.indirizzoDett.setText(evento.indirizzo)
                 binding.linguaEventoDett.setText(evento.lingue)

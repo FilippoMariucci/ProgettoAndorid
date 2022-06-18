@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.databinding.ActivityLoginBinding
 import com.google.firebase.FirebaseApiNotAvailableException
 import com.google.firebase.auth.ActionCodeEmailInfo
@@ -25,6 +27,7 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //remeber that we are gonna initializa biding before settinf the content view
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,6 +37,12 @@ class Login : AppCompatActivity() {
         }
         binding.loginbutton.setOnClickListener{ loginFunction()}
 
+        // KEEP USER LOGG
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser !=null){startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
     }
 
     private fun loginFunction() {
@@ -50,6 +59,7 @@ class Login : AppCompatActivity() {
                     val userReference = database?.child(user?.uid!!)
                     Toast.makeText(this, "You've been succesfully logged!", Toast.LENGTH_LONG).show()
                     Toast.makeText(this, "You've been succesfully logged!" + userReference, Toast.LENGTH_LONG).show()
+
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }

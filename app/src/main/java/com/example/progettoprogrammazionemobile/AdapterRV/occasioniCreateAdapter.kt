@@ -8,11 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.model.Evento
 import kotlinx.android.synthetic.main.occasioni_create_card.view.*
 
-class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>):
+class occasioniCreateAdapter(private var occasioniUtente: List<EventoDb>):
     RecyclerView.Adapter<occasioniCreateAdapter.viewHolder>() {
     private lateinit var cListener : OnCreatedClickListener
 
@@ -60,4 +61,9 @@ class occasioniCreateAdapter(private val occasioniUtente: ArrayList<Evento>):
             }
 
         }
+
+    fun setData(contact: List<EventoDb>){
+        this.occasioniUtente = contact
+        notifyDataSetChanged()
+    }
 }

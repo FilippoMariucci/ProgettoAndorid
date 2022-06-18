@@ -21,6 +21,8 @@ class EventsRepository(private val database: EventsRoomDb) {
         var prova = ArrayList<EventoDb>()
         if(list) {prova = eventsData.getList()}
         for (evento in prova){
+//            val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/${evento.id_evento}"
+//            evento.foto = url_storage
             Log.d("giacomo", "$evento")
             database.eventoDao().insert(evento)
         }
@@ -32,7 +34,58 @@ class EventsRepository(private val database: EventsRoomDb) {
     }
 
     fun insert(model: EventoDb, imageUri: Uri) {
+        val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/${model.id_evento}"
+        model.foto = url_storage
         database.eventoDao().insert(model)
         eventsData.inserEventRemote(model, imageUri)
+    }
+
+    fun delete(idEvento: String) {
+        database.eventoDao().deleteFromId(idEvento)
+        val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/$idEvento"
+        Log.d("url_storage", "$url_storage")
+        eventsData.deleteFromRemote(idEvento, url_storage)
+    }
+
+    fun getUserEvent(uid: String): List<EventoDb> {
+        val list = database.eventoDao().userEvents(uid)
+        return list
+    }
+
+    fun eventoToUpdate(idEvento: String): EventoDb {
+        return database.eventoDao().getEventoFromId(idEvento)
+    }
+
+    /* CALL DAO TO UPDATE FIELDS */
+    fun updateTitle(titolo: String, idEvento: String) {
+        database.eventoDao().updateTitle(titolo, idEvento)
+    }
+    fun updateCategory(categoria: String, idEvento: String) {
+        database.eventoDao().updateCategory(categoria, idEvento)
+    }
+    fun updateCitta(citta: String, idEvento: String) {
+        database.eventoDao().updateCitta(citta, idEvento)
+    }
+    fun updateCosto(costo: String, idEvento: String) {
+        database.eventoDao().updateCosto(costo, idEvento)
+    }
+    fun updateData(data: String, idEvento: String) {
+        database.eventoDao().updateData(data, idEvento)
+    }
+    fun updateDescrizione(descrizione: String, idEvento: String) {
+        database.eventoDao().updateDescrizione(descrizione, idEvento)
+    }
+    fun updateIndirizzo(indirizzo: String, idEvento: String) {
+        database.eventoDao().updateIndirizzo(indirizzo, idEvento)
+    }
+    fun updateLingue(lingua: String, idEvento: String) {
+        database.eventoDao().updateLingue(lingua, idEvento)
+    }
+    fun updateNPersone(npersone: String, idEvento: String) {
+        database.eventoDao().updateNPersone(npersone, idEvento)
+    }
+
+    fun updateEventRemote(event: Map<String, String>, idEvento: String) {
+        eventsData.updateEventOnRemote(event, idEvento)
     }
 }

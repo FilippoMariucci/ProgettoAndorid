@@ -30,8 +30,7 @@ data class EventoDb (
     var foto :String,
     @ColumnInfo(name = "userId")
     var userId :String,
-
-) {
-        constructor() : this("", "null", "null","null" ,
+){
+    constructor() : this("","null", "null","null" ,
         "null", "null","null","null","null","null","null","null")
 }

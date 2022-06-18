@@ -3,7 +3,6 @@ package com.example.progettoprogrammazionemobile
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +12,13 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.lifecycle.ViewModelProviders
+import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentModificaOccasioneBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.firebase.database.*
-import kotlin.concurrent.fixedRateTimer
 
 
 class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -28,6 +28,8 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
     private lateinit var databaseRef : DatabaseReference
     private var _binding : FragmentModificaOccasioneBinding? = null
     private val viewModelEvento: EventoViewModel by activityViewModels()
+
+    private lateinit var vm: eventViewModel
 
     private val binding get() = _binding!!
     var array_date_time = arrayListOf<Int>()
@@ -78,17 +80,21 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
         databaseRef = FirebaseDatabase.getInstance().getReference("Evento").child(idEvento)
-        getEventData()
+        getEventData(idEvento)
     }
 
 
 
-    private fun getEventData() {
+    private fun getEventData(idEvento: String) {
+        // get event from database
+        vm.eventoToUpdate(idEvento)
+        val eventoToEdit = vm.eventoBeforeUpdate
         databaseRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento::class.java)!!
-                Log.d("evento", "$evento")
+                //Log.d("evento", "$evento")
                 val languages = resources.getStringArray(R.array.languages)
                 val categories = resources.getStringArray(R.array.categories)
                 val arrayLanguagesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
@@ -104,7 +110,6 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
                 binding.indirizzoModificaEvento.editText?.setText(evento.indirizzo)
                 binding.npersoneEventoModifica.editText?.setText(evento.n_persone)
                 binding.prezzoEventoModifica.editText?.setText(evento.costo)
-
                 binding.textDataEventoModificato.setText(evento.data_evento)
 
                 binding.btnModifyevento.setOnClickListener{
@@ -117,7 +122,7 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
                     val costo = binding.prezzoEventoModifica.editText?.text.toString()
                     val lingua = binding.autoCompleteLanguagesModifica.text.toString()
                     val data = binding.textDataEventoModificato.text.toString()
-                    updateEvent(titolo, descrizione, citta, categoria, indirizzo, nPersone, costo, lingua, data)
+                    updateEvent(eventoToEdit, idEvento, titolo, descrizione, citta, categoria, indirizzo, nPersone, costo, lingua, data)
                 }
             }
 
@@ -126,9 +131,11 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
         })
     }
 
-    private fun updateEvent( titolo : String, descrizione : String, citta : String, categoria : String,
+    private fun updateEvent(eventoToEdit: EventoDb, idEvento: String, titolo : String,
+                            descrizione : String, citta : String, categoria : String,
                             indirizzo : String, nPersone : String, costo : String, lingua : String,
-                            data : String,) {
+                            data : String,)
+    {
         val event = mapOf<String, String >(
             "titolo" to titolo,
             "categoria" to categoria,
@@ -140,9 +147,26 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
             "lingue" to lingua,
             "n_persone" to nPersone
         )
-        databaseRef.updateChildren(event).addOnSuccessListener {
-            Toast.makeText(requireContext(), " Evento Modificato con successo", Toast.LENGTH_SHORT).show()
-            fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
-        }
+
+        // Local Update checking different fields before and after
+        if(eventoToEdit.titolo != titolo) vm.updateTitle(titolo, idEvento)
+        if(eventoToEdit.categoria != categoria) vm.updateCategory(categoria, idEvento)
+        if(eventoToEdit.citta != citta) vm.updateCitta(citta, idEvento)
+        if(eventoToEdit.costo != costo) vm.updateCosto(costo, idEvento)
+        if(eventoToEdit.data_evento != data) vm.updateData(data, idEvento)
+        if(eventoToEdit.descrizione != descrizione) vm.updateDescrizione(descrizione, idEvento)
+        if(eventoToEdit.indirizzo != indirizzo) vm.updateIndirizzo(indirizzo, idEvento)
+        if(eventoToEdit.lingue != lingua) vm.updateLingue(lingua, idEvento)
+        if(eventoToEdit.n_persone != nPersone) vm.updateNPersone(nPersone, idEvento)
+
+        vm.updateEventRemote(event, idEvento)
+        Toast.makeText(requireContext(), " Evento Modificato con successo", Toast.LENGTH_SHORT).show()
+        fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
+
+        //vm.updateEvent(event)
+//        databaseRef.updateChildren(event).addOnSuccessListener {
+//            Toast.makeText(requireContext(), " Evento Modificato con successo", Toast.LENGTH_SHORT).show()
+//            fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
+//        }
     }
 }

@@ -72,6 +72,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             refreshFeed()
         }
         // categories
+        //var categoryimgs = getCategories()
         var categoryimgs = listOf<category>(
             category(R.drawable.ic_icons8_montagna, "Adventure"),
             category(R.drawable.ic_icons8_illustrator, "Art"),
@@ -117,7 +118,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun refreshFeed() {
-        vm.getDataFromRemote()
+        vm.refreshFeed()
         vm_image.getDataFromRemote()
     }
 

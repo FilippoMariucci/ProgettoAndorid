@@ -16,9 +16,12 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
     var eventList = ArrayList<EventoDb>()
     var auth = FirebaseAuth.getInstance()
     private lateinit var  storageReference: StorageReference
-    var databaseRemote: DatabaseReference = FirebaseDatabase.getInstance(
+    var databaseRemoteEvents: DatabaseReference = FirebaseDatabase.getInstance(
         "https://programmazionemobile-a1b11-default-rtdb.firebaseio.com/")
         .getReference("Evento")
+    var databaseRemotePartecipazione: DatabaseReference = FirebaseDatabase.getInstance(
+        "https://programmazionemobile-a1b11-default-rtdb.firebaseio.com/")
+        .getReference("Partecipazione")
 
     lateinit var dbRef : DatabaseReference
 
@@ -56,7 +59,7 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
 
 
     fun getEvents() {
-        databaseRemote.get().addOnSuccessListener {
+        databaseRemoteEvents.get().addOnSuccessListener {
             events ->
             val dio = ArrayList<EventoDb>()
             for(evento in events.children){
@@ -84,15 +87,15 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
     fun inserEventRemote(model: EventoDb, imageUri: Uri) {
             var ritorno = false
             //reference = FirebaseDatabase.getInstance().getReference("Evento")
-            model.id_evento = databaseRemote.push().getKey().toString();
+            model.id_evento = databaseRemoteEvents.push().getKey().toString();
 
-            val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/ + ${model.id_evento}"
-            model.foto = url_storage
+//            val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/${model.id_evento}"
+//            model.foto = url_storage
 
             uploadEventPictureRemote(model.id_evento, imageUri)
 
             if (model.id_evento != null) {
-                databaseRemote.child(model.id_evento!!).setValue(model)
+                databaseRemoteEvents.child(model.id_evento!!).setValue(model)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             ritorno = true
@@ -108,6 +111,17 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
         auth = FirebaseAuth.getInstance()
         storageReference = FirebaseStorage.getInstance().getReference("Users/" + idEvento)
         storageReference.putFile(imageUri)
+    }
+
+    fun deleteFromRemote(idEvento: String, url_image: String) {
+        databaseRemoteEvents.child(idEvento).removeValue()
+        databaseRemotePartecipazione.child(idEvento).removeValue()
+        storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(url_image)
+        storageReference.delete()
+    }
+
+    fun updateEventOnRemote(event: Map<String, String>, idEvento: String) {
+        databaseRemoteEvents.child(idEvento).updateChildren(event)
     }
 
 
