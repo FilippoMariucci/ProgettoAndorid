@@ -26,8 +26,8 @@
 
             <TextView
                 android:id="@+id/titolo_evento_dett"
-                android:layout_width="377dp"
-                android:layout_height="38dp"
+                android:layout_width="386dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Titolo evento"
@@ -99,12 +99,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/citta_dett" />
 
             <TextView
-                android:id="@+id/creatore_occasione_dett"
+                android:id="@+id/categoria_evento_dett"
                 android:layout_width="263dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="Occasione creata da:"
+                android:text="Categoria"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -114,27 +114,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/persona_mancante_dett" />
 
             <TextView
-                android:id="@+id/categoria_evento_dett"
-                android:layout_width="263dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins"
-                android:text="Categoria"
-                android:textColor="@color/black"
-                android:textSize="21sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.243"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/creatore_occasione_dett" />
-
-            <TextView
                 android:id="@+id/lingua_evento_dett"
                 android:layout_width="142dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
-                android:text="English"
+                android:text="Lingua"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -149,7 +134,7 @@
                 android:layout_height="37dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
-                android:text="30€"
+                android:text="0"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"

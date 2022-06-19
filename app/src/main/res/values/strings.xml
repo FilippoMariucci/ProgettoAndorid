@@ -22,4 +22,8 @@
         <item>Role Games</item>
         <item>Party</item>
     </string-array>
+
+
+    <string name="map_id">f8b7f033c917c778</string>
+    <string name="title_activity_maps">Map Current Location</string>
 </resources>

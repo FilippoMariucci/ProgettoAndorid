@@ -73,36 +73,32 @@ class dettaglio_evento : Fragment() {
         // take event from local db
         databaseReferenceUser.child(idEvento).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                    evento = snapshot.getValue(Evento :: class.java)!!
-                Log.d("eventofoto", "${evento.foto}")
-                getImage(idEvento)
-                //get image from local db
-//                vm_image.getEventImage(idEvento)
-//                vm_image.ImageEvent.observe(viewLifecycleOwner, Observer {
-//                    Glide.with(requireContext()).load(it.url).into(binding.fotoEvento)
-//                })
+                try {
+                    evento = snapshot.getValue(Evento::class.java)!!
+                    Log.d("eventofoto", "${evento.foto}")
+                    getImage(idEvento)
 
-                binding.titoloEventoDett.setText(evento.titolo)
-                binding.dataDett.setText(evento.data_evento)
-                binding.indirizzoDett.setText(evento.indirizzo)
-                binding.linguaEventoDett.setText(evento.lingue)
-                binding.categoriaEventoDett.setText(evento.categoria)
-                binding.cittaDett.setText(evento.citta)
-                binding.indirizzoDett.setText(evento.indirizzo)
-                binding.descEventoDett.setText(evento.descrizione)
+                    binding.titoloEventoDett.setText(evento.titolo)
+                    binding.dataDett.setText(evento.data_evento)
+                    binding.indirizzoDett.setText(evento.indirizzo)
+                    binding.linguaEventoDett.setText(evento.lingue)
+                    binding.categoriaEventoDett.setText(evento.categoria)
+                    binding.cittaDett.setText(evento.citta)
+                    binding.indirizzoDett.setText(evento.indirizzo)
+                    binding.descEventoDett.setText(evento.descrizione)
 
-                val npersone = evento.n_persone?.toInt()
-                FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento).get().addOnSuccessListener{{}
-                    try {
-                        val listPartecipanti = it.child("id_partecipante").getValue() as ArrayList<String>
-                        val size = listPartecipanti.size
-                        partecipanti = 0
-                        for (i in 0..size - 1) {
-                            if (listPartecipanti[i] != null) partecipanti += 1
+                    val npersone = evento.n_persone?.toInt()
+                    FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento).get().addOnSuccessListener{
+                        try {
+                            val listPartecipanti = it.child("id_partecipante").getValue() as ArrayList<String>
+                            val size = listPartecipanti.size
+                            partecipanti = 0
+                            for (i in 0..size - 1) {
+                                if (listPartecipanti[i] != null) partecipanti += 1
+                            }
+                        }catch (e : Exception){
+                            partecipanti = 0
                         }
-                    }catch (e : Exception){
-                        partecipanti = 0
-                    }
 
                         val persone = npersone?.minus(partecipanti)
                         if (persone != null) {
@@ -120,10 +116,17 @@ class dettaglio_evento : Fragment() {
                         }
                     }
 
+
+                }catch (e: Exception) {
+                    binding.titoloEventoDett.setText("L'evento è stato eliminato")
+                    binding.buttonPartecipoDett.visibility = View.INVISIBLE
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Toast.makeText(requireContext(), "Database error", Toast.LENGTH_SHORT).show()
+
             }
         })
     }

@@ -49,7 +49,6 @@ class modifica_profilo : Fragment(R.layout.fragment_modifica_profilo) {
                 binding.inputDescrizioneModifica.setText(user.description)
                 binding.inputDataModifica.setText(user.birth)
                 binding.buttModifica.setOnClickListener {
-                    Toast.makeText(requireContext(), "${user.name}", Toast.LENGTH_SHORT).show()
                     val name = binding.inputNomeModifica.text.toString()
                     val surname = binding.cognomeInputModifica.text.toString()
                     val birth = binding.inputDataModifica.text.toString()
@@ -100,6 +99,7 @@ class modifica_profilo : Fragment(R.layout.fragment_modifica_profilo) {
         )
         userRef.updateChildren(user).addOnSuccessListener {
             Toast.makeText(this.requireContext(), "Succesfuly updated", Toast.LENGTH_SHORT).show()
+            fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, profilo())?.commit()
         }.addOnFailureListener{
             Toast.makeText(this.requireContext(), "Failed to update", Toast.LENGTH_SHORT).show()
         }

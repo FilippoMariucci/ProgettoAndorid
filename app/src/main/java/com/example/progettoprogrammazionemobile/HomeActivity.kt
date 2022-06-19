@@ -58,6 +58,7 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, currrentFragment).commit()
         true
     }
+
 }
 
 

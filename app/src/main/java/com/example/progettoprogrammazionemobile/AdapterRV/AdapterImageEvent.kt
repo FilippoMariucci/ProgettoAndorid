@@ -64,7 +64,7 @@ class AdapterImageEvent: RecyclerView.Adapter<AdapterImageEvent.MyViewHolder>() 
         Glide.with(holder.itemView).load(url).into(holder.itemView.immagineEvento)
 
         holder.itemView.findViewById<TextView>(R.id.tvEventDesc).text = currentItem.titolo
-        holder.itemView.findViewById<TextView>(R.id.prezzoEvento).text = currentItem.costo
+        holder.itemView.findViewById<TextView>(R.id.prezzoEvento).text = currentItem.costo + "€"
         holder.itemView.findViewById<TextView>(R.id.categoriaEvento).text = currentItem.categoria
         holder.itemView.findViewById<TextView>(R.id.dataEvento).text = currentItem.data_evento
     }

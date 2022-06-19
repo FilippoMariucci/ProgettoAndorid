@@ -74,20 +74,6 @@
             app:layout_constraintTop_toBottomOf="@+id/dataEvento"></TextView>
 
         <TextView
-            android:layout_width="24dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="40dp"
-            android:textSize="22dp"
-            android:hint="€"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/orange_bold"
-            app:layout_constraintStart_toEndOf="@+id/prezzoEvento"
-            app:layout_constraintTop_toBottomOf="@+id/tvEventDesc">
-
-        </TextView>
-
-        <TextView
             android:id="@+id/categoriaEvento"
             android:layout_width="136dp"
             android:layout_height="40dp"
