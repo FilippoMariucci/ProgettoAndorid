@@ -17,7 +17,8 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
     var eventList = ArrayList<EventoDb>()
     var auth = FirebaseAuth.getInstance()
     private lateinit var  storageReference: StorageReference
-    var databaseRemoteEvents: DatabaseReference = FirebaseDatabase.getInstance().getReference("Evento")
+    var databaseRemoteEvents: DatabaseReference = FirebaseDatabase.getInstance("https://programmazionemobile-a1b11-default-rtdb.firebaseio.com/")
+        .getReference("Evento")
     var databaseRemotePartecipazione: DatabaseReference = FirebaseDatabase.getInstance(
         "https://programmazionemobile-a1b11-default-rtdb.firebaseio.com/")
         .getReference("Partecipazione")

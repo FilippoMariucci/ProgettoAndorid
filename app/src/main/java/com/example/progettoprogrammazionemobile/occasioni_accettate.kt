@@ -152,7 +152,7 @@ class occasioni_accettate : Fragment() {
                                             .removeValue()
                     val position = position.toInt()
                     occasioniAccettateAdapter.notifyItemRemoved(position)
-                    occasioniAccettateAdapter.notifyItemChanged(position)
+                    dialog.dismiss()
                 })
                 .setNegativeButton("No", DialogInterface.OnClickListener {
                         dialog, id-> dialog.cancel()

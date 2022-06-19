@@ -201,11 +201,13 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         val citta_evento = binding.CittaEvento.editText?.text.toString().trim()
         if(lingue_evento.isEmpty()){binding.errorMsg.setText("Aggiungi una lingua che parlerete all'evento!"); return}
         if(citta_evento.isEmpty()){binding.errorMsg.setText("Aggiungi la città dell'evento!"); return}
+        /*
         else{
             val geocode = Geocoder(requireContext())
             var getLat: MutableList<Address> = geocode.getFromLocationName(citta_evento, 2)
             if (getLat.isEmpty()){binding.errorMsg.setText("Questa città non esiste!"); return}
         }
+         */
         val indirizzo_evento = binding.indirizzoEvento.editText?.text.toString().trim()
         //if(indirizzo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi l'indirizzo dell'evento!"); return}
         val npersone_evento = binding.npersoneEvento.editText?.text.toString().trim()

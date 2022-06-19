@@ -42,11 +42,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
         super.onViewCreated(view, savedInstanceState)
         mapFragment.onCreate(savedInstanceState)
         mapFragment.onResume()
+        mapFragment.getMapAsync(this)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
 
     override fun onMapReady(map: GoogleMap) {
         mMap = map
+
+        mMap.uiSettings.isZoomControlsEnabled = true
         setUpMap()
     }
 
@@ -69,8 +72,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
     }
 
     private fun placeMarkerOnMap(currentLatLong: LatLng) {
-        val markerOptions = MarkerOptions().position(currentLatLong)
-        markerOptions.title("Sei qui Stronzone!")
-        mMap.addMarker(MarkerOptions())
+        mMap.addMarker(MarkerOptions().position(currentLatLong).title("Tu sei qui!"))
+
     }
+
+
 }
