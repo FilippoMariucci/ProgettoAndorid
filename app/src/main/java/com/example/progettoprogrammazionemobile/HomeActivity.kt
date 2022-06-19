@@ -1,5 +1,6 @@
 package com.example.progettoprogrammazionemobile
 
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationRequest
@@ -33,6 +34,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, homeFragment()).commit()
         val bottomNav : BottomNavigationView = findViewById(R.id.bottomAppBar)

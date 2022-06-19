@@ -3,6 +3,8 @@ package com.example.progettoprogrammazionemobile
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Camera
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import androidx.fragment.app.Fragment
 
@@ -12,6 +14,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -25,9 +31,13 @@ import kotlinx.android.synthetic.main.fragment_maps.*
 
 class MapsFragment : Fragment(), OnMapReadyCallback{
 
+    private lateinit var vm: eventViewModel
     private lateinit var mMap : GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var events : List<EventoDb>
+    private lateinit var address : List<Address>
+
 
     companion object{
         private const val LOCATION_REQUEST_CODE = 1
@@ -40,6 +50,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
         mapFragment.onCreate(savedInstanceState)
         mapFragment.onResume()
         mapFragment.getMapAsync(this)
@@ -65,16 +76,42 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
             if (location != null){
                 lastLocation = location
                 val currentLatLong = LatLng(location.latitude, location.longitude)
-                placeMarkerOnMap(currentLatLong)
+                placeMarkerOnMap()
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12f))
             }
         }
     }
 
-    private fun placeMarkerOnMap(currentLatLong: LatLng) {
-        mMap.addMarker(MarkerOptions().position(currentLatLong).title("Tu sei qui!"))
+    private fun placeMarkerOnMap() {
+        vm.readEventData.observe(requireActivity(), Observer { evento ->
+            this.events = evento
+            setData()
+
+//            var getLat: MutableList<Address> = geocode.getFromLocationName(citta_evento, 2)
+//            if (getLat.isEmpty()){binding.errorMsg.setText("Questa città non esiste!"); return}
+        })
+
+        //mMap.addMarker(MarkerOptions().position(currentLatLong).title("Tu sei qui!"))
 
     }
 
+    private fun setData() {
+        val geocode = Geocoder(requireActivity())
+        this.events.forEach() { evento ->
+            try {
+                address = geocode.getFromLocationName(evento.citta, 5);
+                if (address == null) {
+                    return;
+                }
+                val location = address.get(0)
+                val currentLatLong = LatLng(location.getLatitude(), location.getLongitude())
+                mMap.addMarker(MarkerOptions().position(currentLatLong).title("${evento.titolo}"))
+            }catch (e: Exception) {
+                Log.d("erroreMappa", "${e.message}")
+            }
+
+        }
+
+    }
 
 }

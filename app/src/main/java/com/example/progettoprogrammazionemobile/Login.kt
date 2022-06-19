@@ -1,6 +1,7 @@
 package com.example.progettoprogrammazionemobile
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -27,6 +28,8 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         //remeber that we are gonna initializa biding before settinf the content view
         binding = ActivityLoginBinding.inflate(layoutInflater)

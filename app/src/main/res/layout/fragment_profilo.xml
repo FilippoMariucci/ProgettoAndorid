@@ -18,13 +18,13 @@
             android:layout_height="55dp"
             android:layout_marginTop="48dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Il tuo profilo"
+            android:text="Your Vibes"
             android:textAlignment="viewStart"
             android:textColor="@color/orange"
             android:textSize="33sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.358"
+            app:layout_constraintHorizontal_bias="0.331"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,16 +65,17 @@
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="152dp"
-            android:layout_height="46dp"
+            android:layout_width="169dp"
+            android:layout_height="51dp"
             android:layout_marginTop="52dp"
             android:background="@color/orange_bold"
             android:fontFamily="@font/poppins_bold"
             android:text="LOGOUT"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:icon="@drawable/ic_baseline_logout_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.204"
+            app:layout_constraintHorizontal_bias="0.219"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/occasioni_accettate_prof" />
 
@@ -99,6 +100,7 @@
             android:id="@+id/nome_profilo"
             android:layout_width="253dp"
             android:layout_height="32dp"
+            android:fontFamily="@font/poppins"
             android:text="TextView"
             android:textColor="@color/black"
             android:textSize="20sp"

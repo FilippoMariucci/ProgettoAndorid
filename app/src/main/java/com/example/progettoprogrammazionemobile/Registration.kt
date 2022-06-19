@@ -1,6 +1,7 @@
 package com.example.progettoprogrammazionemobile
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
@@ -22,6 +23,9 @@ class Registration : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.registrationButton.setOnClickListener{ registrationFunction() }

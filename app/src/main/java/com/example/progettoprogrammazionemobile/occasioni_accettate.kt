@@ -117,7 +117,7 @@ class occasioni_accettate : Fragment() {
                                     .addOnSuccessListener {
                                         IndexList = it.value as ArrayList<String>
                                         val index = IndexList.indexOf(uid)
-                                        deletePartecipazione(idEvento, position,  adapter)
+                                        deletePartecipazione(idEvento, position,  adapter, index)
                                     }
                         }
 
@@ -133,29 +133,30 @@ class occasioni_accettate : Fragment() {
         })
     }
 
-    private fun deletePartecipazione(idevento: String, index: String, occasioniAccettateAdapter: occasioniAccettateAdapter)  {
-            var flag : Boolean = false
-            Log.d("builderprova", "entrato")
-            val builder = AlertDialog.Builder(requireActivity())
-            Log.d("builderprova", "$builder")
-            builder.setMessage("Are you sure?")
-                .setCancelable(true)
-                .setPositiveButton("Yes", DialogInterface.OnClickListener {
-                        dialog, id ->
-                    Log.d("builderprova", "entrato")
-                    FirebaseDatabase.getInstance()
-                                            .getReference("Partecipazione").child(idevento)
-                                            .child("id_partecipante").child(index.toString())
-                                            .removeValue()
-                    val indice = index.toInt()
-                    occasioniAccettateAdapter.notifyItemRemoved(indice)
-                    fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, profilo())?.commit()
-                })
-                .setNegativeButton("No", DialogInterface.OnClickListener {
-                        dialog, id-> dialog.cancel()
-                })
-            val alert = builder.create()
-            alert.show()
+    private fun deletePartecipazione(idevento: String, position: String, occasioniAccettateAdapter: occasioniAccettateAdapter, index: Int)  {
+        var flag : Boolean = false
+        Log.d("builderprova", "entrato")
+        val builder = AlertDialog.Builder(requireActivity())
+        Log.d("builderprova", "$builder")
+        builder.setMessage("Are you sure?")
+            .setCancelable(true)
+            .setPositiveButton("Yes", DialogInterface.OnClickListener {
+                    dialog, id ->
+                Log.d("builderprova", "entrato")
+                FirebaseDatabase.getInstance()
+                    .getReference("Partecipazione").child(idevento)
+                    .child("id_partecipante").child(index.toString())
+                    .removeValue()
+                val position = position.toInt()
+                occasioniAccettateAdapter.notifyItemRemoved(position)
+                dialog.dismiss()
+                fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, profilo())?.commit()
+            })
+            .setNegativeButton("No", DialogInterface.OnClickListener {
+                    dialog, id-> dialog.cancel()
+            })
+        val alert = builder.create()
+        alert.show()
     }
 
     fun go_Dettaglio(idevento: String){

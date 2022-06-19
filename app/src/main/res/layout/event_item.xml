@@ -33,7 +33,7 @@
             android:layout_height="53dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_bold"
             android:hint="titolo evento"
             android:padding="5dp"
             android:textColor="@color/orange_bold"
