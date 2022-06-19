@@ -145,7 +145,7 @@ class dettaglio_evento : Fragment() {
                 }
             }
             withContext(Dispatchers.Main) {
-                Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
+                Glide.with(requireActivity()).load(image_url).into(binding.fotoEvento)
             }
         }
 

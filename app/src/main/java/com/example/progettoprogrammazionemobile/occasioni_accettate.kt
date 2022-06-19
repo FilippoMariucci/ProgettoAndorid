@@ -40,19 +40,16 @@ class occasioni_accettate : Fragment() {
         _binding = FragmentOccasioniAccettateBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //getEventsKey()
 
         AcceptedEventsRec = binding.recyclerOccasioniAccettate
         AcceptedEventsRec.layoutManager = LinearLayoutManager(this.requireContext())
         AcceptedEventsRec.setHasFixedSize(true)
         AcceptedEventsUser = arrayListOf<Evento>()
-
 
         getEventsKey()
     }
@@ -152,7 +149,6 @@ class occasioni_accettate : Fragment() {
                                             .removeValue()
                     val indice = index.toInt()
                     occasioniAccettateAdapter.notifyItemRemoved(indice)
-                    occasioniAccettateAdapter.notifyItemChanged(indice)
                 })
                 .setNegativeButton("No", DialogInterface.OnClickListener {
                         dialog, id-> dialog.cancel()

@@ -11,15 +11,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="222dp">
 
         <TextView
-            android:fontFamily="@font/poppins"
             android:id="@+id/TitoloEventoAccettato"
-            android:layout_width="263dp"
-            android:layout_height="35dp"
+            android:layout_width="186dp"
+            android:layout_height="32dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
             android:hint="Titolo"
             android:textSize="25dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +27,8 @@
 
         <TextView
             android:id="@+id/dataEventoAccettato"
-            android:layout_width="84dp"
-            android:layout_height="25dp"
+            android:layout_width="135dp"
+            android:layout_height="26dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
@@ -36,32 +36,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
-        <Button
+        <ImageButton
             android:id="@+id/seeMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="52dp"
+            android:background="@drawable/corner_radius"
+
             android:fontFamily="@font/poppins_bold"
-            android:text="SEE MORE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/cancelPartecipazione"
-            app:layout_constraintTop_toBottomOf="@+id/indirizzoEventoAccettato" />
+            android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintBottom_toTopOf="@+id/cittaEventoAccettato"
+            app:layout_constraintEnd_toStartOf="@+id/cancelPartecipazione" />
 
         <TextView
             android:id="@+id/prezzoEventoAccettato"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="26dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="36dp"
             android:fontFamily="@font/poppins"
             android:hint="__€"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins"
+            android:hint="€"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/prezzoEventoAccettato"></TextView>
 
         <TextView
             android:id="@+id/cittaEventoAccettato"
@@ -86,19 +94,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cittaEventoAccettato" />
 
-        <Button
+        <ImageButton
             android:id="@+id/cancelPartecipazione"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="120dp"
+            android:background="@drawable/corner_radius"
             android:backgroundTint="@color/Bordeaux"
-            android:fontFamily="@font/poppins"
-            android:text="CANCEL"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/indirizzoEventoAccettato" />
+            android:src="@drawable/ic_baseline_free_cancellation_24"
+            app:layout_constraintBottom_toTopOf="@+id/prezzoEventoAccettato"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
