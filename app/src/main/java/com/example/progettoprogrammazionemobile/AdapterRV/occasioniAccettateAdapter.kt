@@ -34,7 +34,8 @@ RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
         holder.tAccepted.text = currentAcceptedEvent.titolo
         holder.dAccepted.text = currentAcceptedEvent.data_evento
         holder.cAccepted.text = currentAcceptedEvent.citta
-        holder.pAccepted.text  = currentAcceptedEvent.costo
+        holder.pAccepted.text = currentAcceptedEvent.costo
+        holder.iAccepted.text = currentAcceptedEvent.indirizzo
 
     }
 
@@ -51,6 +52,7 @@ RecyclerView.Adapter<occasioniAccettateAdapter.viewHolder>() {
         val dAccepted : TextView = itemView.findViewById(R.id.dataEventoAccettato)
         val cAccepted : TextView = itemView.findViewById(R.id.cittaEventoAccettato)
         val pAccepted : TextView = itemView.findViewById(R.id.prezzoEventoAccettato)
+        val iAccepted : TextView = itemView.findViewById(R.id.indirizzoEventoAccettato)
         val seeMore : ImageButton = itemView.findViewById(R.id.seeMore)
         val cancel : ImageButton = itemView.findViewById(R.id.cancelPartecipazione)
 

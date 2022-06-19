@@ -60,7 +60,7 @@ class dettaglio_evento_accettato : Fragment() {
                         stringa = "$userName $userSurname"
                         Log.d("Strigna", "$stringa")
                         binding.titoloDettaglioAccettato.setText(evento.titolo)
-                        binding.prezzodettaglioAccettato.setText(evento.costo)
+                        binding.prezzodettaglioAccettato.setText(evento.costo + "€")
 
                         val npersone = evento.n_persone?.toInt()
                         FirebaseDatabase.getInstance().getReference("Partecipazione").child(idEvento).get().addOnSuccessListener{

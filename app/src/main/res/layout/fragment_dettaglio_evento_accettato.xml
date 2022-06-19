@@ -19,15 +19,15 @@
                 android:id="@+id/titoloDettaglioAccettato"
                 android:layout_width="285dp"
                 android:layout_height="42dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Titolo evento"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.441"
+                app:layout_constraintHorizontal_bias="0.253"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -56,8 +56,8 @@
 
             <TextView
                 android:id="@+id/generalTextView5"
-                android:layout_width="152dp"
-                android:layout_height="26dp"
+                android:layout_width="93dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
@@ -70,8 +70,8 @@
 
             <TextView
                 android:id="@+id/indirizzoDettaglioAccettato"
-                android:layout_width="138dp"
-                android:layout_height="27dp"
+                android:layout_width="233dp"
+                android:layout_height="28dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="Indirizzo:"
@@ -79,6 +79,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.396"
                 app:layout_constraintStart_toEndOf="@+id/generalTextView5"
                 app:layout_constraintTop_toBottomOf="@+id/cittaDettaglioAccettato" />
 
@@ -112,8 +113,8 @@
 
             <TextView
                 android:id="@+id/dataDettaglioAccettato"
-                android:layout_width="161dp"
-                android:layout_height="27dp"
+                android:layout_width="238dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="Data:"
@@ -121,6 +122,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
                 app:layout_constraintStart_toEndOf="@+id/generalTV"
                 app:layout_constraintTop_toBottomOf="@+id/indirizzoDettaglioAccettato" />
 

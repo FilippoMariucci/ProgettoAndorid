@@ -117,6 +117,7 @@ class EventsDataFirebase(private val database: EventsRoomDb) {
     fun deleteFromRemote(idEvento: String, url_image: String) {
         databaseRemoteEvents.child(idEvento).removeValue()
         databaseRemotePartecipazione.child(idEvento).removeValue()
+
         storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(url_image)
         storageReference.delete()
     }

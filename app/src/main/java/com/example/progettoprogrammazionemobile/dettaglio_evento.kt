@@ -73,7 +73,7 @@ class dettaglio_evento : Fragment() {
         // take event from local db
         databaseReferenceUser.child(idEvento).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                evento = snapshot.getValue(Evento :: class.java)!!
+                    evento = snapshot.getValue(Evento :: class.java)!!
                 Log.d("eventofoto", "${evento.foto}")
                 getImage(idEvento)
                 //get image from local db

@@ -41,6 +41,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     private lateinit var imageUri: Uri
     private  var button : Button ?= null
     private  var imageView: ImageView ?= null
+    private val home = homeFragment()
 
     private var packageName = BuildConfig.APPLICATION_ID
 //    private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
@@ -145,7 +146,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         binding.btnaddEvento.setOnClickListener{
-            Toast.makeText(this.requireContext(), "Hai creato una nuova occasione!", Toast.LENGTH_SHORT).show()
             this.saveEvento()
         }
 
@@ -251,5 +251,10 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
             npersone_evento, foto_evento, userId)
         vm.saveEvento(model)
+        backDiscover()
+    }
+
+    private fun backDiscover() {
+        if(isAdded)  fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, home)?.commit()
     }
 }

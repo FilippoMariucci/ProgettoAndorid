@@ -42,7 +42,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     val mapEventsBitMap = mutableMapOf<String, Bitmap>()
     val imagesUrl = listOf<String>()
 
-
     private var _binding: com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding? =
         null
     private val binding get() = _binding!!
@@ -52,6 +51,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -66,6 +66,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 return false
             }
         }
+
+
         vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
         vm_image = ViewModelProviders.of(requireActivity()).get(imageViewModel::class.java)
         val rv = view.findViewById<RecyclerView>(R.id.rvEvents)
@@ -89,7 +91,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         AdapterCategories.setOnItemClickListener(object : ImageAdapter.onItemClickListener {
             override fun onItemClick(titleCat: String) {
-                Toast.makeText(requireContext(), "${titleCat}", Toast.LENGTH_LONG).show()
+                binding.displayedEvents.setText(titleCat + " events")
                 filterEvents(titleCat)
             }
         })

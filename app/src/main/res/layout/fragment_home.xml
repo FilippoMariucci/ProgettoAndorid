@@ -34,22 +34,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/refreshBtn"
-        tools:listitem="@layout/event_item" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:listitem="@layout/event_item">
 
-    <TextView
-        android:id="@+id/refreshBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins"
-        android:text="Refresh"
-        android:textColor="@color/orange"
-        android:textSize="16sp"
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="398dp"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories"
-        tools:text="Refresh" />
+        app:layout_constraintTop_toBottomOf="@+id/categories">
+
+        <TextView
+            android:id="@+id/refreshBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Refresh"
+            android:textColor="@color/Bordeaux"
+            android:textSize="16sp"
+            tools:text="Refresh" />
+
+        <TextView
+            android:id="@+id/displayedEvents"
+            android:layout_width="327dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins"
+            android:padding="5dp"
+            android:text="All events"
+            android:textAlignment="textEnd"
+            android:textColor="#717171"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
