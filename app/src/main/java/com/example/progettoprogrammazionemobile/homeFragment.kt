@@ -97,6 +97,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         initialiseObservers()
         fetchAll()
+        refreshFeed()
 
         adapter.setOnItemClickListener(object : AdapterImageEvent.onItemClickListener {
             override fun onItemClick(idevento: String) {
@@ -111,6 +112,12 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         })
     }
+
+
+
+
+
+
     private fun getCategories(): List<category> {
         var categoryimgs = listOf<category>(
             category(R.drawable.ic_icons8_montagna, "Adventure"),
