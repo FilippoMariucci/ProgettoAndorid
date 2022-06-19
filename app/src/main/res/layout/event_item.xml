@@ -13,8 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutCardEvent"
-        android:layout_width="319dp"
-        android:layout_height="449dp"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
         android:orientation="vertical">
 
         <ImageView
@@ -61,17 +61,31 @@
 
         <TextView
             android:id="@+id/prezzoEvento"
-            android:layout_width="127dp"
-            android:layout_height="43dp"
-            android:layout_marginEnd="12dp"
+            android:layout_width="120dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="28dp"
             android:fontFamily="@font/poppins"
-            android:hint="__€"
+            android:hint="__ €"
             android:padding="5dp"
             android:textAlignment="textEnd"
             android:textColor="@color/orange_bold"
             android:textSize="22dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dataEvento"></TextView>
+
+        <TextView
+            android:layout_width="24dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="40dp"
+            android:textSize="22dp"
+            android:hint="€"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/orange_bold"
+            app:layout_constraintStart_toEndOf="@+id/prezzoEvento"
+            app:layout_constraintTop_toBottomOf="@+id/tvEventDesc">
+
+        </TextView>
 
         <TextView
             android:id="@+id/categoriaEvento"
@@ -90,27 +104,27 @@
             android:id="@+id/buttonIminterest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="64dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="68dp"
             android:backgroundTint="@color/orange"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_icons8_amore_cerchiato"
             android:tint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/prezzoEvento" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonNoInterest"
             android:layout_width="59dp"
             android:layout_height="55dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="40dp"
             android:backgroundTint="@color/orange"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_baseline_clear_24"
             android:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoriaEvento" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

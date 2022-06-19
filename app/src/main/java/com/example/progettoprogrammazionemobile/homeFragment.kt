@@ -61,11 +61,16 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val myLinearLayoutManager = object : LinearLayoutManager(requireContext()) {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
         vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
         vm_image = ViewModelProviders.of(requireActivity()).get(imageViewModel::class.java)
         val rv = view.findViewById<RecyclerView>(R.id.rvEvents)
         rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(this.requireContext())
+        rv.layoutManager = myLinearLayoutManager
         rv.setHasFixedSize(true)
 
         binding.refreshBtn.setOnClickListener {
@@ -77,10 +82,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         val recyclerView = binding.categories
         var AdapterCategories = ImageAdapter(categoryimgs)
-        recyclerView.layoutManager =
-            LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.setHasFixedSize(true)
 
+        recyclerView.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = AdapterCategories
 
         AdapterCategories.setOnItemClickListener(object : ImageAdapter.onItemClickListener {
@@ -102,8 +106,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
             override fun skipEvent(posizione: String) {
                 val actualPosition = Integer.parseInt(posizione)
-                Toast.makeText(requireContext(), "$actualPosition", Toast.LENGTH_SHORT)
-                    .show()
+                (rv.layoutManager as LinearLayoutManager).scrollToPosition(actualPosition + 1 )
             }
 
         })
@@ -143,20 +146,11 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     }
 
     fun fetchAll() {
-
-            Log.d("eventsvm", "${vm.readEventData}")
-
             vm.readEventData.observe(requireActivity(), Observer { contact ->
                 adapter.setData(contact)
                 adapter.notifyDataSetChanged()
                 Log.d("aggiunta", "${vm.readEventData}")
             })
-
-//            vm_image.readImageData.observe(requireActivity(), Observer { image ->
-//                adapter.setImage(image)
-//                Log.d("aggiunta", "$image")
-//            })
-
     }
 
     fun go_away(idevento: String){

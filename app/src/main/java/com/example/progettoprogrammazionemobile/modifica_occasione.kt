@@ -27,7 +27,7 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
     private lateinit var idEvento : String
     private lateinit var databaseRef : DatabaseReference
     private var _binding : FragmentModificaOccasioneBinding? = null
-    private val viewModelEvento: EventoViewModel by activityViewModels()
+    private val viewModelEvento: eventViewModel by activityViewModels()
 
     private lateinit var vm: eventViewModel
 

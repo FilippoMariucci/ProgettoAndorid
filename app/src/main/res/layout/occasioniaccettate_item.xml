@@ -14,12 +14,12 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:fontFamily="@font/poppins"
             android:id="@+id/TitoloEventoAccettato"
             android:layout_width="263dp"
             android:layout_height="35dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins"
             android:hint="Titolo"
             android:textSize="25dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +27,8 @@
 
         <TextView
             android:id="@+id/dataEventoAccettato"
-            android:layout_width="206dp"
-            android:layout_height="26dp"
+            android:layout_width="84dp"
+            android:layout_height="25dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"

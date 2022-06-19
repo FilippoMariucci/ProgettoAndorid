@@ -1,8 +1,16 @@
 package com.example.progettoprogrammazionemobile
 
+import android.app.Application
+import android.media.metrics.Event
+import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
+import com.example.progettoprogrammazionemobile.Repository.EventsRepository
+import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
+import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
+import com.example.progettoprogrammazionemobile.model.Evento
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -10,8 +18,23 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+
+    lateinit var evenViewmod : eventViewModel
+    lateinit var repo : EventsRepository
+    lateinit var eventoDb: EventoDb
+
+    @Before
+    fun setUp(){
+
+    }
+
+    @Test
+    fun checkCorrectInsert(){
+
+    }
+
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        assertEquals(4, 4 + 2)
     }
 }

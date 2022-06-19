@@ -7,6 +7,8 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -196,7 +198,14 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         val descrizione_evento = binding.DescrizioneEvento.editText?.text.toString().trim()
         if(descrizione_evento.isEmpty()){binding.errorMsg.setText("Aggiungi una descrizione all'evento!"); return}
         val lingue_evento = binding.autoCompleteLanguages.text.toString().trim()
+        val citta_evento = binding.CittaEvento.editText?.text.toString().trim()
         if(lingue_evento.isEmpty()){binding.errorMsg.setText("Aggiungi una lingua che parlerete all'evento!"); return}
+        if(citta_evento.isEmpty()){binding.errorMsg.setText("Aggiungi la città dell'evento!"); return}
+        else{
+            val geocode = Geocoder(requireContext())
+            var getLat: MutableList<Address> = geocode.getFromLocationName(citta_evento, 2)
+            if (getLat.isEmpty()){binding.errorMsg.setText("Questa città non esiste!"); return}
+        }
         val indirizzo_evento = binding.indirizzoEvento.editText?.text.toString().trim()
         //if(indirizzo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi l'indirizzo dell'evento!"); return}
         val npersone_evento = binding.npersoneEvento.editText?.text.toString().trim()
@@ -217,8 +226,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
                 binding.errorMsg.setText("Il prezzo deve essere un numero! ;)"); return
             }
         }
-        val citta_evento = binding.CittaEvento.editText?.text.toString().trim()
-        if(citta_evento.isEmpty()){binding.errorMsg.setText("Aggiungi la città dell'evento!"); return}
         val data_evento = binding.textDateEvento.text.toString().trim()
         if(data_evento.isEmpty()){
             binding.errorMsg.setText("Aggiungi la data e l'ora dell'evento"); return

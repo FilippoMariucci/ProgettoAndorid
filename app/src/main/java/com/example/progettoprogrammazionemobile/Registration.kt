@@ -31,7 +31,7 @@ class Registration : AppCompatActivity() {
     private fun registrationFunction() {
         val textName = binding.nome.text.toString().trim()
         val textSurname = binding.surname.text.toString().trim()
-        val textEmail = binding.email.text.toString()
+        val textEmail = binding.registrationEmail.text.toString()
         val textState = binding.state.text.toString().trim()
         val textPassword = binding.password.text.toString()
         val textConPassword = binding.passconfirm.text.toString().trim()
@@ -63,8 +63,8 @@ class Registration : AppCompatActivity() {
 
     private fun checkFields(textName: String, textSurname: String, textEmail: String, textPassword: String, textConPassword: String, textdateOfBirth: String): Boolean {
         if (textEmail.isEmpty()) {
-            binding.email.setError("email is required")
-            binding.email.requestFocus()
+            binding.registrationEmail.setError("email is required")
+            binding.registrationEmail.requestFocus()
             return false
         }
 
@@ -81,8 +81,8 @@ class Registration : AppCompatActivity() {
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
-            binding.email.setError("Email missing @!")
-            binding.email.requestFocus()
+            binding.registrationEmail.setError("Email missing @!")
+            binding.registrationEmail.requestFocus()
             return false
         }
 

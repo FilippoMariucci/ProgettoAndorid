@@ -185,29 +185,23 @@ class dettaglio_evento : Fragment() {
                     else {
                         listPartecipanti.add(id_partecipante)
                         val partecipazione = Partecipazione(id_creatore, listPartecipanti)
-                        if(id_evento!=null) {
-                            vm.addPartecipazione(id_evento, partecipazione)
-                            Toast.makeText(requireContext(), "Your application for this event was succesful!", Toast.LENGTH_LONG).show()
-                            vm.refreshFeed()
-                            vm_image.refreshFeed()
+                        if (id_evento != null) {
+                            databaseReferencePartecipazione.child(id_evento)
+                                .setValue(partecipazione)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Your application for this event was succesful!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Sorry we got troubles!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
                         }
-//                        if (id_evento != null) {
-//                            databaseReferencePartecipazione.child(id_evento)
-//                                .setValue(partecipazione)
-//                                .addOnSuccessListener {
-//                                    Toast.makeText(
-//                                        requireContext(),
-//                                        "Your application for this event was succesful!",
-//                                        Toast.LENGTH_LONG
-//                                    ).show()
-//                                }.addOnFailureListener {
-//                                    Toast.makeText(
-//                                        requireContext(),
-//                                        "Sorry we got troubles!",
-//                                        Toast.LENGTH_LONG
-//                                    ).show()
-//                                }
-//                        }
                     }
                 }
 
@@ -215,7 +209,6 @@ class dettaglio_evento : Fragment() {
                     TODO("Not yet implemented")
                 }
             })
-
         }
     }
 

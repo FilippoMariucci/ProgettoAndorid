@@ -50,6 +50,7 @@
         android:id="@+id/password"
         android:layout_width="324dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/btn_background"
         android:backgroundTint="@color/grey"
         android:fontFamily="@font/poppins"

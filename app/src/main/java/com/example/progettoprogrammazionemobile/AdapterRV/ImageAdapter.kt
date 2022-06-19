@@ -34,10 +34,7 @@ class ImageAdapter(private val categories: List<category>):RecyclerView.Adapter<
         holder.imagesrc.setImageResource(currentItem.imageSrc)
         holder.titleCategory.text = currentItem.text
     }
-
     override fun getItemCount(): Int = categories.size
-
-
 
     class ImageViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         val imagesrc : ImageView = itemView.findViewById<ImageView>(R.id.image_category)

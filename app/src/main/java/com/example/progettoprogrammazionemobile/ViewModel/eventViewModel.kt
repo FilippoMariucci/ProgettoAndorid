@@ -103,7 +103,7 @@ class eventViewModel(application: Application) : AndroidViewModel(application) {
         var month = cal.get(Calendar.MONTH)
         var year = cal.get(Calendar.YEAR)
         var hour = cal.get(Calendar.HOUR)
-        var minute = cal.get(Calendar.MINUTE)
+        var minute = cal.get(Calendar.MINUTE) 
         array.add(day)
         array.add(month)
         array.add(year)

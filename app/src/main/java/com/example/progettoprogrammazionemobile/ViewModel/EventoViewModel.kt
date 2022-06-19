@@ -89,7 +89,4 @@ class EventoViewModel: ViewModel() {
         array.add(minute)
         return array
     }
-
-
-
 }

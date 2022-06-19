@@ -1,11 +1,14 @@
 package com.example.progettoprogrammazionemobile
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.progettoprogrammazionemobile.R
+import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.databinding.FragmentModificaProfiloBinding
 import com.example.progettoprogrammazionemobile.model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -52,12 +55,33 @@ class modifica_profilo : Fragment(R.layout.fragment_modifica_profilo) {
                     val birth = binding.inputDataModifica.text.toString()
                     val state = binding.inputStatoModifica.text.toString()
                     val description = binding.inputDescrizioneModifica.text.toString()
-                    updateData(name, surname, birth, state, description)
+                    if (checkFields(name, surname, birth))  updateData(name, surname, birth, state, description)
                 }
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
+    }
+
+    private fun checkFields(textName: String, textSurname: String, textdateOfBirth: String): Boolean {
+        if (textName.isEmpty()) {
+            binding.inputNomeModifica.setError("Name is required")
+            binding.inputNomeModifica.requestFocus()
+            return false
+        }
+        if (textSurname.isEmpty()) {
+            binding.cognomeInputModifica.setError("Surname is required")
+            binding.cognomeInputModifica.requestFocus()
+            return false
+        }
+
+        if (textdateOfBirth.isEmpty()) {
+            binding.inputDataModifica.setError("Your birth is required")
+            binding.inputNomeModifica.requestFocus()
+            return false
+        }
+        else
+            return true
     }
     private fun updateData(name: String, surname: String, birth: String, state: String, description: String) {
 //val firebaseAuth = FirebaseAuth.getInstance()

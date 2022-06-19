@@ -57,9 +57,6 @@ class Login : AppCompatActivity() {
                 if(it.isSuccessful){
                     val user = auth.currentUser
                     val userReference = database?.child(user?.uid!!)
-                    Toast.makeText(this, "You've been succesfully logged!", Toast.LENGTH_LONG).show()
-                    Toast.makeText(this, "You've been succesfully logged!" + userReference, Toast.LENGTH_LONG).show()
-
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }

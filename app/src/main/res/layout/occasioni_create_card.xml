@@ -15,14 +15,14 @@
 
         <TextView
             android:id="@+id/titoloEventoCreato"
-            android:layout_width="155dp"
-            android:layout_height="30dp"
+            android:layout_width="153dp"
+            android:layout_height="41dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_bold"
             android:hint="Titolo"
             android:textColor="@color/orange"
-            android:textSize="20dp"
+            android:textSize="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
@@ -31,7 +31,7 @@
             android:layout_width="72dp"
             android:layout_height="20dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
             android:text="25/12/2022"
             android:textSize="14dp"
@@ -61,14 +61,14 @@
             app:layout_constraintBottom_toTopOf="@+id/categoriaEventoCreato"
             app:layout_constraintStart_toEndOf="@+id/titoloEventoCreato"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.645" />
 
         <ImageButton
             android:id="@+id/modficaOccasione"
             android:layout_width="43dp"
             android:layout_height="43dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/corner_radius"
             android:src="@drawable/ic_baseline_edit_24"
             android:text="MODIFICA"

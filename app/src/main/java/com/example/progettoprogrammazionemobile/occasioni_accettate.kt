@@ -113,14 +113,14 @@ class occasioni_accettate : Fragment() {
                     AcceptedEventsRec.visibility = View.VISIBLE
 
                     adapter.setOnEventClickListener(object : occasioniAccettateAdapter.OnEventClickListener{
-                        override fun cancelclick( idEvento: String) {
+                        override fun cancelclick(idEvento: String, size: Int, position: String) {
                             var IndexList = ArrayList<String>()
                                 FirebaseDatabase.getInstance().getReference("Partecipazione")
                                     .child(idEvento).child("id_partecipante").get()
                                     .addOnSuccessListener {
                                         IndexList = it.value as ArrayList<String>
                                         val index = IndexList.indexOf(uid)
-                                        deletePartecipazione(idEvento, index.toString(), adapter)
+                                        deletePartecipazione(idEvento, position,  adapter)
                                     }
                         }
 
@@ -132,15 +132,11 @@ class occasioni_accettate : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
     }
 
-    private fun deletePartecipazione(
-        idevento: String,
-        index: String,
-        occasioniAccettateAdapter: occasioniAccettateAdapter)  {
+    private fun deletePartecipazione(idevento: String, index: String, occasioniAccettateAdapter: occasioniAccettateAdapter)  {
             var flag : Boolean = false
             Log.d("builderprova", "entrato")
             val builder = AlertDialog.Builder(requireActivity())
@@ -154,8 +150,9 @@ class occasioni_accettate : Fragment() {
                                             .getReference("Partecipazione").child(idevento)
                                             .child("id_partecipante").child(index.toString())
                                             .removeValue()
-                    occasioniAccettateAdapter.notifyItemRemoved(index.toInt())
-                    dialog.dismiss()
+                    val indice = index.toInt()
+                    occasioniAccettateAdapter.notifyItemRemoved(indice)
+                    occasioniAccettateAdapter.notifyItemChanged(indice)
                 })
                 .setNegativeButton("No", DialogInterface.OnClickListener {
                         dialog, id-> dialog.cancel()

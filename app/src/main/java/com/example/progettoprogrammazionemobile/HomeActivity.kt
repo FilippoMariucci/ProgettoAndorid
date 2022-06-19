@@ -1,16 +1,24 @@
 package com.example.progettoprogrammazionemobile
 
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.location.LocationRequestCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.channels.ActorScope
+import java.net.URI.create
+import java.util.jar.Manifest
 
 class HomeActivity : AppCompatActivity() {
 
@@ -18,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
     private val homeFragment = com.example.progettoprogrammazionemobile.homeFragment()
     private val userFragment = com.example.progettoprogrammazionemobile.profilo()
     private val creaOccasioneFragment = crea_occasione()
+    private  val mappa = MapsFragment()
 
     private lateinit var currrentFragment: Fragment
 
@@ -42,24 +51,14 @@ class HomeActivity : AppCompatActivity() {
             R.id.icon_discover -> {
                 currrentFragment = homeFragment
             }
+            R.id.icon_map -> {
+                currrentFragment = mappa
+            }
         }
         supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, currrentFragment).commit()
         true
     }
 }
-//
-//    private lateinit var navController: NavController
-//
-//
-//        val navHostFragment = supportFragment.findFragmentById(
-//            R.id.myNavHostFragment
-//        ) as NavHostFragment
-//        navController = navHostFragment.navController
-
-
-
-
-
 
 
 
