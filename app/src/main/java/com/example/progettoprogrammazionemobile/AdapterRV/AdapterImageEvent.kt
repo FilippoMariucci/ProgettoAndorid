@@ -1,6 +1,5 @@
 package com.example.progettoprogrammazionemobile.AdapterRV
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.database.ImageUrlDb
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.event_item.view.*
-import org.w3c.dom.Text
 
 class AdapterImageEvent: RecyclerView.Adapter<AdapterImageEvent.MyViewHolder>() {
 
@@ -33,7 +31,7 @@ class AdapterImageEvent: RecyclerView.Adapter<AdapterImageEvent.MyViewHolder>() 
     class MyViewHolder(itemView: View, listener: onItemClickListener): RecyclerView.ViewHolder(itemView){
         var idEvent : String = ""
         val bottonInfo : FloatingActionButton = itemView.findViewById(R.id.buttonIminterest)
-        val bottonDelete : FloatingActionButton = itemView.findViewById(R.id.buttonNoInterest)
+        val bottonDelete : FloatingActionButton = itemView.findViewById(R.id.skiphomeBtn)
         init {
             bottonInfo.setOnClickListener{
                 listener.onItemClick(idEvent as String)

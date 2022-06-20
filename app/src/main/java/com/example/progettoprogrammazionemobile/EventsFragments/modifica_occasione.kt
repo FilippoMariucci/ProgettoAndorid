@@ -1,4 +1,4 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.EventsFragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProviders
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
-import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
+import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentModificaOccasioneBinding
 import com.example.progettoprogrammazionemobile.model.Evento
@@ -97,8 +97,10 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
                 //Log.d("evento", "$evento")
                 val languages = resources.getStringArray(R.array.languages)
                 val categories = resources.getStringArray(R.array.categories)
-                val arrayLanguagesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
-                val arrayCategoriesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
+                val arrayLanguagesAdapter = ArrayAdapter(requireContext(),
+                    R.layout.dropdown_item, languages)
+                val arrayCategoriesAdapter = ArrayAdapter(requireContext(),
+                    R.layout.dropdown_item, categories)
 
                 binding.titoloModificaEvento.editText?.setText( evento.titolo)
                 binding.DescrizionemodificaEvento.editText?.setText(evento.descrizione)

@@ -1,4 +1,4 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.EventsFragments
 
 
 import android.Manifest
@@ -7,8 +7,6 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Address
-import android.location.Geocoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -22,12 +20,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
+import com.example.progettoprogrammazionemobile.BuildConfig
+import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentCreaOccasioneBinding
+import com.example.progettoprogrammazionemobile.homeFragment
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.storage.StorageReference
 import java.util.*
 
 
@@ -74,7 +74,8 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         val languages = resources.getStringArray(R.array.languages)
         val categories = resources.getStringArray(R.array.categories)
         val arrayLanguagesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
-        val arrayCategoriesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
+        val arrayCategoriesAdapter = ArrayAdapter(requireContext(),
+            R.layout.dropdown_item, categories)
         binding.autoCompleteCategories.setAdapter(arrayCategoriesAdapter)
         binding.autoCompleteLanguages.setAdapter(arrayLanguagesAdapter)
         binding.InputDataEvento.setOnClickListener(View.OnClickListener {

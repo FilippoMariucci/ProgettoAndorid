@@ -1,4 +1,4 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.EventsFragments
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.progettoprogrammazionemobile.AdapterRV.occasioniAccettateAdapter
+import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.databinding.FragmentOccasioniAccettateBinding
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.Partecipazione
+import com.example.progettoprogrammazionemobile.ProfileFragments.profilo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.lang.Exception

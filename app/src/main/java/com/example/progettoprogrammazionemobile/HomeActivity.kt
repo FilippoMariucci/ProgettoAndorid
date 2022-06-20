@@ -1,31 +1,19 @@
 package com.example.progettoprogrammazionemobile
 
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toolbar
-import androidx.core.app.ActivityCompat
-import androidx.core.location.LocationRequestCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
+import com.example.progettoprogrammazionemobile.EventsFragments.MapsFragment
+import com.example.progettoprogrammazionemobile.EventsFragments.crea_occasione
+import com.example.progettoprogrammazionemobile.ProfileFragments.profilo
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.channels.ActorScope
-import java.net.URI.create
-import java.util.jar.Manifest
 
 class HomeActivity : AppCompatActivity() {
 
 
     private val homeFragment = com.example.progettoprogrammazionemobile.homeFragment()
-    private val userFragment = com.example.progettoprogrammazionemobile.profilo()
+    private val userFragment = profilo()
     private val creaOccasioneFragment = crea_occasione()
     private  val mappa = MapsFragment()
 
@@ -34,8 +22,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         supportFragmentManager.beginTransaction().replace(R.id.myNavHostFragment, homeFragment()).commit()
         val bottomNav : BottomNavigationView = findViewById(R.id.bottomAppBar)

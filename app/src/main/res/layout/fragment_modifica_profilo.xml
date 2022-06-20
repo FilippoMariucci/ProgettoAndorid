@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modifica_profilo">
+    tools:context=".ProfileFragments.modifica_profilo">
 
 
     <ScrollView
@@ -51,15 +51,15 @@
                 android:id="@+id/inputNomeModifica"
                 android:layout_width="284dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/input_back"
                 android:ems="10"
                 android:fontFamily="@font/poppins"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/nome_modifica"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nome_modifica"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.417"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nome_modifica" />
 
             <TextView
@@ -91,15 +91,15 @@
                 android:id="@+id/cognomeInputModifica"
                 android:layout_width="284dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/input_back"
                 android:ems="10"
                 android:fontFamily="@font/poppins"
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/cognome_modifica"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/cognome_modifica"
+                android:paddingLeft="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.425"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cognome_modifica" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -175,7 +175,7 @@
                 android:background="@drawable/input_back"
                 android:ems="10"
                 android:inputType="date"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/Data_nascita_modifica"
                 app:layout_constraintHorizontal_bias="0.019"
                 app:layout_constraintStart_toStartOf="@+id/Data_nascita_modifica"
@@ -190,7 +190,7 @@
                 android:background="@drawable/input_back"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/stato_modifica"
                 app:layout_constraintHorizontal_bias="0.124"
                 app:layout_constraintStart_toStartOf="@+id/stato_modifica"
@@ -204,7 +204,7 @@
                 android:background="@drawable/input_back"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/descrizione_modifica"
                 app:layout_constraintHorizontal_bias="0.021"
                 app:layout_constraintStart_toStartOf="@+id/descrizione_modifica"

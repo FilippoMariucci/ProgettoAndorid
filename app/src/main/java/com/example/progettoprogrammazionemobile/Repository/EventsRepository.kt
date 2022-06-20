@@ -13,6 +13,7 @@ class EventsRepository(private val database: EventsRoomDb) {
     // to avoid mismatch problem
     var eventsData = EventsDataFirebase(database)
     var events: LiveData<List<EventoDb>> = database.eventoDao().getAllEvents()
+    lateinit var evento_to_delete : EventoDb
     //var filtered: LiveData<List<EventoDb>> = database.eventoDao().filterCategory("Adventure")
 
     fun getDataFromRemote() {
@@ -42,10 +43,10 @@ class EventsRepository(private val database: EventsRoomDb) {
     }
 
     fun delete(idEvento: String) {
+        evento_to_delete = database.eventoDao().getEventoFromId(idEvento)
         database.eventoDao().deleteFromId(idEvento)
-        val url_storage = "gs://programmazionemobile-a1b11.appspot.com/Users/$idEvento"
-        Log.d("url_storage", "$url_storage")
-        eventsData.deleteFromRemote(idEvento, url_storage)
+        database.imageDao().deleteImageFromIdEvento(idEvento)
+        eventsData.deleteFromRemote(evento_to_delete)
     }
 
     fun getUserEvent(uid: String): List<EventoDb> {

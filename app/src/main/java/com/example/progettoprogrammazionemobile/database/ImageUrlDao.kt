@@ -18,5 +18,8 @@ interface ImageUrlDao {
     @Query("DELETE FROM image_table")
     fun deleteAll()
 
+    @Query("DELETE FROM image_table WHERE id_evento =:idevento")
+    fun deleteImageFromIdEvento(idevento: String)
+
 
 }

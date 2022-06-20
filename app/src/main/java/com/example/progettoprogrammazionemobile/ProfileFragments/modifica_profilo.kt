@@ -1,14 +1,12 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.ProfileFragments
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.progettoprogrammazionemobile.R
-import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
 import com.example.progettoprogrammazionemobile.databinding.FragmentModificaProfiloBinding
 import com.example.progettoprogrammazionemobile.model.User
 import com.google.firebase.auth.FirebaseAuth

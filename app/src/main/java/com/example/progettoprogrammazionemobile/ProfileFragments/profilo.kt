@@ -1,15 +1,14 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.ProfileFragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
+import com.example.progettoprogrammazionemobile.EventsFragments.occasioni_accettate
+import com.example.progettoprogrammazionemobile.EventsFragments.occasioni_create
+import com.example.progettoprogrammazionemobile.Login
+import com.example.progettoprogrammazionemobile.R
 import com.example.progettoprogrammazionemobile.databinding.FragmentProfiloBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -39,9 +38,9 @@ class profilo : Fragment()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        FirebaseDatabase.getInstance().getReference("Users").child(uid).get().addOnSuccessListener {
-            binding.nomeProfilo.setText("${it.child("name").getValue()}")
-        }
+//        FirebaseDatabase.getInstance().getReference("Users").child(uid).get().addOnSuccessListener {
+//            binding.nomeProfilo.setText("${it.child("name").getValue()}")
+//        }
 
         val button_mod = binding.modificaprofiloButt
         button_mod.setOnClickListener{

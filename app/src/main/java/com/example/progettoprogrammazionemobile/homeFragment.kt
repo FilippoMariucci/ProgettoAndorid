@@ -2,16 +2,17 @@ package com.example.progettoprogrammazionemobile
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.progettoprogrammazionemobile.AdapterRV.AdapterImageEvent
 import com.example.progettoprogrammazionemobile.AdapterRV.ImageAdapter
 import com.example.progettoprogrammazionemobile.EventsFragments.dettaglio_evento
@@ -25,9 +26,7 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
-import java.lang.Exception
-import java.util.EnumSet.of
+
 
 class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var vm: eventViewModel
@@ -67,7 +66,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 return false
             }
         }
-
 
         vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
         vm_image = ViewModelProviders.of(requireActivity()).get(imageViewModel::class.java)

@@ -1,4 +1,4 @@
-package com.example.progettoprogrammazionemobile
+package com.example.progettoprogrammazionemobile.EventsFragments
 
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,6 @@ import com.example.progettoprogrammazionemobile.databinding.FragmentDettaglioEve
 import com.example.progettoprogrammazionemobile.model.Evento
 import com.example.progettoprogrammazionemobile.model.User
 import com.google.firebase.database.*
-import kotlin.properties.Delegates
 
 class dettaglio_evento_accettato : Fragment() {
     private var viewEvento = EventoViewModel()

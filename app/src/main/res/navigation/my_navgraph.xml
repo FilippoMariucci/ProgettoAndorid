@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/profilo"
-        android:name="com.example.progettoprogrammazionemobile.profilo"
+        android:name="com.example.progettoprogrammazionemobile.ProfileFragments.profilo"
         android:label="fragment_profilo"
         tools:layout="@layout/fragment_profilo" >
         <action
@@ -34,22 +34,22 @@
     </fragment>
     <fragment
         android:id="@+id/modifica_profilo"
-        android:name="com.example.progettoprogrammazionemobile.modifica_profilo"
+        android:name="com.example.progettoprogrammazionemobile.ProfileFragments.modifica_profilo"
         android:label="fragment_modifica_profilo"
         tools:layout="@layout/fragment_modifica_profilo" />
     <fragment
         android:id="@+id/occasioni_accettate"
-        android:name="com.example.progettoprogrammazionemobile.occasioni_accettate"
+        android:name="com.example.progettoprogrammazionemobile.EventsFragments.occasioni_accettate"
         android:label="fragment_occasioni_accettate"
         tools:layout="@layout/fragment_occasioni_accettate" />
     <fragment
         android:id="@+id/occasioni_create"
-        android:name="com.example.progettoprogrammazionemobile.occasioni_create"
+        android:name="com.example.progettoprogrammazionemobile.EventsFragments.occasioni_create"
         android:label="fragment_occasioni_create"
         tools:layout="@layout/fragment_occasioni_create" />
     <fragment
         android:id="@+id/dettaglio_evento"
-        android:name="com.example.progettoprogrammazionemobile.dettaglio_evento"
+        android:name="com.example.progettoprogrammazionemobile.EventsFragments.dettaglio_evento"
         android:label="fragment_dettaglio_evento"
         tools:layout="@layout/fragment_dettaglio_evento" >
         <argument

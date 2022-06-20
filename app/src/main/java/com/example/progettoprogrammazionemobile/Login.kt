@@ -29,8 +29,6 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-
         //remeber that we are gonna initializa biding before settinf the content view
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

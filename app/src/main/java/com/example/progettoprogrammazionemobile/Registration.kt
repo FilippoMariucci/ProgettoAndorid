@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class Registration : AppCompatActivity() {
@@ -23,8 +24,6 @@ class Registration : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -111,7 +110,15 @@ class Registration : AppCompatActivity() {
             binding.dateofbirth.setError("Your birth is required")
             binding.dateofbirth.requestFocus()
             return false
-
+        }
+        else {
+            val year = Calendar.getInstance().get(Calendar.YEAR);
+            val current_year = textdateOfBirth.substringAfterLast('/')
+            if(current_year >= year.toString()) {
+                binding.dateofbirth.setError("Are you an alien?")
+                binding.dateofbirth.requestFocus()
+                return false
+            }
         }
 
         if(!textPassword.equals(textPassword)){

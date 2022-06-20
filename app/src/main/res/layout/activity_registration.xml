@@ -113,7 +113,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
-            android:hint="your date of birth"
+            android:hint="Date of birth gg/mm/aaaa"
             android:inputType="date"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
