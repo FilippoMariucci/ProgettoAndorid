@@ -46,7 +46,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     private lateinit var getPosition : List<Address>
 
     private var packageName = BuildConfig.APPLICATION_ID
-//    private val languages = listOf<String>("English", "Italian", "Spanish", "Russian", "French")
 
     private lateinit var evento : Evento
     private lateinit var vm: eventViewModel
@@ -192,7 +191,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
     // function that check fields
     private fun saveEvento(){
-//        val geocode = Geocoder(requireContext())
+        val geocode = Geocoder(requireContext())
 
         val idEvento = ""
         val titolo_evento = binding.titoloEvento.editText?.text.toString().trim()
@@ -205,13 +204,19 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         if(lingue_evento.isEmpty()){binding.errorMsg.setText("Aggiungi una lingua che parlerete all'evento!"); return}
         if(citta_evento.isEmpty()){binding.errorMsg.setText("Aggiungi la città dell'evento!"); return}
 
-//        try {
-//            getPosition = geocode.getFromLocationName(citta_evento, 10)
-//            if (getPosition == null) {binding.errorMsg.setText("Questa città non esiste!"); return}
-//        }catch (e: Exception){binding.errorMsg.setText("Questa città non esiste!"); return}
-
         val indirizzo_evento = binding.indirizzoEvento.editText?.text.toString().trim()
         if(indirizzo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi l'indirizzo dell'evento!"); return}
+
+        try {
+            var indirizzoEvento = "$indirizzo_evento" + ", " + "$citta_evento"
+            getPosition = geocode.getFromLocationName(indirizzoEvento, 5)
+            Log.d("getPosition", "$getPosition")
+            if (getPosition.isEmpty()) {
+                binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine!"); return}
+        }catch (e: Exception){
+            Log.d("getPosition", "$e")
+            binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine! $e"); return}
+
         val npersone_evento = binding.npersoneEvento.editText?.text.toString().trim()
         if(npersone_evento.isEmpty() ){
             binding.errorMsg.setText("Aggiungi il numero di persone richiesto per l'evento!"); return
@@ -255,6 +260,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
             categoria_evento, citta_evento, indirizzo_evento, data_evento, costo_evento,
             npersone_evento, foto_evento, userId)
         vm.saveEvento(model)
+        Toast.makeText(requireContext(), "Evento creato con Successo!", Toast.LENGTH_SHORT).show()
         backDiscover()
     }
 

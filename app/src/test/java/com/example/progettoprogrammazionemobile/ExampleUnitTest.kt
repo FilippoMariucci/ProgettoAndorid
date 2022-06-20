@@ -19,22 +19,8 @@ import org.junit.Before
  */
 class ExampleUnitTest {
 
-    lateinit var evenViewmod : eventViewModel
-    lateinit var repo : EventsRepository
-    lateinit var eventoDb: EventoDb
-
-    @Before
-    fun setUp(){
-
-    }
-
-    @Test
-    fun checkCorrectInsert(){
-
-    }
-
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 4 + 2)
+        assertEquals(4, 2 + 2)
     }
 }

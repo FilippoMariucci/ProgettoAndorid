@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appericolo.ui.preferiti.contacts.database.EventoDb
 import com.example.progettoprogrammazionemobile.AdapterRV.AdapterImageEvent
 import com.example.progettoprogrammazionemobile.AdapterRV.ImageAdapter
+import com.example.progettoprogrammazionemobile.EventsFragments.dettaglio_evento
 import com.example.progettoprogrammazionemobile.ViewModel.eventViewModel
 import com.example.progettoprogrammazionemobile.ViewModel.imageViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentHomeBinding
