@@ -121,7 +121,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         super.onViewCreated(view, savedInstanceState)
         vm = ViewModelProviders.of(requireActivity()).get(eventViewModel::class.java)
 
-
         button = getView()?.findViewById(R.id.scegliImmagine)
         imageView = getView()?.findViewById(R.id.immagine)
 
@@ -210,6 +209,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         val indirizzo_evento = binding.indirizzoEvento.editText?.text.toString().trim()
         if(indirizzo_evento.isEmpty()){binding.errorMsg.setText("Aggiungi l'indirizzo dell'evento!"); return}
 
+        // check fields inputs
         try {
             var indirizzoEvento = "$indirizzo_evento" + ", " + "$citta_evento"
             getPosition = geocode.getFromLocationName(indirizzoEvento, 5)

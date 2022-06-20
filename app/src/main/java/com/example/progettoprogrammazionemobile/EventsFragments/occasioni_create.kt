@@ -86,39 +86,6 @@ class occasioni_create : Fragment() {
                 goModifica(idEvento)
             }
         })
-
-//        dbRef = FirebaseDatabase.getInstance().reference
-//        var dbUserOffer = dbRef.child("Evento").orderByChild("userId").equalTo(uid)
-//        dbUserOffer.addValueEventListener(object : ValueEventListener {
-//            val vm = EventoViewModel()
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                createdEvents.clear()
-//                if (snapshot.exists()) {
-//                    for (eventSnap in snapshot.children) {
-//                        val singoloEvento = eventSnap.getValue(Evento::class.java)
-//                        createdEvents.add(singoloEvento!!)
-//                    }
-//                }
-//
-//                // Adapter OnClick OCCASIONI CREATE
-//                val adapter = occasioniCreateAdapter(createdEvents)
-//                CreateEventsRec.adapter = adapter
-//                adapter.setOndeleteClickListener(object : occasioniCreateAdapter.OnCreatedClickListener{
-//                    override fun deleteEvent(idEvento: String, size: Int, position: String) {
-//                        eliminaEvento(idEvento, adapter, position)
-//                    }
-//
-//                    override fun modificaEvent(idEvento: String) {
-//                        goModifica(idEvento)
-//                    }
-//                })
-//
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
         CreateEventsRec.visibility = View.VISIBLE
     }
 

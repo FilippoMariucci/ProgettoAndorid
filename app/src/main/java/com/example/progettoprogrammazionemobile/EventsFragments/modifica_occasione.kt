@@ -2,7 +2,10 @@ package com.example.progettoprogrammazionemobile.EventsFragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +31,7 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
     private lateinit var databaseRef : DatabaseReference
     private var _binding : FragmentModificaOccasioneBinding? = null
     private val viewModelEvento: eventViewModel by activityViewModels()
-
+    private lateinit var getPosition : List<Address>
     private lateinit var vm: eventViewModel
 
     private val binding get() = _binding!!
@@ -138,6 +141,7 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
                             indirizzo : String, nPersone : String, costo : String, lingua : String,
                             data : String,)
     {
+        val geocode = Geocoder(requireContext())
         val event = mapOf<String, String >(
             "titolo" to titolo,
             "categoria" to categoria,
@@ -149,6 +153,49 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
             "lingue" to lingua,
             "n_persone" to nPersone
         )
+
+        try {
+            var indirizzoEvento = "${eventoToEdit.indirizzo}" + ", " + "${eventoToEdit.citta}"
+            getPosition = geocode.getFromLocationName(indirizzoEvento, 5)
+            Log.d("getPosition", "$getPosition")
+            if (getPosition.isEmpty()) {
+                binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine!"); return}
+        }catch (e: Exception){
+            Log.d("getPosition", "$e")
+            binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine! $e"); return}
+
+        val npersone_evento = eventoToEdit.n_persone.toString()
+        if(npersone_evento.isEmpty() ){
+            binding.errorMsg.setText("Aggiungi il numero di persone richiesto per l'evento!"); return
+        }else {
+            try {npersone_evento.toInt()}
+            catch (e:Exception) {
+                binding.errorMsg.setText("Il numero di persone deve essere un numero! ;)"); return
+            }
+        }
+        val costo_evento = eventoToEdit.costo.toString()
+        if(costo_evento.isEmpty()){
+            binding.errorMsg.setText("Aggiungi il costo dell'evento!"); return
+        }else {
+            try {costo_evento.toFloat()}
+            catch (e:Exception) {
+                binding.errorMsg.setText("Il prezzo deve essere un numero! ;)"); return
+            }
+        }
+        val data_evento = eventoToEdit.data_evento.toString()
+        if(data_evento.isEmpty()){
+            binding.errorMsg.setText("Aggiungi la data e l'ora dell'evento"); return
+        }else{
+            if(savedYear < array_date_time.get(2)){
+                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
+            }
+            else if(savedYear == array_date_time.get(2) && savedMonth < array_date_time.get(1)) {
+                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
+            }
+            else if(savedYear == array_date_time.get(2) && savedMonth == array_date_time.get(1) && savedDay <= array_date_time.get(0)) {
+                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
+            }
+        }
 
         // Local Update checking different fields before and after
         if(eventoToEdit.titolo != titolo) vm.updateTitle(titolo, idEvento)
