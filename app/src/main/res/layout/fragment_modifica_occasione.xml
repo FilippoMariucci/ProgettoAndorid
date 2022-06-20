@@ -274,7 +274,7 @@
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="172dp"
             android:layout_height="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:backgroundTint="@color/orange_bold"
             android:fontFamily="@font/poppins_bold"
             android:text="Modifica"
@@ -288,8 +288,8 @@
 
         <TextView
             android:id="@+id/errorMsg"
-            android:layout_width="346dp"
-            android:layout_height="52dp"
+            android:layout_width="337dp"
+            android:layout_height="30dp"
             android:fontFamily="@font/poppins"
             android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/btnadd_evento"

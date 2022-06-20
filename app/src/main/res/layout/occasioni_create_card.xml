@@ -15,8 +15,8 @@
 
         <TextView
             android:id="@+id/titoloEventoCreato"
-            android:layout_width="201dp"
-            android:layout_height="29dp"
+            android:layout_width="227dp"
+            android:layout_height="57dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_bold"
@@ -42,7 +42,6 @@
             android:id="@+id/categoriaEventoCreato"
             android:layout_width="159dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
             android:fontFamily="@font/poppins"
             android:hint="categoria"
             android:textSize="18dp"

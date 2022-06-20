@@ -87,7 +87,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
     }
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayofMonth: Int) {
         savedDay = dayofMonth
-        savedMonth = month
+        savedMonth = (month+1)
         savedYear = year
 
         array_date_time = arrayListOf<Int>()
@@ -98,7 +98,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         savedHour = hour
         savedMinute = minute
 
-        binding.textDateEvento.text = "$savedDay-$savedMonth-$savedYear at $savedHour:$savedMinute"
+        binding.textDateEvento.text = "$savedDay-${savedMonth}-$savedYear at $savedHour:$savedMinute"
     }
 
 
@@ -138,11 +138,7 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
                 }
 
             }
-
-           //pickImagegallery()
         }
-
-        //binding.btnaddEvento.setOnClickListener{ this.saveEvento() }
 
         auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid
@@ -154,8 +150,6 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
 
 
     }
-
-
 
 
     override fun onRequestPermissionsResult(
@@ -243,10 +237,10 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
             if(savedYear < array_date_time.get(2)){
                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
             }
-            else if(savedYear == array_date_time.get(2) && savedMonth < array_date_time.get(1)) {
+            else if(savedYear == array_date_time.get(2) && savedMonth < array_date_time.get(1)+1) {
                     binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
             }
-            else if(savedYear == array_date_time.get(2) && savedMonth == array_date_time.get(1) && savedDay <= array_date_time.get(0)) {
+            else if(savedYear == array_date_time.get(2) && savedMonth == array_date_time.get(1)+1 && savedDay <= array_date_time.get(0)) {
                 binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
             }
         }

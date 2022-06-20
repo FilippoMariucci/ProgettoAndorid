@@ -27,11 +27,11 @@ import com.google.firebase.database.*
 class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private lateinit var evento: Evento
-    private lateinit var idEvento : String
-    private lateinit var databaseRef : DatabaseReference
-    private var _binding : FragmentModificaOccasioneBinding? = null
+    private lateinit var idEvento: String
+    private lateinit var databaseRef: DatabaseReference
+    private var _binding: FragmentModificaOccasioneBinding? = null
     private val viewModelEvento: eventViewModel by activityViewModels()
-    private lateinit var getPosition : List<Address>
+    private lateinit var getPosition: List<Address>
     private lateinit var vm: eventViewModel
 
     private val binding get() = _binding!!
@@ -46,8 +46,11 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
     }
 
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val arguments = this.arguments
         val argsEvento = arguments?.get("idEvento")
@@ -60,8 +63,14 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
         super.onResume()
         binding.InputDataEventoModifica.setOnClickListener(View.OnClickListener {
             array_date_time = viewModelEvento.getDateTimeCalendar()
-            DatePickerDialog(requireContext(), this, array_date_time.get(2), array_date_time.get(1), array_date_time.get(0)).show()
-             })
+            DatePickerDialog(
+                requireContext(),
+                this,
+                array_date_time.get(2),
+                array_date_time.get(1),
+                array_date_time.get(0)
+            ).show()
+        })
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayofMonth: Int) {
@@ -71,14 +80,21 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
 
         array_date_time = arrayListOf<Int>()
         array_date_time = viewModelEvento.getDateTimeCalendar()
-        TimePickerDialog(requireContext(), this, array_date_time.get(3), array_date_time.get(4), true).show()
+        TimePickerDialog(
+            requireContext(),
+            this,
+            array_date_time.get(3),
+            array_date_time.get(4),
+            true
+        ).show()
     }
 
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
         savedHour = hour
         savedMinute = minute
 
-        binding.textDataEventoModificato.text = "$savedDay-$savedMonth-$savedYear at $savedHour:$savedMinute"
+        binding.textDataEventoModificato.text =
+            "$savedDay-${savedMonth + 1}-$savedYear at $savedHour:$savedMinute"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,23 +105,26 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
     }
 
 
-
     private fun getEventData(idEvento: String) {
         // get event from database
         vm.eventoToUpdate(idEvento)
         val eventoToEdit = vm.eventoBeforeUpdate
-        databaseRef.addValueEventListener(object : ValueEventListener{
+        databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 evento = snapshot.getValue(Evento::class.java)!!
                 //Log.d("evento", "$evento")
                 val languages = resources.getStringArray(R.array.languages)
                 val categories = resources.getStringArray(R.array.categories)
-                val arrayLanguagesAdapter = ArrayAdapter(requireContext(),
-                    R.layout.dropdown_item, languages)
-                val arrayCategoriesAdapter = ArrayAdapter(requireContext(),
-                    R.layout.dropdown_item, categories)
+                val arrayLanguagesAdapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.dropdown_item, languages
+                )
+                val arrayCategoriesAdapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.dropdown_item, categories
+                )
 
-                binding.titoloModificaEvento.editText?.setText( evento.titolo)
+                binding.titoloModificaEvento.editText?.setText(evento.titolo)
                 binding.DescrizionemodificaEvento.editText?.setText(evento.descrizione)
                 binding.cittaModificaEvento.editText?.setText(evento.citta)
                 binding.autoCompleteLanguagesModifica.setText(evento.lingue)
@@ -117,17 +136,78 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
                 binding.prezzoEventoModifica.editText?.setText(evento.costo)
                 binding.textDataEventoModificato.setText(evento.data_evento)
 
-                binding.btnModifyevento.setOnClickListener{
+                binding.btnModifyevento.setOnClickListener {
                     val titolo = binding.titoloModificaEvento.editText?.text.toString()
                     val descrizione = binding.DescrizionemodificaEvento.editText?.text.toString()
                     val citta = binding.cittaModificaEvento.editText?.text.toString()
-                    val categoria  = binding.autoCompleteCategoriesModifica.text.toString()
+                    val categoria = binding.autoCompleteCategoriesModifica.text.toString()
                     val indirizzo = binding.indirizzoModificaEvento.editText?.text.toString()
-                    val nPersone  = binding.npersoneEventoModifica.editText?.text.toString()
+                    val nPersone = binding.npersoneEventoModifica.editText?.text.toString()
                     val costo = binding.prezzoEventoModifica.editText?.text.toString()
                     val lingua = binding.autoCompleteLanguagesModifica.text.toString()
                     val data = binding.textDataEventoModificato.text.toString()
-                    updateEvent(eventoToEdit, idEvento, titolo, descrizione, citta, categoria, indirizzo, nPersone, costo, lingua, data)
+
+                    array_date_time = viewModelEvento.getDateTimeCalendar()
+                    val giorno = data.substringBefore('-').toInt()
+                    val mese = data.substringAfter('-').substringBeforeLast('-').toInt()
+                    val anno = data.substringAfterLast('-').substringBefore(' ').toInt()
+                    val mese_check = array_date_time.get(1)+1
+
+                    var check = true
+
+                    if (nPersone.isEmpty()) {
+                        binding.errorMsg.setText("Aggiungi il numero di persone richiesto per l'evento!")
+                        check = false
+                    } else {
+                        try {
+                            nPersone.toInt()
+                        } catch (e: Exception) {
+                            binding.errorMsg.setText("Il numero di persone deve essere un numero! ;)")
+                            check = false
+                        }
+                    }
+                    if (costo.isEmpty()) {
+                        binding.errorMsg.setText("Aggiungi il costo dell'evento!")
+                        check = false
+                    } else {
+                        try {
+                            costo.toFloat()
+                        } catch (e: Exception) {
+                            binding.errorMsg.setText("Il prezzo deve essere un numero! ;)")
+                            check = false
+                        }
+                    }
+
+                    if (data.isEmpty()) {
+                        binding.errorMsg.setText("Aggiungi la data e l'ora dell'evento")
+                        check = false
+                    } else {
+                        if (anno < array_date_time.get(2)) {
+                            binding.errorMsg.setText("Aggiungi una data a partire da domani")
+                            check = false
+                        } else if (anno == array_date_time.get(2) && mese < mese_check) {
+                            binding.errorMsg.setText("Aggiungi una data a partire da domani")
+                            check = false
+                        } else if (anno == array_date_time.get(2) && mese == mese_check && giorno <= array_date_time.get(0)) {
+                            binding.errorMsg.setText("Aggiungi una data a partire da domani")
+                            check = false
+                            }
+                        }
+                    if(check) {
+                        updateEvent(
+                            eventoToEdit,
+                            idEvento,
+                            titolo,
+                            descrizione,
+                            citta,
+                            categoria,
+                            indirizzo,
+                            nPersone,
+                            costo,
+                            lingua,
+                            data
+                        )
+                    }
                 }
             }
 
@@ -136,13 +216,13 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
         })
     }
 
-    private fun updateEvent(eventoToEdit: EventoDb, idEvento: String, titolo : String,
-                            descrizione : String, citta : String, categoria : String,
-                            indirizzo : String, nPersone : String, costo : String, lingua : String,
-                            data : String,)
-    {
-        val geocode = Geocoder(requireContext())
-        val event = mapOf<String, String >(
+    private fun updateEvent(
+        eventoToEdit: EventoDb, idEvento: String, titolo: String,
+        descrizione: String, citta: String, categoria: String,
+        indirizzo: String, nPersone: String, costo: String, lingua: String,
+        data: String,
+    ) {
+        val event = mapOf<String, String>(
             "titolo" to titolo,
             "categoria" to categoria,
             "citta" to citta,
@@ -154,68 +234,26 @@ class modifica_occasione : Fragment(R.layout.fragment_modifica_occasione), DateP
             "n_persone" to nPersone
         )
 
-        try {
-            var indirizzoEvento = "${eventoToEdit.indirizzo}" + ", " + "${eventoToEdit.citta}"
-            getPosition = geocode.getFromLocationName(indirizzoEvento, 5)
-            Log.d("getPosition", "$getPosition")
-            if (getPosition.isEmpty()) {
-                binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine!"); return}
-        }catch (e: Exception){
-            Log.d("getPosition", "$e")
-            binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine! $e"); return}
+            // Local Update checking different fields before and after
+            if (eventoToEdit.titolo != titolo) vm.updateTitle(titolo, idEvento)
+            if (eventoToEdit.categoria != categoria) vm.updateCategory(categoria, idEvento)
+            if (eventoToEdit.citta != citta) vm.updateCitta(citta, idEvento)
+            if (eventoToEdit.costo != costo) vm.updateCosto(costo, idEvento)
+            if (eventoToEdit.data_evento != data) vm.updateData(data, idEvento)
+            if (eventoToEdit.descrizione != descrizione) vm.updateDescrizione(descrizione, idEvento)
+            if (eventoToEdit.indirizzo != indirizzo) vm.updateIndirizzo(indirizzo, idEvento)
+            if (eventoToEdit.lingue != lingua) vm.updateLingue(lingua, idEvento)
+            if (eventoToEdit.n_persone != nPersone) vm.updateNPersone(nPersone, idEvento)
 
-        val npersone_evento = eventoToEdit.n_persone.toString()
-        if(npersone_evento.isEmpty() ){
-            binding.errorMsg.setText("Aggiungi il numero di persone richiesto per l'evento!"); return
-        }else {
-            try {npersone_evento.toInt()}
-            catch (e:Exception) {
-                binding.errorMsg.setText("Il numero di persone deve essere un numero! ;)"); return
-            }
-        }
-        val costo_evento = eventoToEdit.costo.toString()
-        if(costo_evento.isEmpty()){
-            binding.errorMsg.setText("Aggiungi il costo dell'evento!"); return
-        }else {
-            try {costo_evento.toFloat()}
-            catch (e:Exception) {
-                binding.errorMsg.setText("Il prezzo deve essere un numero! ;)"); return
-            }
-        }
-        val data_evento = eventoToEdit.data_evento.toString()
-        if(data_evento.isEmpty()){
-            binding.errorMsg.setText("Aggiungi la data e l'ora dell'evento"); return
-        }else{
-            if(savedYear < array_date_time.get(2)){
-                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
-            }
-            else if(savedYear == array_date_time.get(2) && savedMonth < array_date_time.get(1)) {
-                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
-            }
-            else if(savedYear == array_date_time.get(2) && savedMonth == array_date_time.get(1) && savedDay <= array_date_time.get(0)) {
-                binding.errorMsg.setText("Aggiungi una data a partire da domani"); return
-            }
-        }
+            vm.updateEventRemote(event, idEvento)
+            Toast.makeText(this.requireContext(),"Evento modificato con successo", Toast.LENGTH_SHORT).show()
 
-        // Local Update checking different fields before and after
-        if(eventoToEdit.titolo != titolo) vm.updateTitle(titolo, idEvento)
-        if(eventoToEdit.categoria != categoria) vm.updateCategory(categoria, idEvento)
-        if(eventoToEdit.citta != citta) vm.updateCitta(citta, idEvento)
-        if(eventoToEdit.costo != costo) vm.updateCosto(costo, idEvento)
-        if(eventoToEdit.data_evento != data) vm.updateData(data, idEvento)
-        if(eventoToEdit.descrizione != descrizione) vm.updateDescrizione(descrizione, idEvento)
-        if(eventoToEdit.indirizzo != indirizzo) vm.updateIndirizzo(indirizzo, idEvento)
-        if(eventoToEdit.lingue != lingua) vm.updateLingue(lingua, idEvento)
-        if(eventoToEdit.n_persone != nPersone) vm.updateNPersone(nPersone, idEvento)
-
-        vm.updateEventRemote(event, idEvento)
-        Toast.makeText(requireContext(), " Evento Modificato con successo", Toast.LENGTH_SHORT).show()
 //      fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
 
-        //vm.updateEvent(event)
+            //vm.updateEvent(event)
 //        databaseRef.updateChildren(event).addOnSuccessListener {
 //            Toast.makeText(requireContext(), " Evento Modificato con successo", Toast.LENGTH_SHORT).show()
 //            fragmentManager?.beginTransaction()?.replace(R.id.myNavHostFragment, occasioni_create())?.commit()
 //        }
+        }
     }
-}
