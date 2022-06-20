@@ -11,14 +11,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="162dp">
 
         <TextView
             android:id="@+id/titoloEventoCreato"
-            android:layout_width="172dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="201dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_bold"
             android:hint="Titolo"
             android:textColor="@color/orange"
@@ -28,9 +28,9 @@
 
         <TextView
             android:id="@+id/dataEventoCreato"
-            android:layout_width="72dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="40dp"
+            android:layout_width="203dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
             android:text="25/12/2022"
@@ -41,8 +41,8 @@
         <TextView
             android:id="@+id/categoriaEventoCreato"
             android:layout_width="159dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
             android:fontFamily="@font/poppins"
             android:hint="categoria"
             android:textSize="18dp"
@@ -53,27 +53,26 @@
             android:id="@+id/deleteOccasione"
             android:layout_width="43dp"
             android:layout_height="43dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/corner_radius"
             android:src="@drawable/ic_baseline_delete_forever_24"
             android:textSize="9dp"
-            app:layout_constraintBottom_toTopOf="@+id/categoriaEventoCreato"
-            app:layout_constraintStart_toEndOf="@+id/titoloEventoCreato"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41" />
+            app:layout_constraintEnd_toStartOf="@+id/modficaOccasione"
+            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/modficaOccasione"
             android:layout_width="43dp"
             android:layout_height="43dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/corner_radius"
             android:src="@drawable/ic_baseline_edit_24"
             android:text="MODIFICA"
             android:textSize="9dp"
-            app:layout_constraintStart_toEndOf="@+id/deleteOccasione"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

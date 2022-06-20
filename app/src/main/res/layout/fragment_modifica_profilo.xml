@@ -199,7 +199,7 @@
             <EditText
                 android:id="@+id/inputDescrizioneModifica"
                 android:layout_width="284dp"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/input_back"
                 android:ems="10"

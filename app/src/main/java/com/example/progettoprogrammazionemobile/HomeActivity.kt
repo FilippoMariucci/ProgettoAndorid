@@ -4,7 +4,6 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.progettoprogrammazionemobile.EventsFragments.MapsFragment
 import com.example.progettoprogrammazionemobile.EventsFragments.crea_occasione
 import com.example.progettoprogrammazionemobile.ProfileFragments.profilo
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,7 +14,7 @@ class HomeActivity : AppCompatActivity() {
     private val homeFragment = com.example.progettoprogrammazionemobile.homeFragment()
     private val userFragment = profilo()
     private val creaOccasioneFragment = crea_occasione()
-    private  val mappa = MapsFragment()
+    private val mappa = MapsFragment()
 
     private lateinit var currrentFragment: Fragment
 
