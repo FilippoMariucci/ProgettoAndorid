@@ -213,12 +213,10 @@ class crea_occasione : Fragment(R.layout.fragment_crea_occasione), DatePickerDia
         try {
             var indirizzoEvento = "$indirizzo_evento" + ", " + "$citta_evento"
             getPosition = geocode.getFromLocationName(indirizzoEvento, 5)
-            Log.d("getPosition", "$getPosition")
             if (getPosition.isEmpty()) {
                 binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine!"); return}
         }catch (e: Exception){
-            Log.d("getPosition", "$e")
-            binding.errorMsg.setText("Citta o indirizzo errati, attento a non inserire spazi alla fine! $e"); return}
+            Log.d("getPosition", "$e"); return}
 
         val npersone_evento = binding.npersoneEvento.editText?.text.toString().trim()
         if(npersone_evento.isEmpty() ){
