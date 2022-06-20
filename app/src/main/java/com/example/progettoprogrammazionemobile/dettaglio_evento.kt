@@ -115,6 +115,10 @@ class dettaglio_evento : Fragment() {
                             }
                         }
                     }
+                }catch (e: Exception) {
+                    binding.titoloEventoDett.setText("L'evento è stato eliminato")
+                    binding.buttonPartecipoDett.visibility = View.INVISIBLE
+                }
 
 
                 }catch (e: Exception) {
@@ -130,27 +134,6 @@ class dettaglio_evento : Fragment() {
             }
         })
     }
-
-    private fun getImage(idEvento: String) = CoroutineScope(Dispatchers.IO).launch{
-            var image_url = ""
-            try {
-                val images =  Firebase.storage.reference.child("Users/").listAll().await()
-                for (i in images.items) {
-                    val evento_for_image = i.toString().substringAfterLast('/').substringBefore('.')
-                    if(evento_for_image == idEvento){
-                        val url = i.downloadUrl.await()
-                        image_url = url.toString()
-                        Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                }
-            }
-            withContext(Dispatchers.Main) {
-                Glide.with(requireActivity()).load(image_url).into(binding.fotoEvento)
-            }
-        }
 
 
     private fun partecipaEvento(){
@@ -214,5 +197,26 @@ class dettaglio_evento : Fragment() {
             })
         }
     }
+    private fun getImage(idEvento: String) = CoroutineScope(Dispatchers.IO).launch{
+        var image_url = ""
+        try {
+            val images =  Firebase.storage.reference.child("Users/").listAll().await()
+            for (i in images.items) {
+                val evento_for_image = i.toString().substringAfterLast('/').substringBefore('.')
+                if(evento_for_image == idEvento){
+                    val url = i.downloadUrl.await()
+                    image_url = url.toString()
+                    Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
+                }
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+            }
+        }
+        withContext(Dispatchers.Main) {
+            Glide.with(requireActivity()).load(image_url).into(binding.fotoEvento)
+        }
+    }
 
 }
+

@@ -2,7 +2,6 @@ package com.example.progettoprogrammazionemobile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Camera
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -24,7 +23,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
@@ -68,7 +66,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
         Log.d("entroat", "entrato")
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Log.d("entroat", "entrato")
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_REQUEST_CODE)
             return
         }
         mMap.isMyLocationEnabled = true
@@ -77,8 +75,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
                 lastLocation = location
                 val currentLatLong = LatLng(location.latitude, location.longitude)
                 placeMarkerOnMap()
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12f))
-            }
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12f))            }
         }
     }
 
@@ -92,26 +89,34 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
         })
 
         //mMap.addMarker(MarkerOptions().position(currentLatLong).title("Tu sei qui!"))
-
     }
 
     private fun setData() {
-        val geocode = Geocoder(requireActivity())
-        this.events.forEach() { evento ->
-            try {
-                address = geocode.getFromLocationName(evento.citta, 5);
-                if (address == null) {
-                    return;
+        try {
+            val geocode = Geocoder(requireContext())
+            this.events.forEach() { evento ->
+                try {
+
+                    var citta = evento.citta
+                    var indirizzo = evento.indirizzo
+                    var cittaIndirizzo = "$indirizzo " + ", " + "$citta"
+                    Log.d("erroreMappa", "${cittaIndirizzo}")
+                    address = geocode.getFromLocationName(cittaIndirizzo, 5);
+                    if (address == null) {
+                        return;
+                    }
+                    val location = address.get(0)
+                    val currentLatLong = LatLng(location.getLatitude(), location.getLongitude())
+                    mMap.addMarker(
+                        MarkerOptions().position(currentLatLong).title("${evento.titolo}")
+                    )
+                } catch (e: Exception) {
+                    Log.d("erroreMappa", "${e.message}")
                 }
-                val location = address.get(0)
-                val currentLatLong = LatLng(location.getLatitude(), location.getLongitude())
-                mMap.addMarker(MarkerOptions().position(currentLatLong).title("${evento.titolo}"))
-            }catch (e: Exception) {
-                Log.d("erroreMappa", "${e.message}")
             }
-
+        }catch (e : Exception){
+            Log.d("erroreMappa", "${e.message}")
         }
-
     }
 
 }
