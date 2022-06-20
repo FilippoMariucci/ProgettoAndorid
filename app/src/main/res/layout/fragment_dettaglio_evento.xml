@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventsFragments.dettaglio_evento">
+    tools:context=".HomeActivity">
 
 
     <ScrollView
@@ -18,16 +18,18 @@
 
             <ImageView
                 android:id="@+id/fotoEvento"
-                android:layout_width="412dp"
-                android:layout_height="246dp"
+                android:layout_width="427dp"
+                android:layout_height="239dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titolo_evento_dett" />
 
             <TextView
                 android:id="@+id/titolo_evento_dett"
-                android:layout_width="386dp"
-                android:layout_height="60dp"
+                android:layout_width="399dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Titolo evento"
@@ -43,8 +45,8 @@
 
             <TextView
                 android:id="@+id/persona_mancante_dett"
-                android:layout_width="191dp"
-                android:layout_height="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="44dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
@@ -56,47 +58,42 @@
 
             <TextView
                 android:id="@+id/indirizzo_dett"
-                android:layout_width="138dp"
-                android:layout_height="27dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="48dp"
+                android:layout_width="338dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="76dp"
                 android:fontFamily="@font/poppins"
                 android:text="Indirizzo:"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/citta_dett"
                 app:layout_constraintTop_toBottomOf="@+id/categoria_evento_dett" />
 
             <TextView
                 android:id="@+id/citta_dett"
-                android:layout_width="158dp"
-                android:layout_height="29dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="334dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="Citta"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/indirizzo_dett"
-                app:layout_constraintHorizontal_bias="0.529"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/categoria_evento_dett"
                 app:layout_constraintTop_toBottomOf="@+id/categoria_evento_dett" />
 
             <TextView
                 android:id="@+id/data_dett"
-                android:layout_width="297dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="205dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins"
                 android:text="Data:"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.315"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/citta_dett" />
+                app:layout_constraintStart_toStartOf="@+id/indirizzo_dett"
+                app:layout_constraintTop_toBottomOf="@+id/indirizzo_dett" />
 
             <TextView
                 android:id="@+id/categoria_evento_dett"
@@ -117,15 +114,14 @@
                 android:id="@+id/lingua_evento_dett"
                 android:layout_width="142dp"
                 android:layout_height="34dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="Lingua"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.133"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/desc_evento_dett"
                 app:layout_constraintTop_toBottomOf="@+id/desc_evento_dett" />
 
             <TextView
@@ -144,25 +140,27 @@
 
             <TextView
                 android:id="@+id/desc_evento_dett"
-                android:layout_width="333dp"
-                android:layout_height="58dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="355dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="24dp"
+                android:ellipsize="none"
                 android:fontFamily="@font/poppins"
+                android:maxLines="10"
                 android:text="Descrizione evento"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.461"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/data_dett"
                 app:layout_constraintTop_toBottomOf="@+id/data_dett" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_partecipo_dett"
                 android:layout_width="191dp"
                 android:layout_height="53dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginStart="72dp"
+                android:layout_marginTop="156dp"
                 android:background="@drawable/btn_background"
                 android:backgroundTint="@color/orange"
                 android:fontFamily="@font/poppins_bold"
@@ -170,9 +168,7 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/lingua_evento_dett"
                 app:layout_constraintTop_toBottomOf="@+id/lingua_evento_dett" />
 
             <TextView
@@ -194,14 +190,14 @@
                 android:id="@+id/fullEventoText"
                 android:layout_width="273dp"
                 android:layout_height="41dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/poppins"
                 android:text="TextView"
                 android:textColor="@color/Bordeaux"
                 android:textSize="16dp"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/lingua_evento_dett"
                 app:layout_constraintTop_toBottomOf="@+id/lingua_evento_dett" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
