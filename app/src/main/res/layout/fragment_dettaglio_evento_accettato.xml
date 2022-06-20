@@ -17,23 +17,24 @@
 
             <TextView
                 android:id="@+id/titoloDettaglioAccettato"
-                android:layout_width="285dp"
-                android:layout_height="42dp"
+                android:layout_width="365dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Titolo evento"
+                android:text="Festa di fine anno accademico"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.253"
+                app:layout_constraintHorizontal_bias="0.652"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <TextView
                 android:id="@+id/personeDettaglioAccettato"
-                android:layout_width="wrap_content"
+                android:layout_width="23dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="0"
@@ -57,7 +58,7 @@
             <TextView
                 android:id="@+id/generalTextView5"
                 android:layout_width="93dp"
-                android:layout_height="27dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
@@ -70,25 +71,25 @@
 
             <TextView
                 android:id="@+id/indirizzoDettaglioAccettato"
-                android:layout_width="233dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="245dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
                 android:text="Indirizzo:"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.396"
+                app:layout_constraintHorizontal_bias="0.39"
                 app:layout_constraintStart_toEndOf="@+id/generalTextView5"
                 app:layout_constraintTop_toBottomOf="@+id/cittaDettaglioAccettato" />
 
             <TextView
                 android:id="@+id/generalTextView4"
                 android:layout_width="70dp"
-                android:layout_height="29dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
                 android:text="Citta:"
                 android:textColor="@color/black"
@@ -99,9 +100,9 @@
 
             <TextView
                 android:id="@+id/cittaDettaglioAccettato"
-                android:layout_width="244dp"
-                android:layout_height="26dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="277dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins"
                 android:text="Citta"
                 android:textColor="@color/black"
@@ -113,25 +114,25 @@
 
             <TextView
                 android:id="@+id/dataDettaglioAccettato"
-                android:layout_width="238dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="274dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/poppins"
                 android:text="Data:"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintHorizontal_bias="0.428"
                 app:layout_constraintStart_toEndOf="@+id/generalTV"
                 app:layout_constraintTop_toBottomOf="@+id/indirizzoDettaglioAccettato" />
 
             <TextView
                 android:id="@+id/generalTV"
                 android:layout_width="77dp"
-                android:layout_height="29dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
                 android:text="Data:"
                 android:textColor="@color/black"
@@ -142,23 +143,22 @@
 
             <TextView
                 android:id="@+id/generalTextView2"
-                android:layout_width="173dp"
-                android:layout_height="34dp"
+                android:layout_width="175dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="Occasione creata da:"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.142"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/generalTextView1" />
 
             <TextView
                 android:id="@+id/nomeUtenteDettaglioAccettato"
                 android:layout_width="204dp"
-                android:layout_height="33dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="nomeutente "
@@ -174,9 +174,9 @@
             <TextView
                 android:id="@+id/generalTextView3"
                 android:layout_width="145dp"
-                android:layout_height="34dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/poppins"
                 android:text="Categoria:"
                 android:textColor="@color/black"
@@ -187,22 +187,23 @@
 
             <TextView
                 android:id="@+id/categoriaDettaglioAccettato"
-                android:layout_width="147dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="225dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/poppins"
                 android:text="Categoria"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/generalTextView3"
                 app:layout_constraintTop_toBottomOf="@+id/nomeUtenteDettaglioAccettato" />
 
             <TextView
                 android:id="@+id/generalTextView7"
                 android:layout_width="152dp"
-                android:layout_height="33dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
@@ -215,8 +216,8 @@
 
             <TextView
                 android:id="@+id/lingueDettaglioAccettato"
-                android:layout_width="142dp"
-                android:layout_height="34dp"
+                android:layout_width="189dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
                 android:text="English"
@@ -224,6 +225,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.342"
                 app:layout_constraintStart_toEndOf="@+id/generalTextView7"
                 app:layout_constraintTop_toBottomOf="@+id/dataDettaglioAccettato" />
 
@@ -243,16 +245,17 @@
 
             <TextView
                 android:id="@+id/descrizioneDettaglioAccettato"
-                android:layout_width="338dp"
-                android:layout_height="105dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="364dp"
+                android:layout_height="103dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins"
                 android:gravity="center_vertical"
-                android:text="Descrizione evento"
+                android:text="descrizione"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.638"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/generalTextView7" />
 

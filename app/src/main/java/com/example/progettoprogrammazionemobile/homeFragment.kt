@@ -102,7 +102,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         adapter.setOnItemClickListener(object : AdapterImageEvent.onItemClickListener {
             override fun onItemClick(idevento: String) {
-                Toast.makeText(requireContext(), "go away", Toast.LENGTH_SHORT).show()
                 go_away(idevento)
             }
 

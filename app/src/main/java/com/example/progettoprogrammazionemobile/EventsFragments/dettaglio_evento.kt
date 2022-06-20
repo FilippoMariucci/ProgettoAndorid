@@ -42,7 +42,7 @@ class dettaglio_evento : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val args = this.arguments
@@ -128,25 +128,25 @@ class dettaglio_evento : Fragment() {
     }
 
     private fun getImage(idEvento: String) = CoroutineScope(Dispatchers.IO).launch{
-        var image_url = ""
-        try {
-            val images =  Firebase.storage.reference.child("Users/").listAll().await()
-            for (i in images.items) {
-                val evento_for_image = i.toString().substringAfterLast('/').substringBefore('.')
-                if(evento_for_image == idEvento){
-                    val url = i.downloadUrl.await()
-                    image_url = url.toString()
-                    Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
+            var image_url = ""
+            try {
+                val images =  Firebase.storage.reference.child("Users/").listAll().await()
+                for (i in images.items) {
+                    val evento_for_image = i.toString().substringAfterLast('/').substringBefore('.')
+                    if(evento_for_image == idEvento){
+                        val url = i.downloadUrl.await()
+                        image_url = url.toString()
+                        Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
                 }
             }
-        } catch (e: Exception) {
             withContext(Dispatchers.Main) {
+                Glide.with(requireContext()).load(image_url).into(binding.fotoEvento)
             }
         }
-        withContext(Dispatchers.Main) {
-            Glide.with(requireActivity()).load(image_url).into(binding.fotoEvento)
-        }
-    }
 
 
     private fun partecipaEvento(){
@@ -171,11 +171,11 @@ class dettaglio_evento : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     listPartecipanti.clear()
                     try {
-                        var nome = snapshot.child("id_partecipante").getValue() as ArrayList<String>
-                        val size = nome.size
-                        for (i in 0..size - 1) {
-                            listPartecipanti.add(nome[i])
-                        }
+                            var nome = snapshot.child("id_partecipante").getValue() as ArrayList<String>
+                            val size = nome.size
+                            for (i in 0..size - 1) {
+                                listPartecipanti.add(nome[i])
+                            }
                     }
                     catch (e:Exception) {
                         Toast.makeText(requireContext(), "Sei il primo a partecipare!", Toast.LENGTH_SHORT).show()

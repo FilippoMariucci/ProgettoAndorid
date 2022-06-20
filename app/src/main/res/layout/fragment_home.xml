@@ -31,7 +31,6 @@
             android:foregroundGravity="center_horizontal"
             android:nestedScrollingEnabled="false"
             android:overScrollMode="ifContentScrolls"
-            android:paddingBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
