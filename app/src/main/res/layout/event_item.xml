@@ -55,7 +55,7 @@
             android:padding="5dp"
             android:textAlignment="viewStart"
             android:textColor="#151515"
-            android:textSize="18dp"
+            android:textSize="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvEventDesc"></TextView>
 
@@ -68,7 +68,7 @@
             android:padding="5dp"
             android:textAlignment="textEnd"
             android:textColor="#151515"
-            android:textSize="18dp"
+            android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/categoriaEvento"
             app:layout_constraintTop_toBottomOf="@+id/dataEvento"></TextView>
 
@@ -82,7 +82,7 @@
             android:hint="Sport"
             android:padding="5dp"
             android:textColor="#151515"
-            android:textSize="18dp"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dataEvento"
@@ -97,7 +97,7 @@
             android:src="@drawable/ic_icons8_amore_cerchiato"
             app:layout_constraintBottom_toTopOf="@+id/tvEventDesc"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintHorizontal_bias="0.578"
             app:layout_constraintStart_toEndOf="@+id/skiphomeBtn"
             app:tint="@android:color/white" />
 
@@ -105,12 +105,13 @@
             android:id="@+id/skiphomeBtn"
             android:layout_width="59dp"
             android:layout_height="55dp"
+            android:layout_marginStart="152dp"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_baseline_clear_24"
             app:layout_constraintBottom_toTopOf="@+id/tvEventDesc"
-            app:tint="@color/orange"
-            tools:layout_editor_absoluteX="162dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/orange" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

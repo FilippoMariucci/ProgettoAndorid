@@ -77,15 +77,6 @@
                 app:layout_constraintStart_toStartOf="@+id/inputNomeModifica"
                 app:layout_constraintTop_toBottomOf="@+id/inputNomeModifica" />
 
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="53dp"
-                tools:layout_editor_absoluteY="471dp" />
 
             <EditText
                 android:id="@+id/cognomeInputModifica"
@@ -174,6 +165,7 @@
                 android:layout_marginTop="44dp"
                 android:background="@drawable/input_back"
                 android:ems="10"
+                android:maxLength="10"
                 android:inputType="date"
                 android:paddingLeft="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/Data_nascita_modifica"
@@ -199,12 +191,13 @@
             <EditText
                 android:id="@+id/inputDescrizioneModifica"
                 android:layout_width="287dp"
-                android:layout_height="108dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/input_back"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:paddingLeft="20dp"
+                android:paddingRight="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/descrizione_modifica"
                 app:layout_constraintHorizontal_bias="0.021"
                 app:layout_constraintStart_toStartOf="@+id/descrizione_modifica"

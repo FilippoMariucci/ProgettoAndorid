@@ -25,8 +25,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvEvents"
-            android:layout_width="286dp"
-            android:layout_height="450dp"
+            android:layout_width="283dp"
+            android:layout_height="436dp"
             android:layout_marginTop="20sp"
             android:layout_marginBottom="20sp"
             android:background="#9CF4F3F1"
