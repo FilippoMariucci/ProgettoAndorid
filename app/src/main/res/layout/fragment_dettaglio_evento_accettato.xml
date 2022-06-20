@@ -246,7 +246,7 @@
             <TextView
                 android:id="@+id/descrizioneDettaglioAccettato"
                 android:layout_width="364dp"
-                android:layout_height="103dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins"
                 android:gravity="center_vertical"

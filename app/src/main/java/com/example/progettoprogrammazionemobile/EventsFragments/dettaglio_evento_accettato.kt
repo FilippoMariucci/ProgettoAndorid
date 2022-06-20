@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.progettoprogrammazionemobile.ViewModel.EventoViewModel
 import com.example.progettoprogrammazionemobile.databinding.FragmentDettaglioEventoAccettatoBinding
 import com.example.progettoprogrammazionemobile.model.Evento
@@ -81,14 +82,15 @@ class dettaglio_evento_accettato : Fragment() {
                         binding.nomeUtenteDettaglioAccettato.setText(stringa)
                         binding.categoriaDettaglioAccettato.setText(evento.categoria)
                         binding.lingueDettaglioAccettato.setText(evento.lingue)
+                        binding.descrizioneDettaglioAccettato.setText(evento.descrizione)
                     }
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
+                        Toast.makeText(requireContext(), "Ops, ci sono stati dei problemi", Toast.LENGTH_SHORT).show()
                     }
                 })
             }
             override fun onCancelled(error: DatabaseError) {
-            TODO("Not yet implemented")
+                Toast.makeText(requireContext(), "Ops, ci sono stati dei problemi", Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
-
+            android:maxLength="500"
             android:hint="little description of yourself"
             android:inputType="textMultiLine"
             android:textColor="@color/black"
